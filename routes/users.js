@@ -6,4 +6,10 @@ router.get('/', function(req, res, next) {
 res.render("userpages/main")
 });
 
+router.get("/login",function(req,res){
+    res.render("userpages/userlogin")
+})
+
+
+
 module.exports = router;
