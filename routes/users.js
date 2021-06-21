@@ -9,7 +9,9 @@ res.render("userpages/main")
 router.get("/login",function(req,res){
     res.render("userpages/userlogin")
 })
-
+router.get("/otp-login",function(req,res){
+    res.render("userpages/phnnumberlogin")
+})
 
 
 module.exports = router;

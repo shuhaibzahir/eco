@@ -190,57 +190,7 @@ section .container.active .signinBx .imgBx {
 }
 
  </style>
-  <section id="emailform">
-    <div class="container " id="loginform">
-      <div class="user signinBx">
-        <div class="imgBx"><img src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img1.jpg" alt="" /></div>
-        <div class="formBx">
-          <form action="" onsubmit="return false;">
-            <h2>Sign In</h2>
-            <input type="text" name="" placeholder="Username" id="loginUsername"/>
-            <input type="password" name="" placeholder="Password" id="loginPassword"/>
-             <input type="submit" name="" value="Login"  />
-            <a id="otp-login"  onclick="hideSection()" class="formbtn">OTP LOGIN</a>
-             <div>
-               {{!-- otp form --}}
-              
-             </div>
-            <div>
-                <p class="signup">Login with socials</p>
-              <a href=""  style="margin-right: 15px;"> <i class="fab fa-facebook" style="font-size: 4rem;"></i></a>  
-               <a href=""  style="margin-right: 15px;"> <i class="fab fa-google" style="font-size: 4rem;"></i></a>  
-            </div>
-            <p class="signup">
-              Don't have an account ?
-              <a href="#" onclick="toggleForm();">Sign Up.</a>
-            </p>
-          </form>
-        
-        </div>
-      </div>
-      <div class="user signupBx">
-        <div class="formBx">
-          <form action="" onsubmit="return false;">
-            <h2>Create an account</h2>
-            <input type="text" name="" placeholder="Username" />
-            <input type="email" name="" placeholder="Email Address" />
-            <input type="password" name="" placeholder="Create Password" />
-            <input type="password" name="" placeholder="Confirm Password" />
-            <input type="submit" name="" value="Sign Up" />
-            <p class="signup">
-              Already have an account ?
-              <a href="#" onclick="toggleForm();">Sign in.</a>
-            </p>
-          </form>
-        </div>
-        <div class="imgBx"><img src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img2.jpg" alt="" /></div>
-      </div>
-    
-    </div>
-     
-  </section>
- 
-  <section id="otpForm" style="display: none;">
+  <section>
     <div class="container " id="loginform">
       <div class="user signinBx">
         <div class="imgBx"><img src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img1.jpg" alt="" /></div>
@@ -249,11 +199,16 @@ section .container.active .signinBx .imgBx {
             <h2>Phone Number</h2>
             <input type="text" name="" placeholder="Enter Your Phone Number" />
 
-             <input type="submit" name="" value="SEND OTP" />
-        
+             <input type="submit" name="" value="Login" />
+         
+             <div>
+               {{!-- otp form --}}
+              
+             </div>
+           
             <p class="signup">
               Email Login?
-              <a style="cursor: pointer;" onclick="showsection()" >Click Here</a>
+              <a href="/login" >Click Here</a>
             </p>
           </form>
         
@@ -264,7 +219,9 @@ section .container.active .signinBx .imgBx {
           <form action="" onsubmit="return false;">
             <h2>Enter Your OTP</h2>
             <input type="text" name="" placeholder="Username" />
+           
             <input type="submit" name="" value="ENTER OTP" />
+           
           </form>
         </div>
         <div class="imgBx"><img src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img2.jpg" alt="" /></div>
@@ -278,13 +235,5 @@ section .container.active .signinBx .imgBx {
    document.getElementById('loginform').classList.toggle("active");
    };
 
-  function hideSection(){
-    document.getElementById("emailform").style.display='none'
-    document.getElementById("otpForm").style.display="block"
-  }
-  function showsection(){
-    document.getElementById("emailform").style.display='block'
-    document.getElementById("otpForm").style.display="none"
-  }
    
  </script>
