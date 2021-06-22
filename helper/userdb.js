@@ -55,7 +55,44 @@ module.exports = {
             })
         })
     },
-    userSignin: (userCr)=>{
-        
+    userSignin: (userdata)=>{
+        return new Promise((resolve, reject) => {
+            User.findOne({email: userdata.email},function(err,dbdata){
+                if(err){
+                    console.log(err)
+                }else{
+                    if(dbdata){
+                        bcrypt.compare(userdata.password, dbdata.password, function(err, result) {
+                            if(result){
+                                resolve(dbdata)
+                            }else{
+                                reject("Email or Password Mismatch !")
+                            }
+                        });
+                    }else{
+                        reject("Email or Password Mismatch !")
+                    }
+                }
+            })
+        })
+    },
+    checkPhone:(ph)=>{
+        return new Promise((resolve,reject) =>{
+            User.findOne({phone:ph.phone},function(err,result){
+                if(err){
+                    console.log(err)
+                }else{
+                    if(result){
+                       if(result.status){
+                        resolve(result)
+                       }else{
+                           reject("Your Account Block by Admin")
+                       }
+                    }else{
+                        reject("This number is not Registerd")
+                    }
+                }
+            })
+        })
     }
 }

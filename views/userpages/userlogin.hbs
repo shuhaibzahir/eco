@@ -225,7 +225,7 @@ section .container.active .signinBx .imgBx {
 
           {{!-- sign up form --}}
 
-          <form  id="signup" method="POST">
+          <form  id="signup">
             <h2>Create an account</h2>
             <input type="text" name="name" placeholder="Username" />
             <input type="email" name="email" placeholder="Email Address" />
@@ -252,32 +252,39 @@ section .container.active .signinBx .imgBx {
       <div class="user signinBx">
         <div class="imgBx"><img src="https://images.pexels.com/photos/2622170/pexels-photo-2622170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" /></div>
         <div class="formBx">
-          <form action="" onsubmit="return false; ">
+          <form id="otp-loginForm">
             <h2>Phone Number</h2>
-            <input type="text" name="" placeholder="Enter Your Phone Number" />
-
-             <input type="submit" name=""   value="SEND OTP" />
-                <p class="signup">
-              Edit Your phone number?
-              <a style="cursor: pointer;" onclick="toggleForm2()" >Click Here</a>
-            </p>
+            <input type="tel" name="phone" placeholder="Enter Your Phone Number" />
+             <input type="submit" value="SEND OTP" />
+              <div>
+                   <p class="signup" id="otpsending-alert" style="color:red"> </p>
+             </div>
             <p class="signup">
               Email Login?
               <a style="cursor: pointer;" onclick="showsection()" >Click Here</a>
             </p>
+             
           </form>
         
         </div>
       </div>
+      {{!-- otp submit --}}
       <div class="user signupBx">
         <div class="formBx">
-          <form action="" onsubmit="return false;">
+          <form id="otp-submitform">
             <h2>Enter Your OTP</h2>
-            <input type="text" name="" placeholder="Username" />
-            <input type="submit" name="" value="ENTER OTP" />
+            <input type="number" name="otp" placeholder="Enter your OTP" />
+            <input type="submit" value="ENTER OTP" />
+                      <div>
+                   <p class="signup" id="otpsubmiting-alert" style="color:red"> </p>
+             </div>
                 <p class="signup">
               Edit Your phone number?
               <a style="cursor: pointer;" onclick="toggleForm2()" >Click Here</a>
+            </p>
+              <p class="signup">
+              Resend OTP?
+              <a href="/otp">Click Here</a>
             </p>
           </form>
         </div>
