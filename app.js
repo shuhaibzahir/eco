@@ -1,14 +1,16 @@
 var createError = require('http-errors');
 var express = require('express');
+require('dotenv').config();
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require("express-handlebars")
 var admin = require('./routes/admin');
 var usersRouter = require('./routes/users');
-
+const db = require("./config/db")
 var app = express();
-
+// db connecting
+db.dbConnect(process.env.DB_URL)
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');

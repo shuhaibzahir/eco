@@ -153,6 +153,7 @@ section .container.active .signupBx .formBx {
 
 section .container .signupBx .imgBx {
   left: -100%;
+ 
 }
 
 section .container.active .signupBx .imgBx {
@@ -212,7 +213,7 @@ section .container.active .signinBx .imgBx {
             </div>
             <p class="signup">
               Don't have an account ?
-              <a href="#" onclick="toggleForm();">Sign Up.</a>
+              <a style=" cursor: pointer;" onclick="toggleForm();">Sign Up.</a>
             </p>
           </form>
         
@@ -220,16 +221,19 @@ section .container.active .signinBx .imgBx {
       </div>
       <div class="user signupBx">
         <div class="formBx">
-          <form action="" onsubmit="return false;">
+
+          {{!-- sign up form --}}
+
+          <form action="/signup" id="signup" method="POST">
             <h2>Create an account</h2>
-            <input type="text" name="" placeholder="Username" />
-            <input type="email" name="" placeholder="Email Address" />
-            <input type="password" name="" placeholder="Create Password" />
-            <input type="password" name="" placeholder="Confirm Password" />
-            <input type="submit" name="" value="Sign Up" />
+            <input type="text" name="name" placeholder="Username" />
+            <input type="email" name="email" placeholder="Email Address" />
+            <input type="password" name="password" placeholder="Create Password" />
+            <input type="password" name="cpassword" placeholder="Confirm Password" />
+            <input type="submit" value="Sign Up" />
             <p class="signup">
               Already have an account ?
-              <a href="#" onclick="toggleForm();">Sign in.</a>
+              <a  onclick="toggleForm();"  style=" cursor: pointer;" >Sign in.</a>
             </p>
           </form>
         </div>
@@ -240,17 +244,20 @@ section .container.active .signinBx .imgBx {
      
   </section>
  
-  <section id="otpForm" style="display: none;">
-    <div class="container " id="loginform">
+  <section id="otpForm" style="display: none; ">
+    <div class="container " id="loginform2">
       <div class="user signinBx">
         <div class="imgBx"><img src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img1.jpg" alt="" /></div>
         <div class="formBx">
-          <form action="" onsubmit="return false;">
+          <form action="" onsubmit="return false; ">
             <h2>Phone Number</h2>
             <input type="text" name="" placeholder="Enter Your Phone Number" />
 
-             <input type="submit" name="" value="SEND OTP" />
-        
+             <input type="submit" name=""   value="SEND OTP" />
+   <p class="signup">
+              Edit Your phone number?
+              <a style="cursor: pointer;" onclick="toggleForm2()" >Click Here</a>
+            </p>
             <p class="signup">
               Email Login?
               <a style="cursor: pointer;" onclick="showsection()" >Click Here</a>
@@ -265,6 +272,10 @@ section .container.active .signinBx .imgBx {
             <h2>Enter Your OTP</h2>
             <input type="text" name="" placeholder="Username" />
             <input type="submit" name="" value="ENTER OTP" />
+                <p class="signup">
+              Edit Your phone number?
+              <a style="cursor: pointer;" onclick="toggleForm2()" >Click Here</a>
+            </p>
           </form>
         </div>
         <div class="imgBx"><img src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img2.jpg" alt="" /></div>
@@ -276,6 +287,9 @@ section .container.active .signinBx .imgBx {
  <script>
       function toggleForm() {
    document.getElementById('loginform').classList.toggle("active");
+   };
+     function toggleForm2() {
+   document.getElementById('loginform2').classList.toggle("active");
    };
 
   function hideSection(){
