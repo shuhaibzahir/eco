@@ -23,7 +23,8 @@ section {
 section .container {
   position: relative;
   width: 800px;
-  height: 500px;
+  height: 600px;
+  border-radius:30px;
   background: #fff;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -191,20 +192,20 @@ section .container.active .signinBx .imgBx {
 }
 
  </style>
+ {{!-- login form --}}
   <section id="emailform">
     <div class="container " id="loginform">
       <div class="user signinBx">
-        <div class="imgBx"><img src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img1.jpg" alt="" /></div>
+        <div class="imgBx"><img src="https://cdn.pixabay.com/photo/2016/11/19/11/33/footwear-1838767_960_720.jpg" alt="" /></div>
         <div class="formBx">
-          <form action="" onsubmit="return false;">
+          <form   id="signin" >
             <h2>Sign In</h2>
-            <input type="text" name="" placeholder="Username" id="loginUsername"/>
-            <input type="password" name="" placeholder="Password" id="loginPassword"/>
-             <input type="submit" name="" value="Login"  />
+            <input type="email" name="email" placeholder="Enter Email" />
+            <input type="password" name="password" placeholder="Password"  />
+             <input type="submit"  value="Login"  />
             <a id="otp-login"  onclick="hideSection()" class="formbtn">OTP LOGIN</a>
              <div>
-               {{!-- otp form --}}
-              
+                   <p class="signup" id="signin-alert" style="color:red"> </p>
              </div>
             <div>
                 <p class="signup">Login with socials</p>
@@ -220,14 +221,15 @@ section .container.active .signinBx .imgBx {
         </div>
       </div>
       <div class="user signupBx">
-        <div class="formBx">
+        <div class="formBx"  >
 
           {{!-- sign up form --}}
 
-          <form action="/signup" id="signup" method="POST">
+          <form  id="signup" method="POST">
             <h2>Create an account</h2>
             <input type="text" name="name" placeholder="Username" />
             <input type="email" name="email" placeholder="Email Address" />
+            <input type="text" name="phone" placeholder="Enter Phone number" />
             <input type="password" name="password" placeholder="Create Password" />
             <input type="password" name="cpassword" placeholder="Confirm Password" />
             <input type="submit" value="Sign Up" />
@@ -235,9 +237,10 @@ section .container.active .signinBx .imgBx {
               Already have an account ?
               <a  onclick="toggleForm();"  style=" cursor: pointer;" >Sign in.</a>
             </p>
+             <p class="signup" id="signup-alert" style="color:red"> </p>
           </form>
         </div>
-        <div class="imgBx"><img src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img2.jpg" alt="" /></div>
+        <div class="imgBx"><img src="https://cdn.pixabay.com/photo/2015/10/12/15/18/clothing-store-984396_960_720.jpg" alt="" /></div>
       </div>
     
     </div>
@@ -247,14 +250,14 @@ section .container.active .signinBx .imgBx {
   <section id="otpForm" style="display: none; ">
     <div class="container " id="loginform2">
       <div class="user signinBx">
-        <div class="imgBx"><img src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img1.jpg" alt="" /></div>
+        <div class="imgBx"><img src="https://images.pexels.com/photos/2622170/pexels-photo-2622170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" /></div>
         <div class="formBx">
           <form action="" onsubmit="return false; ">
             <h2>Phone Number</h2>
             <input type="text" name="" placeholder="Enter Your Phone Number" />
 
              <input type="submit" name=""   value="SEND OTP" />
-   <p class="signup">
+                <p class="signup">
               Edit Your phone number?
               <a style="cursor: pointer;" onclick="toggleForm2()" >Click Here</a>
             </p>
@@ -278,7 +281,7 @@ section .container.active .signinBx .imgBx {
             </p>
           </form>
         </div>
-        <div class="imgBx"><img src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img2.jpg" alt="" /></div>
+        <div class="imgBx"><img src="https://cdn.pixabay.com/photo/2014/05/03/00/46/gadgets-336635_960_720.jpg" alt="" /></div>
       </div>
     
     </div>

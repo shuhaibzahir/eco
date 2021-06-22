@@ -3,41 +3,59 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const UserSchema = new mongoose.Schema({
-    name:String,
-    email:String,
-    phone:Number,
-    password:String,
-    status:Boolean,
+    name: String,
+    email: String,
+    phone: Number,
+    password: String,
+    status: Boolean,
 })
-const User = mongoose.model('User',UserSchema);
- 
+const User = mongoose.model('User', UserSchema);
 
-module.exports={
+
+module.exports = {
     // user sign up function
-   userSignup:(userdata)=>{
-       return new Promise((resolve, reject)=>{
-        //    hashing password
-        bcrypt.hash(userdata.password, saltRounds, function(err, hash) {
-             if(!err){
-                const dataUp = new User({
-                    name:userdata.name,
-                    email:userdata.email,
-                    phone:userdata.phone,
-                    password:hash,
-                    status:true,
-                   })
-                   dataUp.save((err,room)=>{
-                       if(err){
-                           reject(err)
-                       }else{
-                           resolve(room)
-                       }
-                   });
-             }else{
-                 throw err
-             }
-        });
-         
-       })
-   }
+    userSignup: (userdata) => {
+        return new Promise(async (resolve, reject) => {
+            // checking existiting username
+            let emailExist = User.countDocuments({
+                email: userdata.email
+            }).exec()
+            let phoenExist = User.countDocuments({
+                phone: userdata.phone
+            }).exec()
+            Promise.all([emailExist, phoenExist]).then((out) => {
+                console.log(out);
+                if (out[0] != 0) {
+                    console.log(out);
+                    reject("Email Already exist")
+                } else if (out[1] != 0) {
+                    reject("Phone Already exist")
+                } else {
+                    bcrypt.hash(userdata.password, saltRounds, function (err, hash) {
+                        if (!err) {
+                            const dataUp = new User({
+                                name: userdata.name,
+                                email: userdata.email,
+                                phone: userdata.phone,
+                                password: hash,
+                                status: true,
+                            })
+                            dataUp.save((err, room) => {
+                                if (err) {
+                                    console.log(err)
+                                } else {
+                                    resolve(room)
+                                }
+                            });
+                        } else {
+                            console.log(err);
+                        }
+                    });
+                }
+            })
+        })
+    },
+    userSignin: (userCr)=>{
+        
+    }
 }

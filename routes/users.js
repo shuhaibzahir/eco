@@ -12,12 +12,35 @@ router.get("/login",function(req,res){
  
 // user sign up form  post form 
 router.post("/signup",(req,res)=>{
-    console.log(req.body);
+    // console.log(req.body);
+    let signUpStatus = {};
     userDB.userSignup(req.body).then((data)=>{
-        console.log(data);
-    }).then((err)=>{
-
+         signUpStatus={
+             status:true,
+             msg:"successfully Registerd"
+         }
+         res.json(signUpStatus)
+    }).catch((err)=>{
+        signUpStatus={
+            status:false,
+            msg:err
+        }
+        res.json(signUpStatus)
     })
 })
 
+// sign in post request
+router.post("/sign-in",(req,res)=>{
+    userDB.signIn(req.body).then((user)=>{
+        console.log(user);
+    }).catch((err)=>{
+        console.log(err);
+    })
+})
+
+
+
+router.get("/success",(req,res)=>{
+    res.send("dsjfsdh")
+})
 module.exports = router;
