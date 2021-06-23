@@ -24,9 +24,9 @@ module.exports = {
                 phone: userdata.phone
             }).exec()
             Promise.all([emailExist, phoenExist]).then((out) => {
-                console.log(out);
+               
                 if (out[0] != 0) {
-                    console.log(out);
+                     
                     reject("Email Already exist")
                 } else if (out[1] != 0) {
                     reject("Phone Already exist")

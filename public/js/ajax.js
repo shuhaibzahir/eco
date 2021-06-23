@@ -92,3 +92,27 @@ $("#otp-submitform").submit(function(event){
         }
      })
 })
+
+// admin login
+
+$("#admin-login").submit(function(event){
+    event.preventDefault();
+    let form = $(this)
+    $.ajax({
+        url:"/admin/login", 
+        type:"Post",
+        data:form.serialize(),
+        success:function(d){ 
+            console.log(d)
+            if(d.status){
+                document.getElementById('admin-login').reset();
+                window.location.href="/admin/dashboard"
+            }else{
+                $("#admin-login-alert").html(d.msg)
+            }
+        },
+        error:function(err){
+
+        }
+    })
+})

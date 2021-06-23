@@ -34,12 +34,12 @@ router.get("/",  function (req, res) {
     
     if (req.session.user){
         res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        res.render("userpages/main",{usernav:req.session.user})
+        res.render("userpages/main",{ usernav:req.session.user})
 
     }
     else{
         res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        res.render("userpages/main")
+        res.render("userpages/main", )
     }
 
       
@@ -52,7 +52,7 @@ router.get("/login", function (req, res) {
        res.redirect("/")
    }else{
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-       res.render("userpages/userlogin")
+       res.render("userpages/userlogin",)
    }
      
 })
@@ -193,6 +193,10 @@ router.post("/otp-submit", (req, res) => {
 router.get("/logout",(req,res)=>{
     delete req.session.user;
     res.redirect("/")
+})
+
+router.get("/cart",auth, (req,res)=>{
+     
 })
  
  
