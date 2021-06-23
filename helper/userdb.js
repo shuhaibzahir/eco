@@ -109,5 +109,36 @@ module.exports = {
                 }
             })
         })
+    },
+    getAllUsers:()=>{
+        return new Promise((resolve,reject)=>{
+            User.find({},(err,result)=>{
+                if(err){
+                    console.log(err)
+                }else{
+                    if(result){
+                        resolve(result)
+                    }else{
+                        reject("No Data Found")
+                    }
+                }
+            }).lean()
+        })
+    },
+    changeStatus:(data)=>{
+        return new Promise((resolve,reject)=>{
+            User.find({_id:data.uid},(err,result)=>{
+                if(err){
+                    console.log(err)
+                }else{
+                    if(result.status){
+                        
+                    }
+
+                
+                }
+            })
+        })
     }
+     
 }

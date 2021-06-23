@@ -1,7 +1,6 @@
 var express = require('express');
-const { FlowValidateList } = require('twilio/lib/rest/studio/v2/flowValidate');
-const { adminLogin } = require('../helper/admindb');
 var router = express.Router();
+const userDB = require('../helper/userdb')
 const adminDB = require('../helper/admindb')
 /* GET home page. */
 
@@ -49,5 +48,26 @@ router.get("/dashboard",(req,res)=>{
    res.render("admin/dashboard",{layout:"adminLayout",adminStatus:true})
 })
 
- 
+router.get("/add-product",(req,res)=>{
+  res.render("admin/addproduct",{layout:"adminLayout",adminStatus:true})
+})
+
+
+router.get("/user-data",(req,res)=>{
+  userDB.getAllUsers().then((data)=>{
+    console.log(data)
+    res.render("admin/usertable",{layout:"adminLayout",adminStatus:true,users:data})
+  }).catch((err)=>{
+    console.log(err)
+  })
+})
+
+router.post("/user/change-status",(req,res)=>{
+  console.log(req.body)
+  userDB.changeStatus(req.body).then((data)=>{
+  }).catch((err)=>{
+    console.log(err)
+  })
+})
+
 module.exports = router;
