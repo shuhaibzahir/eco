@@ -11,7 +11,7 @@ $('#signup').submit(function(event){
         success:function(data){
             if(data.status){
                 document.getElementById('signup').reset();
-                window.location.href="/success"
+                window.location.href="/"
                 
             }else{
                 $("#signup-alert").html(data.msg)
@@ -36,7 +36,7 @@ $("#signin").submit(function(event){
              console.log(d)
                 if(d.status){
                     document.getElementById('signin').reset();
-                    window.location.href="/success" 
+                    window.location.href="/" 
                 }else{
                     
                     $("#signin-alert").html(d.msg)
@@ -48,7 +48,7 @@ $("#signin").submit(function(event){
      })
 })
 
-// otp submit 
+// otp submit attempt
 $("#otp-loginForm").submit(function(event){
     event.preventDefault()
     let form = $(this);
@@ -59,7 +59,7 @@ $("#otp-loginForm").submit(function(event){
          success:function(d) {
              console.log(d)
                 if(d.status){
-                document.getElementById('loginform2').addClass("active");
+                $('#loginform2').addClass("active");
                 }else{
                   $("#otpsending-alert").html(d.msg)   
                 }
@@ -82,7 +82,7 @@ $("#otp-submitform").submit(function(event){
             if(result.status){
                 document.getElementById('otp-loginForm').reset();
                 document.getElementById('otp-submitform').reset();
-                window.location.href="/success"
+                window.location.href="/"
             }else{
                 $("#otpsubmiting-alert").html(result.msg)
             }

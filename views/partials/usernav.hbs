@@ -63,7 +63,11 @@
 								</div>
 							</div>
 							<div class="box-settings">
-								<i class="far fa-user-circle" style="font-size: 24px; padding-left:10px"> <span style="font-family:  Roboto ; font-weight: bold; color:#c99947">shuhaib</span></i>
+								{{#if usernav}}
+								<i class="far fa-user-circle" style="font-size: 24px; padding-left:10px"> <span style="font-family:  Roboto ; font-weight: bold; color:#c99947">{{usernav.name}}</span></i>
+								{{else}}
+								<i class="far fa-user-circle" style="font-size: 24px; padding-left:10px"> <span style="font-family:  Roboto ; font-weight: bold; color:#c99947"></span></i>
+								{{/if}}
 								<div class="settings-wrapper ">
 									<div class="setting-content">
 									  
@@ -75,9 +79,11 @@
 															MyAccount</span></a></li>
 												<li><a href="#"><i class="icon-note icons"></i><span>Checkout</span></a>
 												</li>
-												 
-												<li><a href="/login"><i class="icon-lock-open icons"></i><span>Login /
-															Register</span></a></li>
+												 {{#if usernav}}
+												<li><a href="/logout"><i class="icon-lock-open icons"></i><span>Logout</span></a></li>
+												 {{else}}
+												 	<li><a href="/login"><i class="icon-lock-open icons"></i><span>Login/Register</span></a></li>
+												{{/if}}
 											</ul>
 										</div>
 									</div>
@@ -147,9 +153,7 @@
 
 											</ul>
 										</div>
-
-
-									</div>
+										</div>
 								</div>
 							</li>
 

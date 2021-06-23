@@ -94,5 +94,20 @@ module.exports = {
                 }
             })
         })
+    },
+    getOneUser:(id)=>{
+        return new Promise((resolve, reject)=>{
+            User.findOne({_id:id},function(err,result){
+                if(!err){
+                    if(result){
+                        resolve(result)
+                    }else{
+                        reject("No User Found")
+                    }
+                }else{
+                    console.log(err)
+                }
+            })
+        })
     }
 }
