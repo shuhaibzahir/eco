@@ -31,15 +31,40 @@ function changeStatus(id){
                 data:{uid:id},
                 success:function(result){
                     console.log(result)
-                    if(result.status){
-                        $("#userCurrentStatus").val("Active").removeClass("btn-danger").addClass("btn-success");
+                    if(result.status ==true){
+                        $(`#${id}`).html("Active").removeClass("btn-danger").addClass("btn-success");
                     }else{
-                        $("#userCurrentStatus").val("Deactive").removeClass("btn-success").addClass("btn-danger");
+                        $(`#${id}`).html("Deactive").removeClass("btn-success").addClass("btn-danger");
                     }
                 },
                 error:function(err){
                     console.log(err)
                 }
-            })
+      })
 }
  
+
+ 
+$("#cat-add-form").submit(function(event){
+  
+    event.preventDefault();
+    
+    let form = $(this)
+    $.ajax({
+        url:"/admin/category/management", 
+        type:"Post",
+        data:form.serialize(),
+        success:function(d){ 
+            
+            if(d.status){
+                document.getElementById('cat-add-form').reset();
+                window.location.href="/admin/category"
+            }else{
+                $("#cat-add-alert").html(d.msg)
+            }
+        },
+        error:function(err){
+
+        }
+    })
+})

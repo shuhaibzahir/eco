@@ -9,6 +9,7 @@ var admin = require('./routes/admin');
 var usersRouter = require('./routes/users');
 var session = require('express-session')
 const db = require("./config/db");
+const fileUpload = require('express-fileupload')
  
 var app = express();
 // db connecting
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: false
 }));
+app.use(fileUpload());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({

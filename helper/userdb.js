@@ -8,13 +8,14 @@ const UserSchema = new mongoose.Schema({
     phone: Number,
     password: String,
     status: Boolean,
+    date  :String,
 })
 const User = mongoose.model('User', UserSchema);
 
 
 module.exports = {
     // user sign up function
-    userSignup: (userdata) => {
+    userSignup: (userdata,todaydate) => {
         return new Promise(async (resolve, reject) => {
             // checking existiting username
             let emailExist = User.countDocuments({
@@ -39,6 +40,7 @@ module.exports = {
                                 phone: userdata.phone,
                                 password: hash,
                                 status: true,
+                                date:todaydate
                             })
                             dataUp.save((err, room) => {
                                 if (err) {
@@ -127,14 +129,27 @@ module.exports = {
     },
     changeStatus:(data)=>{
         return new Promise((resolve,reject)=>{
-            User.find({_id:data.uid},(err,result)=>{
+            User.findOne({_id:data.uid},(err,result)=>{
                 if(err){
                     console.log(err)
                 }else{
                     if(result.status){
-                        
+                        User.findOneAndUpdate({_id:data.uid},{$set:{status:false}},(err,ok)=>{
+                            if(!err){
+                                resolve(false)
+                            }else{
+                                console.log(err)
+                            }
+                        })
+                    }else{
+                        User.findOneAndUpdate({_id:data.uid},{$set:{status:true}},(err,ok)=>{
+                            if(!err){
+                                resolve(true)
+                            }else{
+                                console.log(err)
+                            }
+                        })
                     }
-
                 
                 }
             })

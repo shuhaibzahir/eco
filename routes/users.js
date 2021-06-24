@@ -31,7 +31,8 @@ function auth(req, res, next) {
  
 
 router.get("/",  function (req, res) {
-    
+   
+     
     if (req.session.user){
         res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         res.render("userpages/main",{ usernav:req.session.user})
@@ -60,8 +61,10 @@ router.get("/login", function (req, res) {
 // user sign up form  post form 
 router.post("/signup",  (req, res) => {
     // console.log(req.body);
+    var todayDate = new Date().toLocaleDateString();
+  
     let signUpStatus = {};
-    userDB.userSignup(req.body).then((data) => {
+    userDB.userSignup(req.body,todayDate).then((data) => {
         signUpStatus = {
             status: true,
             msg: "successfully Registerd"
