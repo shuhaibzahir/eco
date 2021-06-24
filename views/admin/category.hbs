@@ -92,10 +92,10 @@
                            <td>{{this.brand}}</td>
                           <td class="td-actions text-right">
                             
-                            <a href="/admin/edit/category/{{this._id}}" class="btn btn-success">
+                            <a href="/admin/edit-category/{{this._id}}" class="btn btn-success">
                               <i class="material-icons" style="color:#ffff">edit</i>
                             </a>
-                            <a  href="/admin/edit/category/{{this._id}}" class="btn btn-danger">
+                            <a  href="/admin/delete-category/{{this._id}}" class="btn btn-danger">
                               <i class="material-icons" style="color:#ffff">close</i>
                             </a>
                           </td>
@@ -135,14 +135,14 @@
                            {{#each watch}}
                            <tr>  
                           <td>{{this.category}}</td>
-                          <td>{{this.ptype}}</td>
+                          <td>watch</td>
                            <td>{{this.brand}}</td>
                           <td class="td-actions text-right">
                             
-                            <a href="/admin/edit/category/{{this._id}}" class="btn btn-success">
+                            <a href="/admin/edit-category/{{this._id}}" class="btn btn-success">
                               <i class="material-icons" style="color:#ffff">edit</i>
                             </a>
-                            <a  href="/admin/edit/category/{{this._id}}" class="btn btn-danger">
+                            <a  href="/admin/delete-category/{{this._id}}" class="btn btn-danger">
                               <i class="material-icons" style="color:#ffff">close</i>
                             </a>
                           </td>
@@ -188,10 +188,10 @@
                            <td>{{this.brand}}</td>
                           <td class="td-actions text-right">
                             
-                            <a href="/admin/edit/category/{{this._id}}" class="btn btn-success">
+                            <a href="/admin/edit-category/{{this._id}}" class="btn btn-success">
                               <i class="material-icons" style="color:#ffff">edit</i>
                             </a>
-                            <a  href="/admin/edit/category/{{this._id}}" class="btn btn-danger">
+                            <a  href="/admin/delete-category/{{this._id}}" class="btn btn-danger">
                               <i class="material-icons" style="color:#ffff">close</i>
                             </a>
                           </td>
@@ -211,7 +211,7 @@
     </div>
 </div>
 
-<script>
+{{!-- <script>
     function hideType(){
         let checkFoot = document.getElementById("type-select"); 
         if(checkFoot.value == "watch"){
@@ -226,4 +226,4 @@
         }
         
     }
-</script>
+</script> --}}

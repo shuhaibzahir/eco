@@ -161,8 +161,65 @@ module.exports = {
                 }else{
                     resolve(result)
                 }
-            })
+            }).lean()
         }) 
+    },
+    updateCategory:(data)=>{
+        return new Promise(async(resolve,reject)=>{
+             
+            var checked= false;
+            console.log("checked")
+            // checking the data is existing
+           await CategoryM.findOne({
+                $and: [{
+                    section: data.section
+                }, {
+                    brand: data.brand
+                }, {ptype:data.product_type},
+                {category:data.category},
+                
+            ]
+            },(err,result)=>{
+                console.log(data.uid)
+                console.log(result)
+                if(result){
+                    if(result._id==data.uid){
+                        checked=true;
+                    }else{
+                        checked=false;
+                    }
+                }else{
+                    checked= true;
+                }
+            })
+            console.log(checked)
+
+            if(checked){
+                CategoryM.findOneAndUpdate({_id:data.uid}
+                  ,{$set:{
+                    section: data.section,
+                    brand: data.brand,
+                    ptype: data.product_type,
+                    category: data.category
+                  }} ,function(err){
+                      resolve(true)
+                  } 
+                    )
+            }else{
+                reject("The Same Data Existed")
+            }
+        })
+    },
+    categoryDelete:(id)=>{
+        return new Promise((resolve,reject) =>{
+            CategoryM.findOneAndDelete({_id:id},(err)=>{
+                if(err){
+                    reject(err)
+                }else{
+                    resolve(true)
+                }
+            })
+        })
     },
     addFootwareProduct: (datas, tags) => {
         return new Promise((resolve, reject) => {
@@ -188,6 +245,17 @@ module.exports = {
                     resolve(room)
                 }
             })
+        })
+    },
+    getAllProduct:()=>{
+        return new Promise ((resolve,reject)=>{
+            Product.find({},(err,data)=>{
+                if(err){
+                    reject(err)
+                }else{
+                    resolve(data)
+                }
+            }).lean()
         })
     }
 }

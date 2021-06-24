@@ -71,16 +71,60 @@ router.get("/add-product",(req,res)=>{
   
 })
 // category edit
-router.get("/admin/edit/category/:topic",(req,res)=>{
-  let id = req.params.topics;
-  productDB.getOneCategory(id).then((result=>{
-
+ 
+router.get("/edit-category/:topic",(req,res)=>{
+  let id = req.params.topic;
+  
+  productDB.getOneCategory(id).then((result)=>{
+     let editData = result;
+     
+    res.render("admin/categoryedit",{layout:"adminLayout",adminStatus:true,editData})
   }).catch((err)=>{
     console.log(err)
   })
-  res.render("admin/categoryedit",{layout:"adminLayout",adminStatus:true})
+  
+})
+// ..............................category delete
+router.get("/delete-category/:topic",(req,res)=>{
+  let id = req.params.topic;
+  
+  productDB.categoryDelete(id).then((result)=>{
+   
+     res.redirect("/admin/category")
+  }).catch((err)=>{
+    console.log(err)
+  })
+  
+})
+// ......................................catgory edit post 
+
+router.post("/edit-category",(req,res)=>{
+ let catUpdate={}
+ productDB.updateCategory(req.body).then((d)=>{
+  catUpdate={status:true}
+  res.json(catUpdate)
+ }).catch((err)=>{
+  catUpdate={status:false,msg:err}
+  res.json(catUpdate)
+ })
+})
+ 
+// .................................end this line
+
+
+// ...................allproduct view
+
+router.get("/view-allproduct",(req,res)=>{
+  productDB.getAllProduct().then((resul)=>{
+    let allproduct = resul;
+    res.render("admin/allproduct",{layout:"adminLayout",adminStatus:true,allproduct})
+  }).catch((err)=>{
+    console.log(err)
+  })
+  
 })
 
+// ................user-data get method............................
 router.get("/user-data",auth,(req,res)=>{
   userDB.getAllUsers().then((data)=>{
     console.log(data)
@@ -90,6 +134,8 @@ router.get("/user-data",auth,(req,res)=>{
     console.log(err)
   })
 })
+
+// ................user-data get method end.......................
 
 router.post("/user/change-status",auth,(req,res)=>{
   console.log(req.body)

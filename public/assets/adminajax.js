@@ -68,3 +68,31 @@ $("#cat-add-form").submit(function(event){
         }
     })
 })
+
+
+// edit category
+// cat-add-form-edit
+
+$("#cat-add-form-edit").submit(function(event){
+  
+    event.preventDefault();
+    
+    let form = $(this)
+    $.ajax({
+        url:"/admin/edit-category", 
+        type:"Post",
+        data:form.serialize(),
+        success:function(d){ 
+            
+            if(d.status){
+                document.getElementById('cat-add-form-edit').reset();
+                window.location.href="/admin/category"
+            }else{
+                $("#cat-add-alert").html(d.msg)
+            }
+        },
+        error:function(err){
+
+        }
+    })
+})
