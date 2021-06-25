@@ -3,7 +3,7 @@ const { FieldValueList } = require('twilio/lib/rest/preview/understand/assistant
 var router = express.Router();
 const userDB = require("../helper/userdb")
 const client = require('twilio')(process.env.TWILIO_ID, process.env.TWILIO_TOKEN);
-
+const productDB = require("../helper/product")
 
 // check authentication
 
@@ -35,12 +35,12 @@ router.get("/",  function (req, res) {
      
     if (req.session.user){
         res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        res.render("userpages/main",{ usernav:req.session.user})
+        res.render("userpages/main",{userLayout:true,usernav:req.session.user})
 
     }
     else{
         res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        res.render("userpages/main", )
+        res.render("userpages/main",{userLayout:true} )
     }
 
       
@@ -53,7 +53,7 @@ router.get("/login", function (req, res) {
        res.redirect("/")
    }else{
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-       res.render("userpages/userlogin",)
+       res.render("userpages/userlogin",{userLayout:true})
    }
      
 })
@@ -192,6 +192,21 @@ router.post("/otp-submit", (req, res) => {
         res.json(otpSubmitStatus)
     }
 })
+
+// ...................product view page ..
+
+router.get("/products",(req,res)=>{
+    console.log('started')
+    productDB.getAllProduct().then((result)=>{
+
+        let allProduct = result
+        res.render("userpages/allproduct",{userLayout:true,allProduct})
+    }).catch((err)=>{
+        console.log(err)
+    })
+})
+
+// ...........end...............
 
 router.get("/logout",(req,res)=>{
     delete req.session.user;

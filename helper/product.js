@@ -47,41 +47,7 @@ const CategoryM = mongoose.model('Categoryms', categorySchema);
 module.exports = {
     categoryManage: (data) => {
         return new Promise((resolve,reject) => {
-            if(data.section =="watch"){
-                CategoryM.findOne({
-                    $and: [{
-                        section: data.section
-                    }, {
-                        brand: data.brand
-                    }, 
-                    {category:data.category},
-                    
-                ]
-                },(err,result)=>{
-                    if(!err){
-                        if(result){
-                            reject("Already have this category")
-                        }else{
-                            const newCat = new CategoryM({
-                                section: data.section,
-                                brand: data.brand,
-                                category: data.category,
-     
-                            })
-    
-                            newCat.save((err,result)=>{
-                                if(!err){
-                                    resolve((result))
-                                }else{
-                                    console.log(err)
-                                }
-                            })
-                        }
-                    }else{
-                        reject(err)
-                    }
-                })
-            }else{
+             
                 CategoryM.findOne({
                     $and: [{
                         section: data.section
@@ -118,7 +84,7 @@ module.exports = {
                 })
             }
             
-        })
+        )     
     },
     getAllCat:()=>{
       return new Promise((resolve,reject)=>{
@@ -221,7 +187,7 @@ module.exports = {
             })
         })
     },
-    addFootwareProduct: (datas, tags) => {
+    addProduct: (datas, tags) => {
         return new Promise((resolve, reject) => {
             const productData = new Product({
                 Name: datas.name,

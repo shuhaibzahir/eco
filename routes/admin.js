@@ -52,7 +52,7 @@ router.get("/dashboard",auth,(req,res)=>{
    res.render("admin/dashboard",{layout:"adminLayout",adminStatus:true,adminData:req.session.admin.details})
 })
 
-router.get("/add-product",(req,res)=>{
+router.get("/add-product",auth,(req,res)=>{
   productDB.getCatValues().then((result)=>{
     let watchCatData =result[0];
     let footCatData =result[1];
@@ -72,20 +72,20 @@ router.get("/add-product",(req,res)=>{
 })
 // category edit
  
-router.get("/edit-category/:topic",(req,res)=>{
+router.get("/edit-category/:topic",auth,(req,res)=>{
   let id = req.params.topic;
   
   productDB.getOneCategory(id).then((result)=>{
      let editData = result;
-     
-    res.render("admin/categoryedit",{layout:"adminLayout",adminStatus:true,editData})
+     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.render("admin/categoryedit",{layout:"adminLayout",adminStatus:true,editData,adminData:req.session.admin.details})
   }).catch((err)=>{
     console.log(err)
   })
   
 })
 // ..............................category delete
-router.get("/delete-category/:topic",(req,res)=>{
+router.get("/delete-category/:topic",auth,(req,res)=>{
   let id = req.params.topic;
   
   productDB.categoryDelete(id).then((result)=>{
@@ -114,10 +114,11 @@ router.post("/edit-category",(req,res)=>{
 
 // ...................allproduct view
 
-router.get("/view-allproduct",(req,res)=>{
+router.get("/view-allproduct",auth,(req,res)=>{
   productDB.getAllProduct().then((resul)=>{
     let allproduct = resul;
-    res.render("admin/allproduct",{layout:"adminLayout",adminStatus:true,allproduct})
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.render("admin/allproduct",{layout:"adminLayout",adminStatus:true,allproduct,adminData:req.session.admin.details})
   }).catch((err)=>{
     console.log(err)
   })
@@ -137,7 +138,7 @@ router.get("/user-data",auth,(req,res)=>{
 
 // ................user-data get method end.......................
 
-router.post("/user/change-status",auth,(req,res)=>{
+router.post("/user/change-status",(req,res)=>{
   console.log(req.body)
   console.log(req.body)
   userDB.changeStatus(req.body).then((data)=>{
@@ -149,15 +150,10 @@ router.post("/user/change-status",auth,(req,res)=>{
   }) 
 })
 
-// admin Logout
-router.get("/account/logout",(req,res)=>{
-  delete req.session.admin
-  res.redirect("/admin")
-})
 
 // categoy management
 
-router.get("/category",(req,res)=>{
+router.get("/category",auth,(req,res)=>{
   productDB.getAllCat().then((result)=>{
     console.log(result)
     let watch =[]
@@ -173,8 +169,8 @@ router.get("/category",(req,res)=>{
       }
      
     })
-    console.log(footwear)
-    res.render("admin/category",{layout:"adminLayout",clothes,watch,footwear,adminStatus:true,})
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.render("admin/category",{layout:"adminLayout",clothes,watch,footwear,adminStatus:true,adminData:req.session.admin.details})
   }).catch((err)=>{
     console.log(err)
   })
@@ -200,19 +196,16 @@ router.post("/add-product/",(req,res)=>{
 
   let allData = req.body;
   let tags = req.body.tags.split(",");
-  console.log(allData);
-  console.log(tags)
+ 
+    
+   
   let image1 = req.files.image1;
   let image2 = req.files.image2;
   let image3 = req.files.image3;
   let image4 = req.files.image4;
+ 
 
-  console.log(image1)
-  console.log(image2)
-  console.log(image3)
-  console.log(image4)
-
-  productDB.addFootwareProduct(allData,tags).then((d)=>{
+  productDB.addProduct(allData,tags).then((d)=>{
     console.log(d)
     // image 1 
     image1.mv("./public/pimages/"+d._id+"001.jpg",err => {
@@ -227,14 +220,24 @@ router.post("/add-product/",(req,res)=>{
     image4.mv("./public/pimages/"+d._id+"004.jpg",err => {
       if(err) {console.log(err)}
     })
-   res.send("ha its uploaded")
+   res.redirect("/admin/view-allproduct")
   }).catch((err)=>{
-    res.send("ha its some error")
+    res.redirect("/admin/add-product")
     console.log(err)
   })
 })
 
- 
+
+
+router.get("/cat-manage",(req,res)=>{
+  res.render("admin/catmanagement",{layout:"adminLayout",adminStatus:true,})
+})
+ // admin Logout
+router.get("/account/logout",auth,(req,res)=>{
+  delete req.session.admin
+  res.redirect("/admin")
+})
+
 
 
 module.exports = router;
