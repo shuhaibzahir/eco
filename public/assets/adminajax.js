@@ -73,20 +73,20 @@ $("#cat-add-form").submit(function(event){
 // edit category
 // cat-add-form-edit
 
-$("#cat-add-form-edit").submit(function(event){
+$("#main-section-cat").submit(function(event){
   
     event.preventDefault();
     
     let form = $(this)
     $.ajax({
-        url:"/admin/edit-category", 
+        url:"/admin/main-section", 
         type:"Post",
         data:form.serialize(),
         success:function(d){ 
             
             if(d.status){
-                document.getElementById('cat-add-form-edit').reset();
-                window.location.href="/admin/category"
+                document.getElementById('main-section-cat').reset();
+                window.location.href="/admin/cat-manage"
             }else{
                 $("#cat-add-alert").html(d.msg)
             }
@@ -96,3 +96,5 @@ $("#cat-add-form-edit").submit(function(event){
         }
     })
 })
+
+ 

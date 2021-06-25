@@ -229,9 +229,56 @@ router.post("/add-product/",(req,res)=>{
 
 
 
+// .............category section..............
 router.get("/cat-manage",(req,res)=>{
-  res.render("admin/catmanagement",{layout:"adminLayout",adminStatus:true,})
+  productDB.getSectionData().then((dat)=>{
+   let types =[]
+    // adding the data to the sepecified name
+    dat.forEach((item)=>{
+      types.push(item)
+    })
+    res.render("admin/catmanagement",{layout:"adminLayout",adminStatus:true,types})
+  }).catch((err)=>{
+    console.log(err)
+  })
+
+ 
 })
+
+
+router.post("/main-section",(req,res)=>{
+  let sectionCatst  ={}
+   let section = req.body.section
+   section= section.toUpperCase()
+  productDB.sectionManage(section).then((sec)=>{
+    sectionCatst={status:true}
+      res.json(sectionCatst)
+  }).catch((err)=>{
+    sectionCatst={status:false,msg:err}
+    res.json(sectionCatst)
+  })
+})
+
+// ..........sub cat adding .....
+router.post("/add-subcat",(req,res)=>{
+  let nameOfPropery = req.body.name.toUpperCase()
+  console.log(req.body)
+  productDB.updateSubCat(nameOfPropery,req.body)
+})
+
+
+router.post("/add-subcat",(req,res)=>{
+
+  console.log(req.body)
+  // productDB.subCatadding(req.body).then((sec)=>{
+  //   console.log(sec)
+  // }).catch((err)=>{
+  //   console.log(err)
+  // })
+})
+
+
+
  // admin Logout
 router.get("/account/logout",auth,(req,res)=>{
   delete req.session.admin
