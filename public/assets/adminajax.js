@@ -88,7 +88,7 @@ $("#main-section-cat").submit(function(event){
                 document.getElementById('main-section-cat').reset();
                 window.location.href="/admin/cat-manage"
             }else{
-                $("#cat-add-alert").html(d.msg)
+                $("#maincat-add-alert").html(d.msg)
             }
         },
         error:function(err){
@@ -97,4 +97,27 @@ $("#main-section-cat").submit(function(event){
     })
 })
 
- 
+// /admin/add-subcat
+
+$("#subCategory").submit(function(event){
+  
+    event.preventDefault();
+    
+    let form = $(this)
+    $.ajax({
+        url:"/admin/add-subcat", 
+        type:"Post",
+        data:form.serialize(),
+        success:function(d){ 
+              if(d.status){
+                document.getElementById('subCategory').reset();
+                window.location.href="/admin/cat-manage"
+            }else{
+                $("#cat-add-alert").html(d.msg)
+            }
+        },
+        error:function(err){
+            console.log(err)
+        }
+    })
+})

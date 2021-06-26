@@ -63,8 +63,8 @@
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="product_type"required>
                                                                     <option disabled selected>Select Type</option>
-                                                                    {{#each  watchCatData}}
-                                                                    <option value="{{_id.ptype}}">{{_id.ptype}}</option>
+                                                                    {{#each  watches.ptype as |item|}}
+                                                                    <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
                                                                 </select>
                                                             </div>
@@ -80,9 +80,10 @@
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="brand" required>
                                                                     <option disabled selected>Select Brand</option>
-                                                                    {{#each  watchCatData}}
-                                                                    <option value="{{_id.brand}}">{{_id.brand}}</option>
+                                                                    {{#each  watches.brand as |item|}}
+                                                                     <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
+                                                                    
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -118,8 +119,8 @@
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="category" required>
                                                                     <option disabled selected>Select Category</option>
-                                                                    {{#each watchCatData}}
-                                                                    <option value="{{_id.category}}">{{_id.category}}
+                                                                    {{#each watches.category as |item|}}
+                                                                    <option value="{{item}}">{{item}}
                                                                     </option>
                                                                     {{/each }}
                                                                 </select>
@@ -351,8 +352,8 @@
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="product_type" required>
                                                                     <option disabled selected>Product Type</option>
-                                                                    {{#each footCatData}}
-                                                                    <option value="{{_id.ptype}}">{{_id.ptype}}</option>
+                                                                    {{#each footwear.ptype as |item|}}
+                                                                    <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
                                                                 </select>
                                                             </div>
@@ -368,8 +369,8 @@
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="brand" required>
                                                                     <option disabled selected>Select Brand</option>
-                                                                    {{#each footCatData}}
-                                                                    <option value="{{_id.brand}}">{{_id.brand}}</option>
+                                                                    {{#each footwear.brand as |item|}}
+                                                                    <option value="{{item}}">{{itme}}</option>
                                                                     {{/each }}
                                                                 </select>
                                                             </div>
@@ -406,8 +407,8 @@
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="category" required>
                                                                     <option disabled selected>Select Category</option>
-                                                                    {{#each footCatData}}
-                                                                    <option value="{{_id.category}}">{{_id.category}}
+                                                                    {{#each footwear.category as |item|}}
+                                                                    <option value="{{item}}">{{item}}
                                                                     </option>
                                                                     {{/each }}
                                                                 </select>
@@ -638,8 +639,8 @@
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="product_type" required>
                                                                     <option disabled selected>Product Type</option>
-                                                                    {{#each clothCatData}}
-                                                                    <option value="{{_id.ptype}}">{{_id.ptype}}</option>
+                                                                    {{#each clothes.ptype  as |item|}}
+                                                                    <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
                                                                 </select>
                                                             </div>
@@ -657,8 +658,8 @@
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="brand" required>
                                                                     <option disabled selected>Select Brand</option>
-                                                                    {{#each clothCatData}}
-                                                                    <option value="{{_id.brand}}">{{_id.brand}}</option>
+                                                                    {{#each clothes.brand  as |item|}}
+                                                                    <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
                                                                 </select>
                                                             </div>
@@ -695,8 +696,8 @@
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="category" required>
                                                                     <option disabled selected>Select Category</option>
-                                                                    {{#each clothCatData}}
-                                                                    <option value="{{_id.category}}">{{_id.category}}
+                                                                    {{#each clothes.category  as |item|}}
+                                                                    <option value="{{item}}">{{item}}
                                                                     </option>
                                                                     {{/each }}
                                                                 </select>

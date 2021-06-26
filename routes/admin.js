@@ -3,284 +3,344 @@ var router = express.Router();
 const userDB = require('../helper/userdb')
 const adminDB = require('../helper/admindb')
 const productDB = require("../helper/product")
-/* GET home page. */
+const fs = require('fs')
 
-function auth(req,res,next){
-  if(req.session.admin){
+
+// ..........main authentication....................
+function auth(req, res, next) {
+  if (req.session.admin) {
     next()
-  }else{
+  } else {
     res.redirect("/admin")
   }
 }
-router.get('/', function(req, res, next) {
- 
-   
-  if(req.session.admin){
+router.get('/', function (req, res, next) {
+  if (req.session.admin) {
     res.redirect("/admin/dashboard")
-  }else{
+  } else {
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    res.render("admin/adminlogin",{layout:"adminLayout"})
+    res.render("admin/adminlogin", {
+      layout: "adminLayout"
+    })
   }
-   
-});
 
-// admin login 
-router.post('/login',(req,res)=>{
-  console.log(req.body)
-  let adminLoginStatus ={}
-  adminDB.adminLogin(req.body).then((data)=>{
+});
+// ..........main authentication end.................................
+
+// ..........Admin login post method...................................
+router.post('/login', (req, res) => {
+ 
+  let adminLoginStatus = {}
+  adminDB.adminLogin(req.body).then((data) => {
     console.log(data);
     req.session.admin = {
-      status:true,
-      details:data
+      status: true,
+      details: data
     }
-    console.log(  req.session.admin)
-     adminLoginStatus={
-       status:true,
-     }
-     res.json(adminLoginStatus)
-  }).catch((err)=>{
-    adminLoginStatus={
-      status:false,
-      msg:err,
+    console.log(req.session.admin)
+    adminLoginStatus = {
+      status: true,
+    }
+    res.json(adminLoginStatus)
+  }).catch((err) => {
+    adminLoginStatus = {
+      status: false,
+      msg: err,
     }
     res.json(adminLoginStatus)
   })
 })
-
-router.get("/dashboard",auth,(req,res)=>{
-   res.render("admin/dashboard",{layout:"adminLayout",adminStatus:true,adminData:req.session.admin.details})
-})
-
-router.get("/add-product",auth,(req,res)=>{
-  productDB.getCatValues().then((result)=>{
-    let watchCatData =result[0];
-    let footCatData =result[1];
-    let clothCatData =result[2]
-    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-  res.render("admin/addproduct",
-  {layout:"adminLayout",
-  adminStatus:true,
-   watchCatData  ,
-   footCatData, 
-    clothCatData
-  
-  })//adminStatus:true,adminData:req.session.admin.details
-    
-  }).catch((err)=>{console.log(err)})
-  
-})
-// category edit
- 
-router.get("/edit-category/:topic",auth,(req,res)=>{
-  let id = req.params.topic;
-  
-  productDB.getOneCategory(id).then((result)=>{
-     let editData = result;
-     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    res.render("admin/categoryedit",{layout:"adminLayout",adminStatus:true,editData,adminData:req.session.admin.details})
-  }).catch((err)=>{
-    console.log(err)
-  })
-  
-})
-// ..............................category delete
-router.get("/delete-category/:topic",auth,(req,res)=>{
-  let id = req.params.topic;
-  
-  productDB.categoryDelete(id).then((result)=>{
-   
-     res.redirect("/admin/category")
-  }).catch((err)=>{
-    console.log(err)
-  })
-  
-})
-// ......................................catgory edit post 
-
-router.post("/edit-category",(req,res)=>{
- let catUpdate={}
- productDB.updateCategory(req.body).then((d)=>{
-  catUpdate={status:true}
-  res.json(catUpdate)
- }).catch((err)=>{
-  catUpdate={status:false,msg:err}
-  res.json(catUpdate)
- })
-})
- 
-// .................................end this line
+// ..........Admin login post method end....................
 
 
-// ...................allproduct view
-
-router.get("/view-allproduct",auth,(req,res)=>{
-  productDB.getAllProduct().then((resul)=>{
-    let allproduct = resul;
-    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    res.render("admin/allproduct",{layout:"adminLayout",adminStatus:true,allproduct,adminData:req.session.admin.details})
-  }).catch((err)=>{
-    console.log(err)
-  })
-  
-})
-
-// ................user-data get method............................
-router.get("/user-data",auth,(req,res)=>{
-  userDB.getAllUsers().then((data)=>{
-    console.log(data)
-    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    res.render("admin/usertable",{layout:"adminLayout",adminStatus:true,users:data,adminData:req.session.admin.details})
-  }).catch((err)=>{
-    console.log(err)
+// ..........Admin Dashboard..................................
+router.get("/dashboard", auth, (req, res) => {
+  res.render("admin/dashboard", {
+    layout: "adminLayout",
+    adminStatus: true,
+    adminData: req.session.admin.details
   })
 })
+// ..........Admin Dashboard end..............................
 
-// ................user-data get method end.......................
+// ..........Add product get method page.............................
+router.get("/add-product", auth, (req, res) => {
 
-router.post("/user/change-status",(req,res)=>{
-  console.log(req.body)
-  console.log(req.body)
-  userDB.changeStatus(req.body).then((data)=>{
-    console.log(data)
-    let changeStatus={
-      status:data
-    }
-    res.json(changeStatus)
-  }) 
-})
+  productDB.categoryFetching().then((catData) => {
+    let clothes;
+    let watches;
+    let footwear;
 
-
-// categoy management
-
-router.get("/category",auth,(req,res)=>{
-  productDB.getAllCat().then((result)=>{
-    console.log(result)
-    let watch =[]
-    let footwear =[]
-    let clothes = []
-    result.forEach((item)=>{
-      if(item.section =="watch"){
-        watch.push(item)
-      }else if(item.section =="footwear"){
-        footwear.push(item)
-      }else{
-        clothes.push(item)
+    catData.forEach(item => {
+      if (item.section == "CLOTHES") {
+        clothes = item;
+      } else if (item.section == "FOOTWEAR" || item.section == "FOOTWEARS") {
+        footwear = item;
+      } else if (item.section == "WATCHE" || item.section == "WATCHES") {
+        watches = item;
+      } else {
+        console.log(item)
       }
-     
-    })
+    });
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    res.render("admin/category",{layout:"adminLayout",clothes,watch,footwear,adminStatus:true,adminData:req.session.admin.details})
-  }).catch((err)=>{
+    res.render("admin/addproduct", {
+      layout: "adminLayout",
+      adminStatus: true,
+      clothes,
+      watches,
+      footwear,
+    })
+
+  }).catch((err) => {
     console.log(err)
   })
-  
-})
-// categoy management post
-router.post("/category/management",(req,res)=>{
-   
-  let catStatus={}
-  productDB.categoryManage(req.body).then((result)=>{
 
-    catStatus = {status:true}
-    res.json(catStatus)
-  }).catch((err)=>{
-   
-    catStatus = {status:false,msg:err}
-    res.json(catStatus)
-  })
+
+
 })
 
-// admin product adding
-router.post("/add-product/",(req,res)=>{
+//  ......................add product post method................
+
+
+router.post("/add-product/", (req, res) => {
 
   let allData = req.body;
   let tags = req.body.tags.split(",");
- 
-    
-   
+
+
+
   let image1 = req.files.image1;
   let image2 = req.files.image2;
   let image3 = req.files.image3;
   let image4 = req.files.image4;
- 
 
-  productDB.addProduct(allData,tags).then((d)=>{
+
+  productDB.addProduct(allData, tags).then((d) => {
     console.log(d)
     // image 1 
-    image1.mv("./public/pimages/"+d._id+"001.jpg",err => {
-      if(err) {console.log(err)}
+    image1.mv("./public/pimages/" + d._id + "001.jpg", err => {
+      if (err) {
+        console.log(err)
+      }
     })
-    image2.mv("./public/pimages/"+d._id+"002.jpg",err => {
-      if(err) {console.log(err)}
-    }) 
-    image3.mv("./public/pimages/"+d._id+"003.jpg",err => {
-      if(err) {console.log(err)}
+    image2.mv("./public/pimages/" + d._id + "002.jpg", err => {
+      if (err) {
+        console.log(err)
+      }
     })
-    image4.mv("./public/pimages/"+d._id+"004.jpg",err => {
-      if(err) {console.log(err)}
+    image3.mv("./public/pimages/" + d._id + "003.jpg", err => {
+      if (err) {
+        console.log(err)
+      }
     })
-   res.redirect("/admin/view-allproduct")
-  }).catch((err)=>{
+    image4.mv("./public/pimages/" + d._id + "004.jpg", err => {
+      if (err) {
+        console.log(err)
+      }
+    })
+    res.redirect("/admin/view-allproduct")
+  }).catch((err) => {
     res.redirect("/admin/add-product")
     console.log(err)
   })
 })
 
 
+// ...........add product post method end...............
 
-// .............category section..............
-router.get("/cat-manage",(req,res)=>{
-  productDB.getSectionData().then((dat)=>{
-   let types =[]
-    // adding the data to the sepecified name
-    dat.forEach((item)=>{
-      types.push(item)
+
+
+// .......... view all product..............................
+router.get("/view-allproduct", auth, (req, res) => {
+  productDB.getAllProduct().then((resul) => {
+    let allproduct = resul;
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.render("admin/allproduct", {
+      layout: "adminLayout",
+      adminStatus: true,
+      allproduct,
+      adminData: req.session.admin.details
     })
-    res.render("admin/catmanagement",{layout:"adminLayout",adminStatus:true,types})
-  }).catch((err)=>{
+  }).catch((err) => {
     console.log(err)
   })
 
- 
+})
+
+// ...........edit product................
+
+
+
+
+
+
+
+
+
+
+
+// ..................edit product end.................
+
+// ..............delete product.....................
+router.get("/delete-product/:id",(req,res)=>{
+  let id = req.params.id;
+   productDB.delteProduct(id).then((result)=>{
+    let idOfItem = result._id;
+    fs.unlink("./public/pimages/" +idOfItem + "001.jpg",(err)=>console.log(err))
+    fs.unlink("./public/pimages/" +idOfItem + "002.jpg",(err)=>console.log(err))
+    fs.unlink("./public/pimages/" +idOfItem + "003.jpg",(err)=>console.log(err))
+    fs.unlink("./public/pimages/" +idOfItem + "004.jpg",(err)=>console.log(err))
+    res.redirect("/admin/view-allproduct")
+  }).catch((err)=>{
+    console.log(err)
+  })
 })
 
 
-router.post("/main-section",(req,res)=>{
-  let sectionCatst  ={}
-   let section = req.body.section
-   section= section.toUpperCase()
-  productDB.sectionManage(section).then((sec)=>{
-    sectionCatst={status:true}
-      res.json(sectionCatst)
-  }).catch((err)=>{
-    sectionCatst={status:false,msg:err}
+
+
+
+
+
+// ..................delete product end..........
+
+// ................user-data get method............................
+router.get("/user-data", auth, (req, res) => {
+  userDB.getAllUsers().then((data) => {
+    console.log(data)
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.render("admin/usertable", {
+      layout: "adminLayout",
+      adminStatus: true,
+      users: data,
+      adminData: req.session.admin.details
+    })
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+// ................user-data get method end.......................
+
+// ................user-data change status.......................
+router.post("/user/change-status", (req, res) => {
+  console.log(req.body)
+  console.log(req.body)
+  userDB.changeStatus(req.body).then((data) => {
+    console.log(data)
+    let changeStatus = {
+      status: data
+    }
+    res.json(changeStatus)
+  })
+})
+
+// ................user-data get change status end.......................
+
+// .............category section....................
+router.get("/cat-manage", (req, res) => {
+  productDB.categoryFetching().then((dat) => {
+    let clothes;
+    let watches;
+    let footwear;
+
+    dat.forEach(item => {
+      if (item.section == "CLOTHES") {
+        clothes = item;
+      } else if (item.section == "FOOTWEAR" || item.section == "FOOTWEARS") {
+        footwear = item;
+      } else if (item.section == "WATCHE" || item.section == "WATCHES") {
+        watches = item;
+      } else {
+        console.log(item)
+      }
+    });
+    res.render("admin/catmanagement", {
+      layout: "adminLayout",
+      adminStatus: true,
+      types: dat,
+      clothes,
+      watches,
+      footwear
+    })
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+// .............category section end....................
+
+
+// .............category main catgory start....................
+router.post("/main-section", (req, res) => {
+  let sectionCatst = {}
+  let section = req.body.section
+  section = section.toUpperCase()
+  productDB.sectionManage(section).then((sec) => {
+    sectionCatst = {
+      status: true }
+    res.json(sectionCatst)
+  }).catch((err) => {
+     
+    sectionCatst = {
+      status: false,
+      msg: err
+    }
     res.json(sectionCatst)
   })
 })
 
-// ..........sub cat adding .....
-router.post("/add-subcat",(req,res)=>{
+// .............category main catgory start....................
+
+
+// .................sub cat adding ............................
+router.post("/add-subcat", (req, res) => {
+
   let nameOfPropery = req.body.name.toUpperCase()
-  console.log(req.body)
-  productDB.updateSubCat(nameOfPropery,req.body)
+  let subCatStatus = {}
+  productDB.subCategoryAdd(req.body, nameOfPropery).then((data) => {
+    subCatStatus = {
+      status: true
+    }
+    res.json(subCatStatus)
+  }).catch((err) => {
+    subCatStatus = {
+      status: false,
+      msg: err
+    }
+    res.json(subCatStatus)
+  })
+
+
+})
+// .................sub cat adding end............................
+
+// .........delete sub category ....................
+
+router.get("/del-cat/:section/:options/:item", (req, res) => {
+ 
+  let section = req.params.section.toUpperCase()
+  let item = req.params.item.toUpperCase() 
+  let option = req.params.options 
+ 
+  
+  productDB.deleteSub(section,option,item).then((result)=>{
+    res.redirect("/admin/cat-manage")
+  }).catch((err)=>{
+    console.log(err)
+    res.redirect("/admin/cat-manage")
+  })
+  
+
 })
 
-
-router.post("/add-subcat",(req,res)=>{
-
-  console.log(req.body)
-  // productDB.subCatadding(req.body).then((sec)=>{
-  //   console.log(sec)
-  // }).catch((err)=>{
-  //   console.log(err)
-  // })
-})
+ 
+//....................delete sub end...................
 
 
 
- // admin Logout
-router.get("/account/logout",auth,(req,res)=>{
+
+// ...........admin logout................
+router.get("/account/logout", (req, res) => {
   delete req.session.admin
   res.redirect("/admin")
 })

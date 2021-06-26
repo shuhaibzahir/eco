@@ -1,0 +1,85 @@
+ 
+router.get("/edit-category/:topic",auth,(req,res)=>{
+  let id = req.params.topic;
+  
+  productDB.getOneCategory(id).then((result)=>{
+     let editData = result;
+     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.render("admin/categoryedit",{layout:"adminLayout",adminStatus:true,editData,adminData:req.session.admin.details})
+  }).catch((err)=>{
+    console.log(err)
+  })
+  
+})
+// ..............................category delete
+router.get("/delete-category/:topic",auth,(req,res)=>{
+  let id = req.params.topic;
+  
+  productDB.categoryDelete(id).then((result)=>{
+   
+     res.redirect("/admin/category")
+  }).catch((err)=>{
+    console.log(err)
+  })
+  
+})
+// ......................................catgory edit post 
+
+router.post("/edit-category",(req,res)=>{
+ let catUpdate={}
+ productDB.updateCategory(req.body).then((d)=>{
+  catUpdate={status:true}
+  res.json(catUpdate)
+ }).catch((err)=>{
+  catUpdate={status:false,msg:err}
+  res.json(catUpdate)
+ })
+})
+ 
+// .................................end this line
+
+
+// ...................allproduct view
+
+//,,,,,,,,,,,category codes
+
+router.get("/category",auth,(req,res)=>{
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.render("admin/category",{layout:"adminLayout", adminStatus:true,adminData:req.session.admin.details})
+
+  // productDB.getAllCat().then((result)=>{
+  //   console.log(result)
+  //   let watch =[]
+  //   let footwear =[]
+  //   let clothes = []
+  //   result.forEach((item)=>{
+  //     if(item.section =="watch"){
+  //       watch.push(item)
+  //     }else if(item.section =="footwear"){
+  //       footwear.push(item)
+  //     }else{
+  //       clothes.push(item)
+  //     }
+     
+  //   })
+  //   res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  //   res.render("admin/category",{layout:"adminLayout",clothes,watch,footwear,adminStatus:true,adminData:req.session.admin.details})
+  // }).catch((err)=>{
+  //   console.log(err)
+  // })
+  
+})
+// categoy management post
+router.post("/category/management",(req,res)=>{
+   
+  let catStatus={}
+  productDB.categoryManage(req.body).then((result)=>{
+
+    catStatus = {status:true}
+    res.json(catStatus)
+  }).catch((err)=>{
+   
+    catStatus = {status:false,msg:err}
+    res.json(catStatus)
+  })
+})

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
                 <div class="page-categories">
-                    <h3 class="title text-center">Add Product</h3>
+                    <h3 class="title text-center">Welcome to Category</h3>
                     <br />
                     <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
                         <li class="nav-item">
@@ -44,20 +44,25 @@
                                                 <h4 class="card-title">ADD SUB</h4>
                                             </div>
                                             <div class="card-body ">
-                                                <form method="POST" action="/admin/add-subcat"
+                                                <form method="POST" id="subCategory" action="/admin/add-subcat"
                                                     enctype="multipart/form-data">
                                                     <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <label class="bmd-label-floating">Enter Your Sub </label>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Select An Option And Type" name="name"
-                                                                    required>
-                                                            </div>
+                                                          <div class="form-group col-md-3">
+                                                            <label class="bmd-label-floating">Select Product
+                                                                Type</label>
+                                                            <div class="form-group ">
 
+                                                                <select class="selectpicker" data-size="7"
+                                                                    data-style="btn btn-success btn-round"
+                                                                    title="Single Select" name="section" required>
+                                                                    <option disabled selected>Product Type</option>
+                                                                    {{#each types}}
+                                                                    <option value="{{section}}">{{section}}</option>
+                                                                    {{/each}}
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                        {{!-- category select --}}
-                                                        <div class="form-group col-md-3">
+                                                            <div class="form-group col-md-3">
                                                             <label class="bmd-label-floating">Select Option</label>
                                                             <div class="form-group ">
 
@@ -73,27 +78,24 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group col-md-3">
-                                                            <label class="bmd-label-floating">Select Product
-                                                                Type</label>
-                                                            <div class="form-group ">
-
-                                                                <select class="selectpicker" data-size="7"
-                                                                    data-style="btn btn-success btn-round"
-                                                                    title="Single Select" name="section" required>
-                                                                    <option disabled selected>Product Type</option>
-                                                                   {{#each types}}
-                                                                    <option value="{{section.name}}">{{section.name}}</option>
-                                                                    {{/each}}
-                                                                </select>
+                                                      
+                                                        <div class="form-group col-md-6">
+                                                            <label class="bmd-label-floating">Enter Your Sub </label>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Select An Option And Type" name="name"
+                                                                    required>
                                                             </div>
+
                                                         </div>
+                                                        {{!-- category select --}}
+                                                    
 
-
+                                                        <p id="cat-add-alert" style="color: red;"></p>
                                                     </div>
                                                     <div class="card-footer ">
-                                                        <button type="submit"
-                                                            class="btn btn-fill btn-rose">Submit</button>
+                                                        <button type="submit "
+                                                           class="btn btn-fill btn-rose">Submit</button>
                                                     </div>
                                                 </form>
 
@@ -130,7 +132,7 @@
 
                                                         </div>
                                                     </div>
-                                                    <p id="cat-add-alert" style="color: red;"></p>
+                                                    <p id="maincat-add-alert" style="color: red;"></p>
                                             </div>
                                             <div class="card-footer ">
                                                 <button type="submit" class="btn btn-fill btn-rose">Submit</button>
@@ -148,5 +150,381 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+                <div class="page-categories">
+                    <h3 class="title text-center">Select SECTIONS</h3>
+                    <br />
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+                        <li class="nav-item " >
+                            <a class="nav-link active " data-toggle="tab" href="#clothes" role="tablist">
+                                <i class="far fa-clock"></i> Clothes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " data-toggle="tab" href="#foot" role="tablist">
+                                <i class="far fa-clock"></i> Footware
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link " data-toggle="tab" href="#Watches" role="tablist">
+                                <i class="far fa-clock"></i> Watches
+                            </a>
+                        </li>
+
+                    </ul>
+
+
+                    <div class="tab-content tab-space tab-subcategories">
+                        <div class="tab-pane " id="foot">
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header card-header-rose card-header-icon">
+                                            <div class="card-icon">
+                                                <i class="material-icons">assignment</i>
+                                            </div>
+                                            <h4 class="card-title">Section : Footwear</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Brand</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {{#each footwear.brand as |item|}}
+                                                        <tr>
+                                                            <td>{{item}}</td>
+                                                            <td class="td-actions">
+                                                                <a href="/admin/del-cat/FOOTWEAR/brand/{{item}}"
+                                                                    class="btn btn-danger">
+                                                                    <i class="material-icons"
+                                                                        style="color:#ffff">close</i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header card-header-rose card-header-icon">
+                                            <div class="card-icon">
+                                                <i class="material-icons">assignment</i>
+                                            </div>
+                                            <h4 class="card-title">Section : Footwear</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product Type</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {{#each footwear.ptype as |item|}}
+                                                        <tr>
+                                                            <td>{{item}}</td>
+                                                            <td class="td-actions">
+                                                                <a href="/admin/del-cat/FOOTWEAR/ptype/{{item}}"
+                                                                    class="btn btn-danger">
+                                                                    <i class="material-icons"
+                                                                        style="color:#ffff">close</i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header card-header-rose card-header-icon">
+                                            <div class="card-icon">
+                                                <i class="material-icons">assignment</i>
+                                            </div>
+                                            <h4 class="card-title">Section : Footware</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Category</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {{#each footwear.category as |item|}}
+                                                        <tr>
+                                                            <td>{{item}}</td>
+                                                            <td class="td-actions">
+                                                                <a href="/admin/del-cat/FOOTWEAR/category/{{item}}"
+                                                                    class="btn btn-danger">
+                                                                    <i class="material-icons"
+                                                                        style="color:#ffff">close</i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{!-- main section --}}
+                        <div class="tab-pane active " id="clothes">
+                                <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header card-header-rose card-header-icon">
+                                            <div class="card-icon">
+                                                <i class="material-icons">assignment</i>
+                                            </div>
+                                            <h4 class="card-title">Section : Clothes</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Brand</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {{#each clothes.brand as |item|}}
+                                                        <tr>
+                                                            <td>{{item}}</td>
+                                                            <td class="td-actions">
+                                                                <a  href="/admin/del-cat/CLOTHES/brand/{{item}}"
+                                                                    class="btn btn-danger">
+                                                                    <i class="material-icons"
+                                                                        style="color:#ffff">close</i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header card-header-rose card-header-icon">
+                                            <div class="card-icon">
+                                                <i class="material-icons">assignment</i>
+                                            </div>
+                                            <h4 class="card-title">Section : Clothes</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product Type</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {{#each clothes.ptype as |item|}}
+                                                        <tr>
+                                                            <td>{{item}}</td>
+                                                            <td class="td-actions">
+                                                                <a href="/admin/del-cat/CLOTHES/ptype/{{item}}"
+                                                                    class="btn btn-danger">
+                                                                    <i class="material-icons"
+                                                                        style="color:#ffff">close</i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header card-header-rose card-header-icon">
+                                            <div class="card-icon">
+                                                <i class="material-icons">assignment</i>
+                                            </div>
+                                            <h4 class="card-title">Section : Clothes</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Category</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {{#each clothes.category as |item|}}
+                                                        <tr>
+                                                            <td>{{item}}</td>
+                                                            <td class="td-actions">
+                                                                <a href="/admin/del-cat/clothes/category/{{item}}"
+                                                                    class="btn btn-danger">
+                                                                    <i class="material-icons"
+                                                                        style="color:#ffff">close</i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+
+                        <div class="tab-pane  " id="Watches">
+                                <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header card-header-rose card-header-icon">
+                                            <div class="card-icon">
+                                                <i class="material-icons">assignment</i>
+                                            </div>
+                                            <h4 class="card-title">Section : Watch</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Brand</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {{#each watches.brand as |item|}}
+                                                        <tr>
+                                                            <td>{{item}}</td>
+                                                            <td class="td-actions">
+                                                                <a href="/admin/del-cat/watches/brand/{{item}}"
+                                                                    class="btn btn-danger">
+                                                                    <i class="material-icons"
+                                                                        style="color:#ffff">close</i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header card-header-rose card-header-icon">
+                                            <div class="card-icon">
+                                                <i class="material-icons">assignment</i>
+                                            </div>
+                                            <h4 class="card-title">Section : Watch</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product Type</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {{#each watches.ptype as |item|}}
+                                                        <tr>
+                                                            <td>{{item}}</td>
+                                                            <td class="td-actions">
+                                                                <a href="/admin/del-cat/watches/ptype/{{item}}"
+                                                                    class="btn btn-danger">
+                                                                    <i class="material-icons"
+                                                                        style="color:#ffff">close</i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header card-header-rose card-header-icon">
+                                            <div class="card-icon">
+                                                <i class="material-icons">assignment</i>
+                                            </div>
+                                            <h4 class="card-title">Section : Watch</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Category</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {{#each watches.category as |item|}}
+                                                        <tr>
+                                                            <td>{{item}}</td>
+                                                            <td class="td-actions">
+                                                                <a href="/admin/del-cat/watches/category/{{item}}"
+                                                                    class="btn btn-danger">
+                                                                    <i class="material-icons"
+                                                                        style="color:#ffff">close</i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

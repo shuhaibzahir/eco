@@ -27,10 +27,14 @@ const Product = mongoose.model('Products', ProductSchema);
 // CategoryM is cateogrymanagement
 
 const categorySchema = new mongoose.Schema({
-    section: Object
+    section: String,
+    brand: Array,
+    ptype: Array,
+    category: Array,
+
 })
 
-const CategoryM = mongoose.model('Categoryms', categorySchema);
+const Category = mongoose.model('Categoryms', categorySchema);
 
 
 
@@ -38,106 +42,97 @@ const CategoryM = mongoose.model('Categoryms', categorySchema);
 
 
 module.exports = {
+    // ......................... main section category adding................
     sectionManage: (sec) => {
-        return new Promise((resolve, reject) => {
-            CategoryM.find({}, function (err, result) {
-                if (err) {
-                    console.log(err)
-                } else {
-                    if (result.length == 0) {
-                        const newSection = new CategoryM({
-                            section: {
-                                name: sec,
-                                brand: [],
-                                ptype: [],
-                                category: []
-                            }
-                        })
-                        newSection.save((err, result) => {
-                            if (err) {
-                                reject(err)
-                            } else {
-                                resolve(result)
-                            }
-                        })
-                    } else {
-                        result.forEach((item) => {
-
-                            if (item.section.name == sec) {
-
-                                reject("Section Already Exist")
-                            } else {
-
-                                const newSection = new CategoryM({
-                                    section: {
-                                        name: sec,
-                                        brand: [],
-                                        ptype: [],
-                                        category: []
-                                    }
-                                })
-                                newSection.save((err, result) => {
-                                    if (err) {
-                                        reject(err)
-                                    } else {
-                                        resolve(result)
-                                    }
-                                })
-                            }
-                        })
-                    }
-
-
-                }
-            })
-        })
-    },
-    updateSubCat: (opt, fullDetails) => {
         return new Promise(async (resolve, reject) => {
-            var itemId;
-            await CategoryM.find({}, (err, result) => {
-                if (err) {
-                    console.log(err)
-                } else {
-                    result.forEach((items) => {
-                        if (items.section.name == fullDetails.section) {
-                            itemId = items._id;
-                        }
-                    })
-                }
-            })
-            console.log(itemId)
-            let brand = false;
-            let ptype = false;
-            let catgory = false;
-            if(fullDetails.option=="brand"){
-                brand=true;
-            }else if(fullDetails.option=="ptype"){
-                ptype=true;
 
-            }else if(fullDetails.option=="category"){
-                
+            let count = await Category.countDocuments({
+                section: sec
+            }).exec()
+            if (count != 0) {
+                reject("The Section Already Exist")
+            } else {
+                const newSection = new Category({
+                    section: sec
+                })
+                newSection.save((err, room) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        resolve(room)
+                    }
+                })
             }
-
-
         })
     },
-    getSectionData: () => {
+    // ......................... main section category ending................
+    // ......................... main category  fetching................
+    categoryFetching: () => {
         return new Promise((resolve, reject) => {
-            CategoryM.find({}, (err, result) => {
+            Category.find({}, (err, result) => {
                 if (err) {
-                    console.log(err)
+                    reject(err)
                 } else {
                     resolve(result)
                 }
-
             }).lean()
         })
     },
+    // ......................... main category  fetching ending................
 
+    // ......................... sub category  adding...............
+    subCategoryAdd: (details, data) => {
+        return new Promise(async (resolve, reject) => {
+            let VARIABLE = details.option.trim()
+            let count = await Category.countDocuments({
+                section: details.section,
+                [VARIABLE]: {
+                    $in: [data]
+                }
+            }).exec()
+            if (count != 0) {
+                reject("Already Have Same Category")
+            } else {
 
-    // product adding
-    addProduct: (datas, tags) => {
+                Category.findOneAndUpdate({
+                        section: details.section
+                    }, {
+                        $push: {
+                            [VARIABLE]: data
+                        }
+                    },
+                    (err, result) => {
+                        resolve(data)
+                    }
+                )
+            }
+
+        })
+    },
+    // ......................dub category delete...............
+
+    deleteSub: (sec, opt, item) =>{
+        return new Promise((resolve,reject)=>{
+            
+           Category.updateOne({section:sec},
+                {$pull:{[opt]:item}},
+                (err,result)=>{
+                    if(err){
+                        reject(err)
+                    }else{
+                        console.log(result)
+                        resolve(true)
+                    }
+                }
+                )
+        })
+    }, 
+
+// ......................... sub category  ending...............
+   
+//  .................add product.................
+   
+    addProduct:(datas, tags) => {
         return new Promise((resolve, reject) => {
             const productData = new Product({
                 Name: datas.name,
@@ -163,6 +158,7 @@ module.exports = {
             })
         })
     },
+    // ..............get All Product...........
     getAllProduct: () => {
         return new Promise((resolve, reject) => {
             Product.find({}, (err, data) => {
@@ -173,5 +169,19 @@ module.exports = {
                 }
             }).lean()
         })
+    },
+    // ..............get all product end...........
+
+    delteProduct:(id)=>{
+        return new Promise((resolve,reject)=>{
+            Product.findOneAndDelete({_id:id},(err,result)=>{
+                if(err){
+                    reject(err)
+                }else{
+                    resolve(result)
+                }
+            })
+        })
+
     }
 }

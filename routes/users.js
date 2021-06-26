@@ -198,7 +198,6 @@ router.post("/otp-submit", (req, res) => {
 router.get("/products",(req,res)=>{
     console.log('started')
     productDB.getAllProduct().then((result)=>{
-
         let allProduct = result
         res.render("userpages/allproduct",{userLayout:true,allProduct})
     }).catch((err)=>{
