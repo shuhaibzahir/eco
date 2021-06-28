@@ -253,7 +253,9 @@ router.post("/edit-product/",(req,res)=>{
 
 
 
-
+router.get("/test",(req,res)=>{
+  console.log("testing")
+})
 
 
 

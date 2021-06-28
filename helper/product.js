@@ -85,44 +85,26 @@ module.exports = {
 // .............category only aggregatin...........
 categorOnly:()=>{
     return new Promise((resolve,reject)=>{
-        
-
-       let catOnly =  Category.aggregate([
-            {$group:{_id: "$category"}}
-        ]) 
-        let brandOnly =  Category.aggregate([
-            {$group:{_id: "$brand"}}
-        ]) 
-        let pTypeOnly =  Category.aggregate([
-            {$group:{_id: "$ptype"}}
-        ]) 
-         Promise.all([catOnly,brandOnly,pTypeOnly]).then((results)=>{
-             let [cat,brand,type]=results
-             let catFilterd=[]
-             let brandFilterd=[];
-             let typeFilterd=[]
-              for(let i=0; i<results.length; i++){
-                  for(let j=0; j<results[i].length; j++){
-                      if(i==0){
-                        catFilterd.push(...results[i][j]._id)
-                      }else if(i ==1){
-                        brandFilterd.push(...results[i][j]._id)
-                      }else if(i ==2){
-                        typeFilterd.push(...results[i][j]._id)
-                      }else{
-                        console.log(resutl[i][j])
-                      }
-                  }
-              }
-
-              resolve([catFilterd,brandFilterd,typeFilterd])
-        
-         }).catch((error)=>{
-             reject(error)
-         })
-        
+        let catFilterd=[]
+        let brandFilterd=[];
+        let typeFilterd=[]
+       let catCategory = Category.distinct("category") 
+       let catBrand = Category.distinct("brand") 
+       let catPtype = Category.distinct("ptype") 
+        Promise.all([catCategory,catBrand,catPtype]).then((allcatData)=>{
+            catFilterd.push(...allcatData[0])
+            brandFilterd.push(...allcatData[1])
+            typeFilterd.push(allcatData[2])
+            resolve([catFilterd,brandFilterd,typeFilterd])
+        }).catch((err)=>{
+            reject(err)
+        })
     })
 },
+
+// .................testing..........................................
+
+ 
     // ......................... sub category  adding...............
     subCategoryAdd: (details, data) => {
         return new Promise(async (resolve, reject) => {
