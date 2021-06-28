@@ -170,26 +170,117 @@ router.get("/view-allproduct", auth, (req, res) => {
 // ...........edit product................
 
 
+router.get("/edit-product/:topic",(req,res)=>{
+  let pId = req.params.topic
+  productDB.getOneProduct(pId).then((result)=>{
+    
+    let categories =[]
+      let types = [];
+      let brands=[];
+    productDB.categorOnly().then((allgroupedCat)=>{
+    
+      let [filterdCat,brandsOfP,typesOfP]=allgroupedCat
+      categories.push(...filterdCat)
+      types.push(...typesOfP)
+      brands.push(...brandsOfP)
+     
+    }).catch((errofCat)=>{console.log(errofCat)})
+     res.render("admin/editproduct",{layout: "adminLayout",
+     adminStatus: true,
+     pDetails:result,
+     categories,
+     types,
+     brands
+     })
+  }).catch((err)=>{
+    console.log(err)
+  })
+ 
+})
 
-
-
-
-
-
-
-
-
+ 
 // ..................edit product end.................
+
+// ............edit product post methos.................
+
+router.post("/edit-product/",(req,res)=>{
+  let pId = req.body.productID
+  let allData = req.body;
+  let tags = req.body.tags.split(",");
+
+  productDB.editProduct(allData, tags,pId).then((d) => {
+    
+     if(req.files.image1!=null){
+      let image1 = req.files.image1;
+      image1.mv("./public/pimages/" + d._id + "001.jpg", err => {
+        if (err) {
+          console.log(err)
+        }
+      })
+     }
+     if(req.files.image2!=null){
+      let image2 = req.files.image2;
+      image2.mv("./public/pimages/" + d._id + "002.jpg", err => {
+        if (err) {
+          console.log(err)
+        }
+      })
+     }
+     if(req.files.image3!=null){
+       let image3 = req.files.image3;
+      image3.mv("./public/pimages/" + d._id + "003.jpg", err => {
+        if (err) {
+          console.log(err)
+        }
+      })
+     }
+     if(req.files.image4!=null){
+      image4.mv("./public/pimages/" + d._id + "004.jpg", err => {
+        if (err) {
+          console.log(err)
+        }
+      })
+     }
+   
+    res.redirect("/admin/view-allproduct")
+  }).catch((err) => {
+    res.redirect("/admin/add-product")
+    console.log(err)
+  })
+   
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ..............delete product.....................
 router.get("/delete-product/:id",(req,res)=>{
   let id = req.params.id;
    productDB.delteProduct(id).then((result)=>{
     let idOfItem = result._id;
-    fs.unlink("./public/pimages/" +idOfItem + "001.jpg",(err)=>console.log(err))
-    fs.unlink("./public/pimages/" +idOfItem + "002.jpg",(err)=>console.log(err))
-    fs.unlink("./public/pimages/" +idOfItem + "003.jpg",(err)=>console.log(err))
-    fs.unlink("./public/pimages/" +idOfItem + "004.jpg",(err)=>console.log(err))
+    fs.unlink("./public/pimages/" +idOfItem + "001.jpg",(err)=> {if(err){console.log(err)}})
+    fs.unlink("./public/pimages/" +idOfItem + "002.jpg",(err)=>{if(err){console.log(err)}})
+    fs.unlink("./public/pimages/" +idOfItem + "003.jpg",(err)=>{if(err){console.log(err)}})
+    fs.unlink("./public/pimages/" +idOfItem + "004.jpg",(err)=>{if(err){console.log(err)}})
     res.redirect("/admin/view-allproduct")
   }).catch((err)=>{
     console.log(err)

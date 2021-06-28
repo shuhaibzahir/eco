@@ -7,6 +7,9 @@ const ProductSchema = new mongoose.Schema({
     Prize: {
         type: Float
     },
+    OfferPrize: {
+        type: Float
+    },
     Department: String,
     Category: String,
     Color: String,
@@ -79,7 +82,47 @@ module.exports = {
         })
     },
     // ......................... main category  fetching ending................
+// .............category only aggregatin...........
+categorOnly:()=>{
+    return new Promise((resolve,reject)=>{
+        
 
+       let catOnly =  Category.aggregate([
+            {$group:{_id: "$category"}}
+        ]) 
+        let brandOnly =  Category.aggregate([
+            {$group:{_id: "$brand"}}
+        ]) 
+        let pTypeOnly =  Category.aggregate([
+            {$group:{_id: "$ptype"}}
+        ]) 
+         Promise.all([catOnly,brandOnly,pTypeOnly]).then((results)=>{
+             let [cat,brand,type]=results
+             let catFilterd=[]
+             let brandFilterd=[];
+             let typeFilterd=[]
+              for(let i=0; i<results.length; i++){
+                  for(let j=0; j<results[i].length; j++){
+                      if(i==0){
+                        catFilterd.push(...results[i][j]._id)
+                      }else if(i ==1){
+                        brandFilterd.push(...results[i][j]._id)
+                      }else if(i ==2){
+                        typeFilterd.push(...results[i][j]._id)
+                      }else{
+                        console.log(resutl[i][j])
+                      }
+                  }
+              }
+
+              resolve([catFilterd,brandFilterd,typeFilterd])
+        
+         }).catch((error)=>{
+             reject(error)
+         })
+        
+    })
+},
     // ......................... sub category  adding...............
     subCategoryAdd: (details, data) => {
         return new Promise(async (resolve, reject) => {
@@ -134,6 +177,8 @@ module.exports = {
    
     addProduct:(datas, tags) => {
         return new Promise((resolve, reject) => {
+                   let offer = (datas.prize/100)*datas.discount;
+                   let reducedPrize = Math.floor(datas.prize-offer)
             const productData = new Product({
                 Name: datas.name,
                 Type: datas.product_type,
@@ -147,6 +192,7 @@ module.exports = {
                 Discount: datas.discount,
                 Tags: tags,
                 Mood: datas.mood,
+                OfferPrize:reducedPrize,
                 Description: datas.decsription,
             })
             productData.save((err, room) => {
@@ -171,7 +217,59 @@ module.exports = {
         })
     },
     // ..............get all product end...........
+    // .................GET ONE PRODUCT.............
 
+    getOneProduct:(pid)=>{
+        return new Promise((resolve,reject)=>{
+            Product.findOne({_id:pid},function(err,result){
+                if(err){
+                    reject(err)
+                }else{
+                    resolve(result)
+                }
+            }).lean()
+        })
+    },
+// ...............GET ONE PRODUCT END........
+
+
+// ...............Edit product ........
+editProduct:(allData, tags,pId)=>{
+    return new Promise((resolve,reject)=>{
+        let offer = (allData.prize/100)*allData.discount;
+        let reducedPrize = Math.floor(allData.prize-offer)
+        console.log(reducedPrize)
+        Product.findOneAndUpdate({_id:pId},{
+            $set:{
+                Name: allData.name,
+                Type: allData.product_type,
+                Brand: allData.brand,
+                Prize: allData.prize,
+                Department: allData.department,
+                Category: allData.category,
+                Color: allData.color,
+                Size: allData.size,
+                Quantity: allData.quantity,
+                Discount: allData.discount,
+                OfferPrize:reducedPrize,
+                Tags: tags,
+                Mood: allData.mood,
+                Description: allData.decsription,
+            }
+        },(err,resultOfUpdate)=>{
+            if(err){
+               reject(err)
+            }else{
+                console.log(resultOfUpdate)
+                resolve(resultOfUpdate)
+            }
+        })
+    })
+},
+
+// ...............Edit product end........
+
+// ...............Delete Product............  
     delteProduct:(id)=>{
         return new Promise((resolve,reject)=>{
             Product.findOneAndDelete({_id:id},(err,result)=>{
@@ -181,7 +279,7 @@ module.exports = {
                     resolve(result)
                 }
             })
-        })
-
+        }) 
     }
+ // ...............Delete Product end............  
 }

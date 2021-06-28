@@ -2,290 +2,280 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
-                  <div class="tab-pane" id="link7">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Add Wathces </h4>
-                                    <p class="card-category">
-                                        Keep Complete This Form
-                                    </p>
-                                </div>
-                                <div class="card-body">
-                                    <div class="col-12">
-                                        <div class="card ">
-                                            <div class="card-header card-header-rose card-header-icon">
-                                                <div class="card-icon">
-                                                    <i class="far fa-clock" style="font-size:34px"></i>
-                                                </div>
-                                                <h4 class="card-title">ADD PRODUCTS</h4>
-                                            </div>
-                                            <div class="card-body ">
-                                                <form method="POST" action="/admin/add-product/"
-                                                    enctype="multipart/form-data">
-                                                    <div class="row">
-                                                          <div class="form-group col-md-6">
-                                                            <label class="bmd-label-floating">Product Name</label>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Enter Product Name" name="name"
-                                                                    required>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                             <label class="bmd-label-floating">Select Product Type </label>
-                                                           <div class="form-group ">
-                                                            <select class="selectpicker" data-size="7"
-                                                                    data-style="btn btn-success btn-round"
-                                                                    title="Single Select" name="product_type"required>
-                                                                    <option disabled selected>Select Type</option>
-                                                                    {{#each  watches.ptype as |item|}}
-                                                                    <option value="{{item}}">{{item}}</option>
-                                                                    {{/each }}
-                                                                </select>
-                                                            </div>
-                                                            
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                               <label class="bmd-label-floating">Brand Name</label>
-                                                            <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
-                                                                    data-style="btn btn-success btn-round"
-                                                                    title="Single Select" name="brand" required>
-                                                                    <option disabled selected>Select Brand</option>
-                                                                    {{#each  watches.brand as |item|}}
-                                                                     <option value="{{item}}">{{item}}</option>
-                                                                    {{/each }}
-                                                                    
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <label class="bmd-label-floating">Prize</label>
-                                                            <div class="form-group">
-                                                                <input type="number" step="0.01" class="form-control"
-                                                                    placeholder="Enter Product Prize" name="prize"
-                                                                    required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <label class="bmd-label-floating">Department</label>
-                                                            <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
-                                                                    data-style="btn btn-success btn-round"
-                                                                    title="Single Select" name="department" required>
-                                                                    <option disabled selected>Single Option</option>
-                                                                    <option value="Women">Women's</option>
-                                                                    <option value="Men">Men's</option>
-                                                                    <option value="Kid">Kid's</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    {{!-- next row --}}
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                             <label class="bmd-label-floating">Category</label>
-                                                            <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
-                                                                    data-style="btn btn-success btn-round"
-                                                                    title="Single Select" name="category" required>
-                                                                    <option disabled selected>Select Category</option>
-                                                                    {{#each watches.category as |item|}}
-                                                                    <option value="{{item}}">{{item}}
-                                                                    </option>
-                                                                    {{/each }}
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <label class="bmd-label-floating">Color</label>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Enter Product Color" name="color"
-                                                                    required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <label class="bmd-label-floating">Select Size</label>
-                                                            <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
-                                                                    data-style="btn btn-success btn-round"
-                                                                    title="Single Select" disabled required>
-                                                                    <option disabled selected>Single Option</option>
-                                                                    <option value="S">Small</option>
-                                                                    <option value="M">Medium</option>
-                                                                    <option value="L">Large</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {{!-- next --}}
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <label class="bmd-label-floating">Quantity</label>
-                                                            <div class="form-group">
-                                                                <input type="number" class="form-control"
-                                                                    placeholder="Product Quantity" name="quantity"
-                                                                    required>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <label class="bmd-label-floating">Discount </label>
-                                                            <div class="form-group">
-                                                                <input type="number" step="0.01" class="form-control"
-                                                                    placeholder="Discount in Percentage" name="discount"
-                                                                    required>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <h4 class="title">Tags</h4>
-                                                            <input type="text" value="men's,"
-                                                                class="form-control tagsinput" data-role="tagsinput"
-                                                                data-color="info" name="tags">
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <label class="bmd-label-floating">Selecte Mood</label>
-                                                            <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
-                                                                    data-style="btn btn-success btn-round"
-                                                                    title="Single Select" disabled>
-                                                                    <option disabled selected>Single Option</option>
-                                                                    <option value="indoor">Indoor </option>
-                                                                    <option value="outdoor">Outdoor</option>
-
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <label class="bmd-label-floating">Product Decscription
-                                                            </label>
-                                                            <div class="form-group">
-                                                                <textarea name="decsription" class="form-control"
-                                                                    cols="30" rows="10"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row justify-content-between" style="width:90%">
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title"> Image 1</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
-                                                                <div class="fileinput-new thumbnail">
-                                                                    <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
-                                                                </div>
-                                                                <div>
-                                                                    <span class="btn btn-rose btn-round btn-file">
-                                                                        <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image1" required />
-                                                                    </span>
-                                                                    <a href="#pablo"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title">Image 2</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
-                                                                <div class="fileinput-new thumbnail">
-                                                                    <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
-                                                                </div>
-                                                                <div>
-                                                                    <span class="btn btn-rose btn-round btn-file">
-                                                                        <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image2" required />
-                                                                    </span>
-                                                                    <a href="#pablo"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title">Image 3</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
-                                                                <div class="fileinput-new thumbnail">
-                                                                    <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
-                                                                </div>
-                                                                <div>
-                                                                    <span class="btn btn-rose btn-round btn-file">
-                                                                        <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image3" required />
-                                                                    </span>
-                                                                    <a href="#"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title">Image 4</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
-                                                                <div class="fileinput-new thumbnail">
-                                                                    <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
-                                                                </div>
-                                                                <div>
-                                                                    <span class="btn btn-rose btn-round btn-file">
-                                                                        <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image4" required />
-                                                                    </span>
-                                                                    <a href="#"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                            </div>
-                                            <div class="card-footer ">
-                                                <button type="submit" class="btn btn-fill btn-rose">Submit</button>
-                                            </div>
-                                            </form>
+                <div class="tab-pane" id="link7">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Edit Your Product </h4>
+                            <p class="card-category">
+                                Keep the details correct !
+                            </p>
+                        </div>
+          
+                        <div class="card-body">
+                            <div class="col-12">
+                                <div class="card ">
+                                    <div class="card-header card-header-rose card-header-icon">
+                                        <div class="card-icon"> <i class="far fa-clock" style="font-size:34px"></i>
                                         </div>
-
+                                        <h4 class="card-title">EditPRODUCTS</h4>
                                     </div>
+                                    <div class="card-body ">
+                                        <form method="POST" action="/admin/edit-product/" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="form-group col-md-6"> <label
+                                                        class="bmd-label-floating">Product Name</label>
+                                                    <div class="form-group"> <input type="text" class="form-control"
+                                                            placeholder="Enter Product Name" name="name" value="{{pDetails.Name}}" required>
+                                                    </div>
+                                                </div>
+                                                <input type="text" name="productID" id="" value="{{pDetails._id}}" hidden>
+                                                <div class="form-group col-md-6"> <label
+                                                        class="bmd-label-floating">Select Product Type </label>
+                                                    <div class="form-group "> <select class="selectpicker" data-size="7"
+                                                            data-style="btn btn-success btn-round" title="Select Type"
+                                                            name="product_type" required>
+                                                            <option value="{{pDetails.Type}}" selected> > {{pDetails.Type}}</option>
+                                                             {{#each types as |typeofProduct|}}
+                                                              <option value="{{typeofProduct}}">{{typeofProduct}}  </option>
+                                                            {{/each}}
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="bmd-label-floating">Brand Name</label>
+                                                    <div class="form-group">
+                                                        <select class="selectpicker" data-size="7"
+                                                            data-style="btn btn-success btn-round" title="Single Select"
+                                                            name="brand" required>
+                                                             <option value="{{pDetails.Brand}}" selected> > {{pDetails.Brand}}</option>
+                                                            {{#each brands as |brandOfProduct|}}
+                                                            <option value="{{brandOfProduct}}">{{brandOfProduct}}</option>
+                                                            {{/each }}
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="bmd-label-floating">Prize</label>
+                                                    <div class="form-group">
+                                                        <input type="number" step="0.01" class="form-control"
+                                                            placeholder="Enter Product Prize" name="prize" value="{{pDetails.Prize}}" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="bmd-label-floating">Department</label>
+                                                    <div class="form-group">
+                                                        <select class="selectpicker" data-size="7"
+                                                            data-style="btn btn-success btn-round" title="Single Select"
+                                                            name="department" required>
+                                                          
+                                                             <option  selected value="{{pDetails.Department}}"> > {{pDetails.Department}}</option>
+                                                            <option value="Women">Women's</option>
+                                                            <option value="Men">Men's</option>
+                                                            <option value="Kid">Kid's</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {{!-- next row --}}
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="bmd-label-floating">Category</label>
+                                                    <div class="form-group">
+                                                        <select class="selectpicker" data-size="7"
+                                                            data-style="btn btn-success btn-round" title="Single Select"
+                                                            name="category" required>
+                                                             <option value="{{pDetails.Category}}" selected> > {{pDetails.Category}}</option>
+                                                            {{#each categories as |catOfProduct|}}
+                                                            <option value="{{catOfProduct}}">{{catOfProduct}}
+                                                            </option>
+                                                            {{/each }}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="bmd-label-floating">Color</label>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter Product Color" name="color" value="{{pDetails.Color}}" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="bmd-label-floating">Select Size</label>
+                                                    <div class="form-group">
+                                                        <select class="selectpicker" data-size="7"
+                                                            data-style="btn btn-success btn-round" name="size" title="Single Select"
+                                                             required>
+                                                          <option value="{{pDetails.Size}}" selected> > {{pDetails.Size}}</option>
+                                                            <option value="S">Small</option>
+                                                            <option value="M">Medium</option>
+                                                            <option value="L">Large</option>
+                                                            <option value="9">9</option>
+                                                            <option value="8">8</option>
+                                                            <option value="7">7</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{!-- next --}}
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="bmd-label-floating">Quantity</label>
+                                                    <div class="form-group">
+                                                        <input type="number" class="form-control"
+                                                            placeholder="Product Quantity" name="quantity" value="{{pDetails.Quantity}}" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label class="bmd-label-floating">Discount </label>
+                                                    <div class="form-group">
+                                                        <input type="number" step="0.01" class="form-control"
+                                                            placeholder="Discount in Percentage" name="discount"
+                                                           value="{{pDetails.Discount}}" required>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4 class="title">Tags</h4>
+                                                 
+                                                    <input type="text"  value= " {{#each pDetails.Tags as |tagsSet|}} {{tagsSet}},  {{/each}}" class="form-control tagsinput"
+                                                        data-role="tagsinput" data-color="info" name="tags" required>
+                                                   
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="bmd-label-floating">Selecte Mood</label>
+                                                    <div class="form-group">
+                                                        <select class="selectpicker" data-size="7"
+                                                            data-style="btn btn-success btn-round" title="Single Select"
+                                                            >
+                                                            <option value="{{pDetails.Mood}}" selected> > {{pDetails.Mood}}</option>
+                                                            <option value="indoor">Indoor </option>
+                                                            <option value="outdoor">Outdoor</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <label class="bmd-label-floating">Product Decscription
+                                                    </label>
+                                                    <div class="form-group">
+                                                        <textarea name="decsription" class="form-control" cols="30"
+                                                            rows="10" value="dfdsf">{{pDetails.Description}}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-between" style="width:90%">
+                                                <div class="col-md-2 col-sm-2">
+                                                    <h4 class="title"> Image 1</h4>
+                                                    <div class="fileinput fileinput-new text-center"
+                                                        data-provides="fileinput">
+                                                        <div class="fileinput-new thumbnail">
+                                                            <img src="/pimages/{{pDetails._id}}001.jpg" alt="...">
+                                                        </div>
+                                                        <div class="fileinput-preview fileinput-exists thumbnail">
+                                                        </div>
+                                                        <div>
+                                                            <span class="btn btn-rose btn-round btn-file">
+                                                                <span class="fileinput-new">Change image</span>
+                                                                <span class="fileinput-exists">Change</span>
+                                                                <input type="file" name="image1"  />
+                                                            </span>
+                                                            <a href="#pablo"
+                                                                class="btn btn-danger btn-round fileinput-exists"
+                                                                data-dismiss="fileinput"><i class="fa fa-times"></i>
+                                                                Remove</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2">
+                                                    <h4 class="title">Image 2</h4>
+                                                    <div class="fileinput fileinput-new text-center"
+                                                        data-provides="fileinput">
+                                                        <div class="fileinput-new thumbnail">
+                                                            <img src="/pimages/{{pDetails._id}}002.jpg" alt="...">
+                                                        </div>
+                                                        <div class="fileinput-preview fileinput-exists thumbnail">
+                                                        </div>
+                                                        <div>
+                                                            <span class="btn btn-rose btn-round btn-file">
+                                                                <span class="fileinput-new">Change image</span>
+                                                                <span class="fileinput-exists">Change</span>
+                                                                <input type="file" name="image2"/>
+                                                            </span>
+                                                            <a href="#pablo"
+                                                                class="btn btn-danger btn-round fileinput-exists"
+                                                                data-dismiss="fileinput"><i class="fa fa-times"></i>
+                                                                Remove</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2">
+                                                    <h4 class="title">Image 3</h4>
+                                                    <div class="fileinput fileinput-new text-center"
+                                                        data-provides="fileinput">
+                                                        <div class="fileinput-new thumbnail">
+                                                            <img src="/pimages/{{pDetails._id}}003.jpg" alt="...">
+                                                        </div>
+                                                        <div class="fileinput-preview fileinput-exists thumbnail">
+                                                        </div>
+                                                        <div>
+                                                            <span class="btn btn-rose btn-round btn-file">
+                                                                <span class="fileinput-new">Change image</span>
+                                                                <span class="fileinput-exists">Change</span>
+                                                                <input type="file" name="image3"  />
+                                                            </span>
+                                                            <a href="#"
+                                                                class="btn btn-danger btn-round fileinput-exists"
+                                                                data-dismiss="fileinput"><i class="fa fa-times"></i>
+                                                                Remove</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2">
+                                                    <h4 class="title">Image 4</h4>
+                                                    <div class="fileinput fileinput-new text-center"
+                                                        data-provides="fileinput">
+                                                        <div class="fileinput-new thumbnail">
+                                                            <img src="/pimages/{{pDetails._id}}004.jpg" alt="...">
+                                                        </div>
+                                                        <div class="fileinput-preview fileinput-exists thumbnail">
+                                                        </div>
+                                                        <div>
+                                                            <span class="btn btn-rose btn-round btn-file">
+                                                                <span class="fileinput-new">Change image</span>
+                                                                <span class="fileinput-exists">Change</span>
+                                                                <input type="file" name="image4"  />
+                                                            </span>
+                                                            <a href="#"
+                                                                class="btn btn-danger btn-round fileinput-exists"
+                                                                data-dismiss="fileinput"><i class="fa fa-times"></i>
+                                                                Remove</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                    </div>
+                                    <div class="card-footer ">
+                                        <button type="submit" class="btn btn-fill btn-rose">Submit</button>
+                                    </div>
+                                    </form>
                                 </div>
+
                             </div>
                         </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
