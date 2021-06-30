@@ -1,3 +1,18 @@
+<style>
+    .preview {
+        overflow: hidden;
+        width: 160px;
+        height: 160px;
+        margin: 10px;
+        border: 1px solid red;
+    }
+
+    .modal-lg {
+        max-width: 1000px !important;
+    }
+</style>
+
+
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -45,45 +60,48 @@
                                             </div>
                                             <div class="card-body ">
                                                 <form method="POST" action="/admin/add-product/"
-                                                    enctype="multipart/form-data">
+                                                    >
                                                     <div class="row">
-                                                          <div class="form-group col-md-6">
+                                                        <div class="form-group col-md-6">
                                                             <label class="bmd-label-floating">Product Name</label>
                                                             <div class="form-group">
                                                                 <input type="text" class="form-control"
                                                                     placeholder="Enter Product Name" name="name"
                                                                     required>
+                                                                <input type="text" name="sectionIdentify"
+                                                                    value="watches" hidden>
                                                             </div>
 
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                             <label class="bmd-label-floating">Select Product Type </label>
-                                                           <div class="form-group ">
-                                                            <select class="selectpicker" data-size="7"
+                                                            <label class="bmd-label-floating">Select Product Type
+                                                            </label>
+                                                            <div class="form-group ">
+                                                                <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
-                                                                    title="Single Select" name="product_type"required>
+                                                                    title="Single Select" name="product_type" required>
                                                                     <option disabled selected>Select Type</option>
-                                                                    {{#each  watches.ptype as |item|}}
+                                                                    {{#each watches.ptype as |item|}}
                                                                     <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
                                                                 </select>
                                                             </div>
-                                                            
+
                                                         </div>
 
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                               <label class="bmd-label-floating">Brand Name</label>
+                                                            <label class="bmd-label-floating">Brand Name</label>
                                                             <div class="form-group">
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="brand" required>
                                                                     <option disabled selected>Select Brand</option>
-                                                                    {{#each  watches.brand as |item|}}
-                                                                     <option value="{{item}}">{{item}}</option>
+                                                                    {{#each watches.brand as |item|}}
+                                                                    <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
-                                                                    
+
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -113,7 +131,7 @@
                                                     {{!-- next row --}}
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                             <label class="bmd-label-floating">Category</label>
+                                                            <label class="bmd-label-floating">Category</label>
                                                             <div class="form-group">
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
@@ -201,102 +219,105 @@
                                                         </div>
                                                     </div>
                                                     <div class="row justify-content-between" style="width:90%">
+                                                        {{!-- item 1 start --}}
                                                         <div class="col-md-2 col-sm-2">
                                                             <h4 class="title"> Image 1</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
+                                                            <div class="fileinput fileinput-new text-center">
                                                                 <div class="fileinput-new thumbnail">
                                                                     <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
+                                                                        id="chekPreview5" alt="...">
+
                                                                 </div>
                                                                 <div>
                                                                     <span class="btn btn-rose btn-round btn-file">
                                                                         <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image1" required />
+                                                                        <input type="file" id="image5"
+                                                                            accept="image/gif, image/jpeg, image/png"
+                                                                            required />
+                                                                        <textarea name="image5_b64" id="imageValue5"
+                                                                            cols="30" rows="10" hidden></textarea>
                                                                     </span>
-                                                                    <a href="#pablo"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        {{!-- item 1 end--}}
+
+
+
+                                                        {{!-- item 2 start --}}
                                                         <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title">Image 2</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
+                                                            <h4 class="title"> Image 2</h4>
+                                                            <div class="fileinput fileinput-new text-center">
                                                                 <div class="fileinput-new thumbnail">
                                                                     <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
+                                                                        id="chekPreview6" alt="...">
+
                                                                 </div>
                                                                 <div>
                                                                     <span class="btn btn-rose btn-round btn-file">
                                                                         <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image2" required />
+                                                                        <input type="file" id="image6"
+                                                                            accept="image/gif, image/jpeg, image/png"
+                                                                            required />
+                                                                        <textarea name="image6_b64" id="imageValue6"
+                                                                            cols="30" rows="10" hidden></textarea>
                                                                     </span>
-                                                                    <a href="#pablo"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        {{!-- item 2 end--}}
+
+
+                                                        {{!-- item 3 start --}}
                                                         <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title">Image 3</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
+                                                            <h4 class="title"> Image 3</h4>
+                                                            <div class="fileinput fileinput-new text-center">
                                                                 <div class="fileinput-new thumbnail">
                                                                     <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
+                                                                        id="chekPreview7" alt="...">
+
                                                                 </div>
                                                                 <div>
                                                                     <span class="btn btn-rose btn-round btn-file">
                                                                         <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image3" required />
+                                                                        <input type="file" id="image7"
+                                                                            accept="image/gif, image/jpeg, image/png"
+                                                                            required />
+                                                                        <textarea name="image7_b64" id="imageValue7"
+                                                                            cols="30" rows="10" hidden></textarea>
                                                                     </span>
-                                                                    <a href="#"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        {{!-- item 3 end--}}
+
+
+                                                        {{!-- item 4 start --}}
                                                         <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title">Image 4</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
+                                                            <h4 class="title"> Image 4</h4>
+                                                            <div class="fileinput fileinput-new text-center">
                                                                 <div class="fileinput-new thumbnail">
                                                                     <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
+                                                                        id="chekPreview8" alt="...">
+
                                                                 </div>
                                                                 <div>
                                                                     <span class="btn btn-rose btn-round btn-file">
                                                                         <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image4" required />
+                                                                        <input type="file" id="image8"
+                                                                            accept="image/gif, image/jpeg, image/png"
+                                                                            required />
+                                                                        <textarea name="image8_b64" id="imageValue8"
+                                                                            cols="30" rows="10" hidden></textarea>
                                                                     </span>
-                                                                    <a href="#"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        {{!-- item 4 end--}}
 
                                                     </div>
                                             </div>
@@ -331,7 +352,7 @@
                                             {{!-- add product --}}
                                             <div class="card-body ">
                                                 <form method="POST" action="/admin/add-product"
-                                                    enctype="multipart/form-data">
+                                                     >
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
                                                             <label class="bmd-label-floating">Product Name</label>
@@ -339,6 +360,8 @@
                                                                 <input type="text" class="form-control"
                                                                     placeholder="Enter Product Name" name="name"
                                                                     required>
+                                                                <input type="text" name="sectionIdentify"
+                                                                    value="footwear" hidden>
                                                             </div>
 
                                                         </div>
@@ -363,7 +386,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                             <label class="bmd-label-floating">Brand Name</label>
+                                                            <label class="bmd-label-floating">Brand Name</label>
                                                             <div class="form-group">
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
@@ -401,7 +424,7 @@
                                                     {{!-- next row --}}
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                              <label class="bmd-label-floating">Category</label>
+                                                            <label class="bmd-label-floating">Category</label>
                                                             <div class="form-group">
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
@@ -490,102 +513,105 @@
                                                         </div>
                                                     </div>
                                                     <div class="row justify-content-between" style="width:90%">
+                                                        {{!-- item 1 start --}}
                                                         <div class="col-md-2 col-sm-2">
                                                             <h4 class="title"> Image 1</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
+                                                            <div class="fileinput fileinput-new text-center">
                                                                 <div class="fileinput-new thumbnail">
                                                                     <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
+                                                                        id="chekPreview1" alt="...">
+
                                                                 </div>
                                                                 <div>
                                                                     <span class="btn btn-rose btn-round btn-file">
                                                                         <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image1" required />
+                                                                        <input type="file" id="image1"
+                                                                            accept="image/gif, image/jpeg, image/png"
+                                                                            required />
+                                                                        <textarea name="image1_b64" id="imageValue1"
+                                                                            cols="30" rows="10" hidden></textarea>
                                                                     </span>
-                                                                    <a href="#pablo"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        {{!-- item 1 end--}}
+
+
+
+                                                        {{!-- item 2 start --}}
                                                         <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title">Image 2</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
+                                                            <h4 class="title"> Image 2</h4>
+                                                            <div class="fileinput fileinput-new text-center">
                                                                 <div class="fileinput-new thumbnail">
                                                                     <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
+                                                                        id="chekPreview2" alt="...">
+
                                                                 </div>
                                                                 <div>
                                                                     <span class="btn btn-rose btn-round btn-file">
                                                                         <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image2" required />
+                                                                        <input type="file" id="image2"
+                                                                            accept="image/gif, image/jpeg, image/png"
+                                                                            required />
+                                                                        <textarea name="image2_b64" id="imageValue2"
+                                                                            cols="30" rows="10" hidden></textarea>
                                                                     </span>
-                                                                    <a href="#pablo"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        {{!-- item 2 end--}}
+
+
+                                                        {{!-- item 3 start --}}
                                                         <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title">Image 3</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
+                                                            <h4 class="title"> Image 3</h4>
+                                                            <div class="fileinput fileinput-new text-center">
                                                                 <div class="fileinput-new thumbnail">
                                                                     <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
+                                                                        id="chekPreview3" alt="...">
+
                                                                 </div>
                                                                 <div>
                                                                     <span class="btn btn-rose btn-round btn-file">
                                                                         <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image3" required />
+                                                                        <input type="file" id="image3"
+                                                                            accept="image/gif, image/jpeg, image/png"
+                                                                            required />
+                                                                        <textarea name="image3_b64" id="imageValue3"
+                                                                            cols="30" rows="10" hidden></textarea>
                                                                     </span>
-                                                                    <a href="#"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        {{!-- item 3 end--}}
+
+
+                                                        {{!-- item 4 start --}}
                                                         <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title">Image 4</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
+                                                            <h4 class="title"> Image 4</h4>
+                                                            <div class="fileinput fileinput-new text-center">
                                                                 <div class="fileinput-new thumbnail">
                                                                     <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
+                                                                        id="chekPreview4" alt="...">
+
                                                                 </div>
                                                                 <div>
                                                                     <span class="btn btn-rose btn-round btn-file">
                                                                         <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image4" required />
+                                                                        <input type="file" id="image4"
+                                                                            accept="image/gif, image/jpeg, image/png"
+                                                                            required />
+                                                                        <textarea name="image4_b64" id="imageValue4"
+                                                                            cols="30" rows="10" hidden></textarea>
                                                                     </span>
-                                                                    <a href="#"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        {{!-- item 4 end--}}
 
                                                     </div>
                                             </div>
@@ -619,7 +645,7 @@
                                             </div>
                                             <div class="card-body ">
                                                 <form method="POST" action="/admin/add-product"
-                                                    enctype="multipart/form-data">
+                                                    >
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
                                                             <label class="bmd-label-floating">Product Name</label>
@@ -627,6 +653,8 @@
                                                                 <input type="text" class="form-control"
                                                                     placeholder="Enter Product Name" name="name"
                                                                     required>
+                                                                <input type="text" name="sectionIdentify"
+                                                                    value="clothes" hidden>
                                                             </div>
 
                                                         </div>
@@ -639,7 +667,7 @@
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="product_type" required>
                                                                     <option disabled selected>Product Type</option>
-                                                                    {{#each clothes.ptype  as |item|}}
+                                                                    {{#each clothes.ptype as |item|}}
                                                                     <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
                                                                 </select>
@@ -658,7 +686,7 @@
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="brand" required>
                                                                     <option disabled selected>Select Brand</option>
-                                                                    {{#each clothes.brand  as |item|}}
+                                                                    {{#each clothes.brand as |item|}}
                                                                     <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
                                                                 </select>
@@ -696,7 +724,7 @@
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="category" required>
                                                                     <option disabled selected>Select Category</option>
-                                                                    {{#each clothes.category  as |item|}}
+                                                                    {{#each clothes.category as |item|}}
                                                                     <option value="{{item}}">{{item}}
                                                                     </option>
                                                                     {{/each }}
@@ -780,102 +808,90 @@
                                                         </div>
                                                     </div>
                                                     <div class="row justify-content-between" style="width:90%">
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title"> Image 1</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
-                                                                <div class="fileinput-new thumbnail">
-                                                                    <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
-                                                                </div>
-                                                                <div>
-                                                                    <span class="btn btn-rose btn-round btn-file">
-                                                                        <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image1" required />
-                                                                    </span>
-                                                                    <a href="#pablo"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title">Image 2</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
-                                                                <div class="fileinput-new thumbnail">
-                                                                    <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
-                                                                </div>
-                                                                <div>
-                                                                    <span class="btn btn-rose btn-round btn-file">
-                                                                        <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image2" required />
-                                                                    </span>
-                                                                    <a href="#pablo"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title">Image 3</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
-                                                                <div class="fileinput-new thumbnail">
-                                                                    <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
-                                                                </div>
-                                                                <div>
-                                                                    <span class="btn btn-rose btn-round btn-file">
-                                                                        <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image3" required />
-                                                                    </span>
-                                                                    <a href="#"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title">Image 4</h4>
-                                                            <div class="fileinput fileinput-new text-center"
-                                                                data-provides="fileinput">
-                                                                <div class="fileinput-new thumbnail">
-                                                                    <img src="../../assets/img/image_placeholder.jpg"
-                                                                        alt="...">
-                                                                </div>
-                                                                <div
-                                                                    class="fileinput-preview fileinput-exists thumbnail">
-                                                                </div>
-                                                                <div>
-                                                                    <span class="btn btn-rose btn-round btn-file">
-                                                                        <span class="fileinput-new">Select image</span>
-                                                                        <span class="fileinput-exists">Change</span>
-                                                                        <input type="file" name="image4" required />
-                                                                    </span>
-                                                                    <a href="#"
-                                                                        class="btn btn-danger btn-round fileinput-exists"
-                                                                        data-dismiss="fileinput"><i
-                                                                            class="fa fa-times"></i> Remove</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                            {{!-- item 1 start --}}
+        <div class="col-md-2 col-sm-2">
+            <h4 class="title"> Image 1</h4>
+            <div class="fileinput fileinput-new text-center">
+                <div class="fileinput-new thumbnail">
+                    <img src="../../assets/img/image_placeholder.jpg" id="chekPreview9" alt="...">
+
+                </div>
+                <div>
+                    <span class="btn btn-rose btn-round btn-file">
+                        <span class="fileinput-new">Select image</span>
+                        <input type="file" id="image9" accept="image/gif, image/jpeg, image/png" required />
+                        <textarea name="image9_b64" id="imageValue9" cols="30" rows="10" hidden></textarea>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+     {{!-- item 1 end--}}
+
+
+
+      {{!-- item 2 start --}}
+        <div class="col-md-2 col-sm-2">
+            <h4 class="title"> Image 2</h4>
+            <div class="fileinput fileinput-new text-center">
+                <div class="fileinput-new thumbnail">
+                    <img src="../../assets/img/image_placeholder.jpg" id="chekPreview10" alt="...">
+
+                </div>
+                <div>
+                    <span class="btn btn-rose btn-round btn-file">
+                        <span class="fileinput-new">Select image</span>
+                        <input type="file" id="image10" accept="image/gif, image/jpeg, image/png" required />
+                        <textarea name="image10_b64" id="imageValue10" cols="30" rows="10" hidden></textarea>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+     {{!-- item 2 end--}}
+
+
+    {{!-- item 3 start --}}
+        <div class="col-md-2 col-sm-2">
+            <h4 class="title"> Image 3</h4>
+            <div class="fileinput fileinput-new text-center">
+                <div class="fileinput-new thumbnail">
+                    <img src="../../assets/img/image_placeholder.jpg" id="chekPreview11" alt="...">
+
+                </div>
+                <div>
+                    <span class="btn btn-rose btn-round btn-file">
+                        <span class="fileinput-new">Select image</span>
+                        <input type="file" id="image11" accept="image/gif, image/jpeg, image/png" required />
+                        <textarea name="image11_b64" id="imageValue11" cols="30" rows="10" hidden></textarea>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+     {{!-- item 3 end--}}
+
+
+     {{!-- item 4 start --}}
+        <div class="col-md-2 col-sm-2">
+            <h4 class="title"> Image 4</h4>
+            <div class="fileinput fileinput-new text-center">
+                <div class="fileinput-new thumbnail">
+                    <img src="../../assets/img/image_placeholder.jpg" id="chekPreview12" alt="...">
+
+                </div>
+                <div>
+                    <span class="btn btn-rose btn-round btn-file">
+                        <span class="fileinput-new">Select image</span>
+                        <input type="file" id="image12" accept="image/gif, image/jpeg, image/png" required />
+                        <textarea name="image12_b64" id="imageValue12" cols="30" rows="10" hidden></textarea>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+     {{!-- item 4 end--}}
+
 
                                                     </div>
                                             </div>
@@ -895,3 +911,1067 @@
         </div>
     </div>
 </div>
+
+<!-- Modal 1-->
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage1" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop1" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  1 end-->
+
+
+
+<!-- Modal 2-->
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage2" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop2" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  2 end-->
+
+
+<!-- Modal 3-->
+<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage3" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop3" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  3 end-->
+
+<!-- Modal 4-->
+<div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage4" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop4" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  4 end-->
+
+
+
+<!-- Modal 5-->
+<div class="modal fade" id="modal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage5" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop5" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  5 end-->
+
+
+
+<!-- Modal 6-->
+<div class="modal fade" id="modal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage6" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop6" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  6 end-->
+
+
+<!-- Modal 7-->
+<div class="modal fade" id="modal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage7" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview7"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop7" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  7 end-->
+
+<!-- Modal 8-->
+<div class="modal fade" id="modal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage8" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview8"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop8" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  8 end-->
+
+
+<!-- Modal 9-->
+<div class="modal fade" id="modal9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage9" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview9"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop9" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  9 end-->
+
+ 
+
+<!-- Modal 10-->
+<div class="modal fade" id="modal10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage10" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview10"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop10" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  10 end-->
+
+
+<!-- Modal 11-->
+<div class="modal fade" id="modal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage11" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview11"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop11" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  11 end-->
+
+<!-- Modal 12 -->
+<div class="modal fade" id="modal12" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage12" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview12"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop12" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal  12 end-->
+
+
+
+
+
+<script>
+    $('document').ready(function () {
+        //modal1 and image 1
+        var image1 = document.getElementById('sampleImage1');
+        var modal1 = $('#modal1');
+        var cropper1;
+
+        $('#image1').change(function (event) {
+            var files = event.target.files;
+
+            var done = function (url) {
+                image1.src = url;
+                modal1.modal('show');
+            };
+
+            if (files && files.length > 0) {
+                reader = new FileReader();
+                reader.onload = function (event) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+
+        modal1.on('shown.bs.modal', function () {
+            cropper1 = new Cropper(image1, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview1'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper1.destroy();
+            cropper1 = null;
+        });
+
+        $('#crop1').click(function () {
+            canvas = cropper1.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal1.modal('hide');
+                    $("#imageValue1").val(base64data)
+                    $('#chekPreview1').attr('src', base64data);
+                };
+            });
+        });
+        //modal1 and image 1 end
+
+        //modal2 and image 2
+        var image2 = document.getElementById('sampleImage2');
+        var modal2 = $('#modal2');
+        var cropper2;
+
+        $('#image2').change(function (event) {
+            var files = event.target.files;
+
+            var done = function (url) {
+                image2.src = url;
+                modal2.modal('show');
+            };
+
+            if (files && files.length > 0) {
+                reader = new FileReader();
+                reader.onload = function (event) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+
+        modal2.on('shown.bs.modal', function () {
+            cropper2 = new Cropper(image2, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview2'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper2.destroy();
+            cropper2 = null;
+        });
+
+        $('#crop2').click(function () {
+            canvas = cropper2.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal2.modal('hide');
+                    $("#imageValue2").val(base64data)
+                    $('#chekPreview2').attr('src', base64data);
+                };
+            });
+        });
+        //image 2 and modal 2 end
+
+
+        //modal3 and image 3 start
+        var image3 = document.getElementById('sampleImage3');
+        var modal3 = $('#modal3');
+        var cropper3;
+
+        $('#image3').change(function (event) {
+            var files = event.target.files;
+
+            var done = function (url) {
+                image3.src = url;
+                modal3.modal('show');
+            };
+
+            if (files && files.length > 0) {
+                reader = new FileReader();
+                reader.onload = function (event) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+
+        modal3.on('shown.bs.modal', function () {
+            cropper3 = new Cropper(image3, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview3'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper3.destroy();
+            cropper3 = null;
+        });
+
+        $('#crop3').click(function () {
+            canvas = cropper3.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal3.modal('hide');
+                    $("#imageValue3").val(base64data)
+                    $('#chekPreview3').attr('src', base64data);
+                };
+            });
+        });
+        //image 3 and modal 3 end
+
+        //modal4 and image 4 start
+        var image4 = document.getElementById('sampleImage4');
+        var modal4 = $('#modal4');
+        var cropper4;
+
+        $('#image4').change(function (event) {
+            var files = event.target.files;
+
+            var done = function (url) {
+                image4.src = url;
+                modal4.modal('show');
+            };
+
+            if (files && files.length > 0) {
+                reader = new FileReader();
+                reader.onload = function (event) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+
+        modal4.on('shown.bs.modal', function () {
+            cropper4 = new Cropper(image4, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview4'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper4.destroy();
+            cropper4 = null;
+        });
+
+        $('#crop4').click(function () {
+            canvas = cropper4.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal4.modal('hide');
+                    $("#imageValue4").val(base64data)
+                    $('#chekPreview4').attr('src', base64data);
+                };
+            });
+        });
+
+
+
+        //next watch section
+
+
+        //modal1 and image 1
+        var image5 = document.getElementById('sampleImage5');
+        var modal5 = $('#modal5');
+        var cropper5;
+
+        $('#image5').change(function (event) {
+            var files = event.target.files;
+
+            var done = function (url) {
+                image5.src = url;
+                modal5.modal('show');
+            };
+
+            if (files && files.length > 0) {
+                reader = new FileReader();
+                reader.onload = function (event) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+
+        modal5.on('shown.bs.modal', function () {
+            cropper5 = new Cropper(image5, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview5'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper5.destroy();
+            cropper5 = null;
+        });
+
+        $('#crop5').click(function () {
+            canvas = cropper5.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal5.modal('hide');
+                    $("#imageValue5").val(base64data)
+                    $('#chekPreview5').attr('src', base64data);
+                };
+            });
+        });
+        //modal1 and image 1 end
+
+        //modal2 and image 2
+        var image6 = document.getElementById('sampleImage6');
+        var modal6 = $('#modal6');
+        var cropper6;
+
+        $('#image6').change(function (event) {
+            var files = event.target.files;
+
+            var done = function (url) {
+                image6.src = url;
+                modal6.modal('show');
+            };
+
+            if (files && files.length > 0) {
+                reader = new FileReader();
+                reader.onload = function (event) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+
+        modal6.on('shown.bs.modal', function () {
+            cropper6 = new Cropper(image6, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview6'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper6.destroy();
+            cropper6 = null;
+        });
+
+        $('#crop6').click(function () {
+            canvas = cropper6.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal6.modal('hide');
+                    $("#imageValue6").val(base64data)
+                    $('#chekPreview6').attr('src', base64data);
+                };
+            });
+        });
+        //image 2 and modal 2 end
+
+
+        //modal3 and image 3 start
+        var image7 = document.getElementById('sampleImage7');
+        var modal7 = $('#modal7');
+        var cropper3;
+
+        $('#image7').change(function (event) {
+            var files = event.target.files;
+
+            var done = function (url) {
+                image7.src = url;
+                modal7.modal('show');
+            };
+
+            if (files && files.length > 0) {
+                reader = new FileReader();
+                reader.onload = function (event) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+
+        modal7.on('shown.bs.modal', function () {
+            cropper7 = new Cropper(image7, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview7'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper7.destroy();
+            cropper7 = null;
+        });
+
+        $('#crop7').click(function () {
+            canvas = cropper7.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal7.modal('hide');
+                    $("#imageValue7").val(base64data)
+                    $('#chekPreview7').attr('src', base64data);
+                };
+            });
+        });
+        //image 3 and modal 3 end
+
+        //modal4 and image 4 start
+        var image8 = document.getElementById('sampleImage8');
+        var modal8 = $('#modal8');
+        var cropper8;
+
+        $('#image8').change(function (event) {
+            var files = event.target.files;
+
+            var done = function (url) {
+                image8.src = url;
+                modal8.modal('show');
+            };
+
+            if (files && files.length > 0) {
+                reader = new FileReader();
+                reader.onload = function (event) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+
+        modal8.on('shown.bs.modal', function () {
+            cropper8 = new Cropper(image8, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview8'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper8.destroy();
+            cropper8 = null;
+        });
+
+        $('#crop8').click(function () {
+            canvas = cropper8.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal8.modal('hide');
+                    $("#imageValue8").val(base64data)
+                    $('#chekPreview8').attr('src', base64data);
+                };
+            });
+        });
+        //image 4 and modal 4 end
+
+    //clothe section
+          var image9 = document.getElementById('sampleImage9');
+    var modal9 = $('#modal9');
+    var cropper9;
+
+    $('#image9').change(function (event) {
+        var files = event.target.files;
+
+        var done = function (url) {
+            image9.src = url;
+            modal9.modal('show');
+        };
+
+        if (files && files.length > 0) {
+            reader = new FileReader();
+            reader.onload = function (event) {
+                done(reader.result);
+            };
+            reader.readAsDataURL(files[0]);
+        }
+    });
+
+    modal9.on('shown.bs.modal', function () {
+        cropper9 = new Cropper(image9, {
+            aspectRatio: 1,
+            viewMode: 3,
+            preview: '#preview9'
+        });
+    }).on('hidden.bs.modal', function () {
+        cropper9.destroy();
+        cropper9 = null;
+    });
+
+    $('#crop9').click(function () {
+        canvas = cropper9.getCroppedCanvas({
+            width: 400,
+            height: 400
+        });
+
+        canvas.toBlob(function (blob) {
+            url = URL.createObjectURL(blob);
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function () {
+                var base64data = reader.result;
+                modal9.modal('hide');
+                $("#imageValue9").val(base64data)
+                $('#chekPreview9').attr('src', base64data);
+            };
+        });
+    });
+//modal1 and image 1 end
+
+//modal2 and image 2
+    var image10 = document.getElementById('sampleImage10');
+    var modal10 = $('#modal10');
+    var cropper10;
+
+    $('#image10').change(function (event) {
+        var files = event.target.files;
+
+        var done = function (url) {
+            image10.src = url;
+            modal10.modal('show');
+        };
+
+        if (files && files.length > 0) {
+            reader = new FileReader();
+            reader.onload = function (event) {
+                done(reader.result);
+            };
+            reader.readAsDataURL(files[0]);
+        }
+    });
+
+    modal10.on('shown.bs.modal', function () {
+        cropper10 = new Cropper(image10, {
+            aspectRatio: 1,
+            viewMode: 3,
+            preview: '#preview10'
+        });
+    }).on('hidden.bs.modal', function () {
+        cropper10.destroy();
+        cropper10 = null;
+    });
+
+    $('#crop10').click(function () {
+        canvas = cropper10.getCroppedCanvas({
+            width: 400,
+            height: 400
+        });
+
+        canvas.toBlob(function (blob) {
+            url = URL.createObjectURL(blob);
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function () {
+                var base64data = reader.result;
+                modal10.modal('hide');
+                $("#imageValue10").val(base64data)
+                $('#chekPreview10').attr('src', base64data);
+            };
+        });
+    });
+//image 2 and modal 2 end
+
+
+//modal3 and image 3 start
+    var image11 = document.getElementById('sampleImage11');
+    var modal11 = $('#modal11');
+    var cropper11;
+
+    $('#image11').change(function (event) {
+        var files = event.target.files;
+
+        var done = function (url) {
+            image11.src = url;
+            modal11.modal('show');
+        };
+
+        if (files && files.length > 0) {
+            reader = new FileReader();
+            reader.onload = function (event) {
+                done(reader.result);
+            };
+            reader.readAsDataURL(files[0]);
+        }
+    });
+
+    modal11.on('shown.bs.modal', function () {
+        cropper11 = new Cropper(image11, {
+            aspectRatio: 1,
+            viewMode: 3,
+            preview: '#preview11'
+        });
+    }).on('hidden.bs.modal', function () {
+        cropper11.destroy();
+        cropper11 = null;
+    });
+
+    $('#crop11').click(function () {
+        canvas = cropper11.getCroppedCanvas({
+            width: 400,
+            height: 400
+        });
+
+        canvas.toBlob(function (blob) {
+            url = URL.createObjectURL(blob);
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function () {
+                var base64data = reader.result;
+                modal11.modal('hide');
+                $("#imageValue11").val(base64data)
+                $('#chekPreview11').attr('src', base64data);
+            };
+        });
+    });
+//image 3 and modal 3 end
+
+//modal4 and image 4 start
+    var image12 = document.getElementById('sampleImage12');
+    var modal12 = $('#modal12');
+    var cropper12;
+
+    $('#image12').change(function (event) {
+        var files = event.target.files;
+
+        var done = function (url) {
+            image12.src = url;
+            modal12.modal('show');
+        };
+
+        if (files && files.length > 0) {
+            reader = new FileReader();
+            reader.onload = function (event) {
+                done(reader.result);
+            };
+            reader.readAsDataURL(files[0]);
+        }
+    });
+
+    modal12.on('shown.bs.modal', function () {
+        cropper12 = new Cropper(image12, {
+            aspectRatio: 1,
+            viewMode: 3,
+            preview: '#preview12'
+        });
+    }).on('hidden.bs.modal', function () {
+        cropper12.destroy();
+        cropper12 = null;
+    });
+
+    $('#crop12').click(function () {
+        canvas = cropper12.getCroppedCanvas({
+            width: 400,
+            height: 400
+        });
+
+        canvas.toBlob(function (blob) {
+            url = URL.createObjectURL(blob);
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function () {
+                var base64data = reader.result;
+                modal12.modal('hide');
+                $("#imageValue12").val(base64data)
+                $('#chekPreview12').attr('src', base64data);
+            };
+        });
+    });
+
+
+    });
+</script>

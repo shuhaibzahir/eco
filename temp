@@ -83,3 +83,42 @@ router.post("/category/management",(req,res)=>{
     res.json(catStatus)
   })
 })
+
+
+$.ajax({
+url: 'upload.php',
+method: 'POST',
+data: { image: base64data },
+success: function (data) {
+$modal.modal('hide');
+$('#uploaded_image').attr('src', data);
+}
+}); 
+
+
+
+
+
+
+
+//this is simple 
+ image1.mv("./public/pimages/" + d._id + "001.jpg", err => {
+      if (err) {
+        console.log(err)
+      }
+    })
+    image2.mv("./public/pimages/" + d._id + "002.jpg", err => {
+      if (err) {
+        console.log(err)
+      }
+    })
+    image3.mv("./public/pimages/" + d._id + "003.jpg", err => {
+      if (err) {
+        console.log(err)
+      }
+    })
+    image4.mv("./public/pimages/" + d._id + "004.jpg", err => {
+      if (err) {
+        console.log(err)
+      }
+    })

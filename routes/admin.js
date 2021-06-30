@@ -103,41 +103,61 @@ router.get("/add-product", auth, (req, res) => {
 
 
 router.post("/add-product/", (req, res) => {
+  
+    // const path1 = `./public/uploads/product_images/${tagId}-001.jpg`
+    // const image1 = req.body.pro_img1;
+    // const base64Data1 = image1.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+    // fs.writeFileSync(path1, base64Data1, { encoding: 'base64' });
 
   let allData = req.body;
   let tags = req.body.tags.split(",");
+ 
+  // let image1 = req.files.image1;
+  // let image2 = req.files.image2;
+  // let image3 = req.files.image3;
+  // let image4 = req.files.image4;
+  let image1;
+  let image2;
+  let image3;
+  let image4;
 
-
-
-  let image1 = req.files.image1;
-  let image2 = req.files.image2;
-  let image3 = req.files.image3;
-  let image4 = req.files.image4;
+  
+    if(req.body.sectionIdentify=="footwear"){
+      image1 = req.body.image1_b64;
+      image2 = req.body.image2_b64;
+      image3 = req.body.image3_b64;
+      image4 = req.body.image4_b64;
+    }else if(req.body.sectionIdentify=="clothes"){
+      image1 = req.body.image9_b64;
+      image2 = req.body.image10_b64;
+      image3 = req.body.image11_b64;
+      image4 = req.body.image12_b64;
+    }else if( req.body.sectionIdentify == "watches"){
+      image1 = req.body.image5_b64;
+      image2 = req.body.image6_b64;
+      image3 = req.body.image7_b64;
+      image4 = req.body.image8_b64;
+    }
 
 
   productDB.addProduct(allData, tags).then((d) => {
-    console.log(d)
-    // image 1 
-    image1.mv("./public/pimages/" + d._id + "001.jpg", err => {
-      if (err) {
-        console.log(err)
-      }
-    })
-    image2.mv("./public/pimages/" + d._id + "002.jpg", err => {
-      if (err) {
-        console.log(err)
-      }
-    })
-    image3.mv("./public/pimages/" + d._id + "003.jpg", err => {
-      if (err) {
-        console.log(err)
-      }
-    })
-    image4.mv("./public/pimages/" + d._id + "004.jpg", err => {
-      if (err) {
-        console.log(err)
-      }
-    })
+   
+    const path1 = `./public/pimages/${d._id}-001.jpg`;
+    const path2 = `./public/pimages/${d._id}-002.jpg`;
+    const path3 = `./public/pimages/${d._id}-003.jpg`;
+    const path4 = `./public/pimages/${d._id}-004.jpg`;
+    
+   
+    const base64Data1 = image1.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+    const base64Data2 = image2.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+    const base64Data3 = image3.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+    const base64Data4 = image4.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+
+    fs.writeFileSync(path1, base64Data1, { encoding: 'base64' });
+    fs.writeFileSync(path2, base64Data2, { encoding: 'base64' });
+    fs.writeFileSync(path3, base64Data3, { encoding: 'base64' });
+    fs.writeFileSync(path4, base64Data4, { encoding: 'base64' });
+
     res.redirect("/admin/view-allproduct")
   }).catch((err) => {
     res.redirect("/admin/add-product")
@@ -146,11 +166,11 @@ router.post("/add-product/", (req, res) => {
 })
 
 
-// ...........add product post method end...............
+// // ...........add product post method end...............
 
 
 
-// .......... view all product..............................
+// // .......... view all product..............................
 router.get("/view-allproduct", auth, (req, res) => {
   productDB.getAllProduct().then((resul) => {
     let allproduct = resul;
@@ -178,20 +198,23 @@ router.get("/edit-product/:topic",(req,res)=>{
       let types = [];
       let brands=[];
     productDB.categorOnly().then((allgroupedCat)=>{
-    
+      console.log(allgroupedCat)
       let [filterdCat,brandsOfP,typesOfP]=allgroupedCat
       categories.push(...filterdCat)
       types.push(...typesOfP)
       brands.push(...brandsOfP)
+       
+      res.render("admin/editproduct",{layout: "adminLayout",
+      adminStatus: true,
+      pDetails:result,
+      categories,
+      types,
+      brands
+      })
+    }).catch((errofCat)=>{if(errofCat){
+      console.log(errofCat)
+    }})
      
-    }).catch((errofCat)=>{console.log(errofCat)})
-     res.render("admin/editproduct",{layout: "adminLayout",
-     adminStatus: true,
-     pDetails:result,
-     categories,
-     types,
-     brands
-     })
   }).catch((err)=>{
     console.log(err)
   })
@@ -209,39 +232,39 @@ router.post("/edit-product/",(req,res)=>{
   let tags = req.body.tags.split(",");
 
   productDB.editProduct(allData, tags,pId).then((d) => {
-    
-     if(req.files.image1!=null){
-      let image1 = req.files.image1;
-      image1.mv("./public/pimages/" + d._id + "001.jpg", err => {
-        if (err) {
-          console.log(err)
-        }
-      })
-     }
-     if(req.files.image2!=null){
-      let image2 = req.files.image2;
-      image2.mv("./public/pimages/" + d._id + "002.jpg", err => {
-        if (err) {
-          console.log(err)
-        }
-      })
-     }
-     if(req.files.image3!=null){
-       let image3 = req.files.image3;
-      image3.mv("./public/pimages/" + d._id + "003.jpg", err => {
-        if (err) {
-          console.log(err)
-        }
-      })
-     }
-     if(req.files.image4!=null){
-      image4.mv("./public/pimages/" + d._id + "004.jpg", err => {
-        if (err) {
-          console.log(err)
-        }
-      })
-     }
+    if(req.body.image1_b64.length>0){
+      image1 = req.body.image1_b64;
+      const path1 = `./public/pimages/${d._id}-001.jpg`; 
+      const base64Data1 = image1.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+      fs.writeFileSync(path1, base64Data1, { encoding: 'base64' });
+ 
+    }
+     if(req.body.image2_b64.length>0){
+      image2 = req.body.image2_b64;
+      const path2 = `./public/pimages/${d._id}-002.jpg`;
+      const base64Data2 = image2.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+      fs.writeFileSync(path2, base64Data2, { encoding: 'base64' });
    
+    
+    
+    }
+    if(req.body.image3_b64.length>0){
+      image3 = req.body.image3_b64;
+      const path3 = `./public/pimages/${d._id}-003.jpg`;
+      const base64Data3 = image3.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+      fs.writeFileSync(path3, base64Data3, { encoding: 'base64' });
+   
+  
+     
+   
+    }
+     if(req.body.image4_b64.length>0){
+      image4 = req.body.image4_b64;
+      const path4 = `./public/pimages/${d._id}-004.jpg`;
+      const base64Data4 = image4.replace(/^data:([A-Za-z-+/]+);base64,/, ''); 
+      fs.writeFileSync(path4, base64Data4, { encoding: 'base64' });
+    }
+ 
     res.redirect("/admin/view-allproduct")
   }).catch((err) => {
     res.redirect("/admin/add-product")
@@ -249,40 +272,17 @@ router.post("/edit-product/",(req,res)=>{
   })
    
 })
-
-
-
-
-router.get("/test",(req,res)=>{
-  console.log("testing")
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 // ..............delete product.....................
 router.get("/delete-product/:id",(req,res)=>{
   let id = req.params.id;
    productDB.delteProduct(id).then((result)=>{
     let idOfItem = result._id;
-    fs.unlink("./public/pimages/" +idOfItem + "001.jpg",(err)=> {if(err){console.log(err)}})
-    fs.unlink("./public/pimages/" +idOfItem + "002.jpg",(err)=>{if(err){console.log(err)}})
-    fs.unlink("./public/pimages/" +idOfItem + "003.jpg",(err)=>{if(err){console.log(err)}})
-    fs.unlink("./public/pimages/" +idOfItem + "004.jpg",(err)=>{if(err){console.log(err)}})
+    fs.unlink("./public/pimages/" +idOfItem + "-001.jpg",(err)=> {if(err){console.log(err)}})
+    fs.unlink("./public/pimages/" +idOfItem + "-002.jpg",(err)=>{if(err){console.log(err)}})
+    fs.unlink("./public/pimages/" +idOfItem + "-003.jpg",(err)=>{if(err){console.log(err)}})
+    fs.unlink("./public/pimages/" +idOfItem + "-004.jpg",(err)=>{if(err){console.log(err)}})
     res.redirect("/admin/view-allproduct")
   }).catch((err)=>{
     console.log(err)
@@ -426,9 +426,86 @@ router.get("/del-cat/:section/:options/:item", (req, res) => {
 
 })
 
- 
 //....................delete sub end...................
 
+// ..........banner section .............
+router.get("/add/home-banner",(req,res)=>{
+  productDB.getAllBanner().then((ban)=>{
+    console.log(ban)
+    res.render("admin/homeBanner",{layout: "adminLayout",
+  adminStatus: true,
+    banner:ban,
+})
+  }).catch((err)=>{
+    console.log(err)
+  })
+  
+})
+
+router.post("/add/home-banner",(req,res)=>{
+     productDB.addBanner(req.body).then((result)=>{
+      let image1 = req.body.image1_b64;
+      const path1 = `./public/banners/${result._id}-001.jpg`;
+      const base64Data1 = image1.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+      fs.writeFileSync(path1, base64Data1, { encoding: 'base64' });
+      res.redirect("/admin/add/home-banner")
+   }).catch((err)=>{
+     console.log(err)
+   })
+})
+
+router.get("/delete/banner/:id",(req,res)=>{
+  let banId = req.params.id
+  console.log(banId)
+  productDB.delteBanner(banId).then((result)=>{
+    fs.unlink("./public/banners/" +banId + "-001.jpg",(err)=> {if(err){console.log(err)}})
+    res.redirect("/admin/add/home-banner")
+  }).catch((err)=>{
+    console.log(err)
+  })
+})
+
+// ........special banner..........
+
+router.get("/add/special-banner",(req,res)=>{
+  productDB.categorOnly().then((dataFetched)=>{
+    let brand=[]
+    let type=[]
+    brand.push(...dataFetched[1])
+    type.push(...dataFetched[2])
+  productDB.getAllSpecialBanner().then((spBanner)=>{
+    res.render("admin/specialOffer",{layout: "adminLayout",
+    adminStatus: true,brand,type,bannerData:spBanner})
+  }).catch((err)=>{
+    console.log(err)
+  })
+   
+  }).catch((err)=>{
+    console.log(err)
+  })
+  
+})
+
+router.post("/add/special-banner",(req,res)=>{
+  productDB.addSpecialBrand(req.body).then((savedData)=>{
+    let image1 = req.body.image1_b64;
+      const path1 = `./public/spbanner/${savedData._id}-001.jpg`;
+      const base64Data1 = image1.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+      fs.writeFileSync(path1, base64Data1, { encoding: 'base64' });
+      res.redirect("/admin/add/special-banner")
+  }).catch((err)=>{
+    console.log(err)
+  })
+})
+
+
+router.get("/delete/sp-banner/:id",(req,res)=>{
+  let spBannerId = req.params.id
+  productDB.deleteSpBanner(spBannerId).then((result)=>{
+    fs.unlink("./public/spbanner/" +spBannerId + "-001.jpg",(err)=> {if(err){console.log(err)}})
+    res.redirect("/admin/add/special-banner")
+  })
+})
 
 
 

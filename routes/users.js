@@ -32,22 +32,31 @@ function auth(req, res, next) {
 
 router.get("/",  function (req, res) {
    
-     
-    if (req.session.user){
-        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        res.render("userpages/main",{userLayout:true,usernav:req.session.user})
-
-    }
-    else{
-        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        res.render("userpages/main",{userLayout:true} )
-    }
-
+    productDB.getBannersToHome().then((banners)=>{
+         let {main, sp }= banners
+         let banner = main;
+         let spbanner = sp[0];
+         console.log(spbanner)
+        if (req.session.user){
+            res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            res.render("userpages/main",{userLayout:true,usernav:req.session.user,banner,spbanner})
+    
+        }
+    
+        else{
+            res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            res.render("userpages/main",{userLayout:true,banner,spbanner} )
+        }
+    
+    }).catch((err)=>{
+        console.log(err)
+    })
+  
       
 });
 
 router.get("/login", function (req, res) {
-    console.log(req.session.user)
+    
    if(req.session.user){
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
        res.redirect("/")
@@ -193,18 +202,27 @@ router.post("/otp-submit", (req, res) => {
     }
 })
 
-// ...................product view page ..
+// ...................product view page .......
 
-router.get("/products",(req,res)=>{
+router.get("/allproduct",(req,res)=>{
     console.log('started')
     productDB.getAllProduct().then((result)=>{
         let allProduct = result
-        res.render("userpages/allproduct",{userLayout:true,allProduct})
+        res.render("userpages/categorypage",{userLayout:true,allProduct})
     }).catch((err)=>{
         console.log(err)
     })
 })
 
+
+router.get("/product/view/:id",(req,res)=>{
+    let pid = req.params.id
+    productDB.getOneProduct(pid).then((result)=>{
+        let details = result
+        res.render("userpages/productview",{userLayout:true,details})
+    })
+    
+})
 // ...........end...............
 
 router.get("/logout",(req,res)=>{

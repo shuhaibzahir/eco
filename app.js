@@ -4,7 +4,7 @@ require('dotenv').config();
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var hbs = require("express-handlebars")
+var exphbs = require('express-handlebars');
  
 var admin = require('./routes/admin');
 var usersRouter = require('./routes/users');
@@ -16,21 +16,28 @@ var app = express();
 // db connecting
 db.dbConnect(process.env.DB_URL)
 // view engine setup
+var hbs = exphbs.create({
+  helpers: {
+      ifEqual: function(arg1, arg2, options) {
+        return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+    }
+  },
+  defaultLayout: 'layout',
+   extname: '.hbs',
+   layoutsDir: path.join(__dirname, "views/layouts"),
+   partialsDir: path.join(__dirname, "/views/partials")
+ 
+});
 app.set('views', path.join(__dirname, 'views'));
-  
 app.set('view engine', 'hbs');
-app.engine('hbs', hbs({
-   defaultLayout: 'layout',
-  extname: '.hbs',
-  layoutsDir: path.join(__dirname, "views/layouts"),
-  partialsDir: path.join(__dirname, "/views/partials")
-}))
+app.engine('hbs', hbs.engine)
  
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
-  extended: false
+  extended: false,
+  limit:'50mb'
 }));
 app.use(fileUpload());
 app.use(cookieParser());

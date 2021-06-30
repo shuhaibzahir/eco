@@ -23,9 +23,10 @@
                           <th>Brand</th>
                           <th>Type</th>
                           <th>Department</th>
-                        <th>Prize</th>
+                          <th>Prize</th>
                           <th >Discount</th> 
                           <th >Current Prize</th> 
+                          <th >Quantity</th> 
                           <th>Images</th>
                            <th >Actions</th> 
                           {{!-- //class="disabled-sorting text-right"// --}}
@@ -40,6 +41,7 @@
                         <th>Prize</th>
                           <th >Discount</th> 
                              <th >Current Prize</th> 
+                             <th >Quantity</th>
                               <th>Images</th>
                            <th >Actions</th> 
                         </tr>
@@ -55,7 +57,12 @@
                         <td>{{Prize}}</td>
                           <td>{{Discount}}</td>
                           <td>{{OfferPrize}}</td>
-                          <td><img src="/pimages/{{_id}}001.jpg" alt="" style="width:50px; height:50px"></td>
+                          {{#ifEqual Quantity 0}}
+                           <td style="color:red; font-weight:bold">OUT OF STOCK</td>
+                           {{else}}
+                           <td>{{Quantity}}</td>
+                           {{/ifEqual}}
+                          <td><img src="/pimages/{{_id}}-001.jpg" alt="" style="width:50px; height:50px"></td>
                          <td class="td-actions text-right">
                             
                             <a href="/admin/edit-product/{{this._id}}" class="btn btn-success">

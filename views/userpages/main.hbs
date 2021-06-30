@@ -1,21 +1,35 @@
-
 <!-- Main section-->
+
+<style>
+	.brandImagview {
+		object-fit: cover;
+		width: 100%;
+		height: 60%;
+	}
+</style>
 <div class="home-slide3 owl-carousel nav-style4 nav-center-center" data-items="1" data-nav="true" data-dots="false"
 	data-loop="true" data-autoplay="true" style="padding-bottom:50px">
-	<img src="images/slides/12.jpg" alt="">
-	<img src="images/slides/13.jpg" alt="">
-	<img src="images/slides/14.jpg" alt="">
+	{{#each banner}}
+
+	<img src="/banners/{{_id}}-001.jpg" alt="">
+
+
+	{{/each}}
 </div>
+
 <div class="container">
 	{{!-- second sections --}}
 	<div class="row">
 		<div class="col-sm-5">
 			<div class="banner-text">
 				<div class="image">
-					<a class="banner-opacity" href="#"><img src="images/b/11.jpg" alt=""></a>
+					<a class="banner-opacity" href="#"><img src="/spbanner/{{spbanner._id}}-001.jpg" alt=""></a>
 				</div>
 				<div class="content-text">
-					<h3 class="title">WINTER SALE <span>75%OFF</span></h3>
+
+
+					<h3 class="title">{{spbanner.Title}} <span>{{spbanner.disEnd}}% OFF</span></h3>
+
 					<span class="sub-title">Checkout Our HotSale Products This Week !</span>
 					<a href="#" class="button">SHOP PRODUCTS</a>
 				</div>
@@ -24,7 +38,7 @@
 		<div class="col-sm-4">
 			<div class="banner-text style2">
 				<div class="image">
-					<a class="banner-opacity" href="#"><img src="images/b/12.jpg" alt=""></a>
+					<a class="banner-opacity "   href="#"><img   src="/images/mainbrands/men's.jpg" alt=""></a>
 				</div>
 				<div class="content-text">
 					<h3 class="title">MENSWEAR</h3>
@@ -34,25 +48,25 @@
 		<div class="col-sm-3">
 			<div class="banner-text style2">
 				<div class="image">
-					<a class="banner-opacity" href="#"><img src="images/b/13.jpg" alt=""></a>
+					<a class="banner-opacity" href="#"><img src="/images/mainbrands/kid's.jpg" alt="" style=""></a>
 				</div>
 				<div class="content-text">
-					<h3 class="title">HANDBAG</h3>
+					<h3 class="title">KID'S ZONE</h3>
 				</div>
 			</div>
 			<div class="banner-text style2">
 				<div class="image ">
-					<a class="banner-opacity" href="#"><img src="images/b/14.jpg" alt=""></a>
+					<a class="banner-opacity" href="#"><img src="/images/mainbrands/watch.jpg" alt=""></a>
 				</div>
 				<div class="content-text">
-					<h3 class="title">SNEAKERS</h3>
+					<h3 class="title">WATCHES</h3>
 				</div>
 			</div>
 		</div>
 	</div>
 	{{!-- free delivery notice --}}
 	<div class="text-border margin-top-10">
-		<p>FREE UK DELIVERY + RETURN OVER £85.00 (EXCLUDING HOMEWARE)| FREE UK COLLECT FROM STORE</p>
+		<p> FREE DELIVERY ₹500 ABOVE (SAFE AND SECURE TRANSPORT) RETURN WITHIN 7 DAYS</p>
 	</div>
 
 
@@ -61,42 +75,42 @@
 		data-loop="true" data-autoplay="false" data-margin="0"
 		data-responsive='{"0":{"items":1},"600":{"items":2},"1000":{"items":4}}'>
 		<div class="banner-text style4">
-			<div class="image">
-				<a href="#"><img src="images/slides/11-1.png" alt=""></a>
+			<div class="image ">
+				<a href="#"><img src="/images/mainbrands/adidas.jpg" class="brandImagview" alt=""></a>
 			</div>
 			<div class="content-text">
-				<h4 class="subtitle">Trending</h4>
+				<h4 class="subtitle">Adidas</h4>
 				<h3 class="title">Men fashion</h3>
 				<a class="shop-now" href="#">shop now!</a>
 			</div>
 		</div>
 		<div class="banner-text style4">
 			<div class="image">
-				<a href="#"><img src="images/slides/11-2.png" alt=""> </a>
+				<a href="#"><img src="/images/mainbrands/nikes.jpg" class="brandImagview" alt=""> </a>
 			</div>
 			<div class="content-text">
-				<h4 class="subtitle">Trending</h4>
-				<h3 class="title">autumn fashion</h3>
+				<h4 class="subtitle">Nike</h4>
+				<h3 class="title">Nike Trending</h3>
 				<a class="shop-now" href="#">shop now!</a>
 			</div>
 		</div>
 		<div class="banner-text style4">
 			<div class="image">
-				<a href="#"><img src="images/slides/11-3.png" alt=""></a>
+				<a href="#"><img src="/images/mainbrands/Levis.jpg" class="brandImagview" alt=""></a>
 			</div>
 			<div class="content-text">
-				<h4 class="subtitle">Trending</h4>
-				<h3 class="title">autumn fashion</h3>
+				<h4 class="subtitle">Levi's </h4>
+				<h3 class="title">Trend With Levi's</h3>
 				<a class="shop-now" href="#">shop now!</a>
 			</div>
 		</div>
 		<div class="banner-text style4">
 			<div class="image">
-				<a href="#"><img src="images/slides/11-4.png" alt=""></a>
+				<a href="#"><img src="/images/mainbrands/allen.jpg"  class="brandImagview"alt=""></a>
 			</div>
 			<div class="content-text">
-				<h4 class="subtitle">Trending</h4>
-				<h3 class="title">Shoe fashion</h3>
+				<h4 class="subtitle">Allen Solly</h4>
+				<h3 class="title">Allen Solly Trend</h3>
 				<a class="shop-now" href="#">shop now!</a>
 			</div>
 		</div>
@@ -118,28 +132,62 @@
 	<div class="row margin-top-60">
 		<div class="section-title style2 text-center">
 			<span class="sub-title">Check out our Featured today!</span>
-			<h3>Special for women's</h3>
+			<h3>Special for Men's</h3>
 			<span class="driver"></span>
 		</div>
-		<div class="col-sm-6 margin-top-30">
-			<a class="banner-opacity" href="#"><img src="images/b/15.jpg" alt=""></a>
+		 
+	
+		<div class="col-sm-6 margin-top-30"  >
+			<div class="banner-text style2">
+				<div class="image">
+					<a class="banner-opacity "    href="#"><img src="/images/mainbrands/menIndoor.jpg" alt=""></a>
+				</div>
+				<div class="content-text">
+					<h3 class="title">Men's Indoor</h3>
+				</div>
+			</div>
 		</div>
-		<div class="col-sm-6 margin-top-30">
-			<a class="banner-opacity" href="#"><img src="images/b/16.jpg" alt=""></a>
+
+		 		<div class="col-sm-6 margin-top-30"  >
+			<div class="banner-text style2">
+				<div class="image">
+					<a class="banner-opacity "    href="#"><img src="/images/mainbrands/men'soutdoor.jpg" class="brandImagview" alt=""></a>
+				</div>
+				<div class="content-text">
+					<h3 class="title">Men's Outdoor</h3>
+				</div>
+			</div>
 		</div>
 	</div>
 	{{!-- girls section --}}
-	<div class="row margin-top-60">
+	 <div class="row margin-top-60">
 		<div class="section-title style2 text-center">
 			<span class="sub-title">Check out our Featured today!</span>
-			<h3>special for men's</h3>
+			<h3>Special for Women's</h3>
 			<span class="driver"></span>
 		</div>
-		<div class="col-sm-6 margin-top-30">
-			<a class="banner-opacity" href="#"><img src="images/b/15.jpg" alt=""></a>
+		 
+	
+		<div class="col-sm-6 margin-top-30"  >
+			<div class="banner-text style2">
+				<div class="image">
+					<a class="banner-opacity "    href="#"><img src="/images/mainbrands/womenindoor.jpg" alt=""></a>
+				</div>
+				<div class="content-text">
+					<h3 class="title">Women's Indoor</h3>
+				</div>
+			</div>
 		</div>
-		<div class="col-sm-6 margin-top-30">
-			<a class="banner-opacity" href="#"><img src="images/b/16.jpg" alt=""></a>
+
+		 		<div class="col-sm-6 margin-top-30"  >
+			<div class="banner-text style2">
+				<div class="image">
+					<a class="banner-opacity "    href="#"><img src="/images/mainbrands/womenoutdoor.jpg" class="brandImagview" alt=""></a>
+				</div>
+				<div class="content-text">
+					<h3 class="title">Women's Outdoor</h3>
+				</div>
+			</div>
 		</div>
 	</div>
 	{{!-- watch section --}}
@@ -152,19 +200,19 @@
 			<div class="item-blog">
 
 
-				<a class="banner-border" href="#"><img src="images/blogs/1.jpg" alt=""></a>
+				<a class="banner-border" href="#"><img src="/images/mainbrands/titanw.jpg" alt=""></a>
 
 			</div>
 			<div class="item-blog">
 
 
-				<a class="banner-border" href="#"><img src="images/blogs/2.jpg" alt=""></a>
+				<a class="banner-border" href="#"><img src="/images/mainbrands/radow.jpg" alt=""></a>
 
 			</div>
 			<div class="item-blog">
 
 
-				<a class="banner-border" href="#"><img src="images/blogs/1.jpg" alt=""></a>
+				<a class="banner-border" href="#"><img src="/images/mainbrands/omegaw.png" alt=""></a>
 
 			</div>
 		</div>
@@ -203,63 +251,20 @@
 <footer class="footer">
 	<div class="footer-top">
 		<div class="container">
-			<div class="row flex-flow">
-				<div class="col-sm-12 col-md-4 footer-sidebar">
+			<div class="row  ustify-content-center">
+				<div class="col-6 ">
 					<div class="widget contact-info">
 						<span class="text-primary PlayfairDisplay">Talk to Us Now !</span>
 						<h3 class="widget-title">Contact Us</h3>
 						<div class="content">
-							<p class="address">5701 Outlets at Tejon Pkwy, Tejon ranch CA 93203 UK.</p>
-							<p class="phone"><i class="fa fa-phone"></i> (+800) 6868 2268</p>
+							<p class="address">5701 Outlets at Bangalore, Madiwala 560064 INDIA	.</p>
+							<p class="phone"><i class="fa fa-phone"></i> (+91) 90482 68028</p>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-12 col-md-4 footer-sidebar">
-					<div class="widget our-service">
-						<span class="text-primary PlayfairDisplay">Talk to Us Now !</span>
-						<h3 class="widget-title">OUR SERVICES</h3>
-						<div class="content">
-							<ul>
-								<li><a href="#">About us</a></li>
-								<li><a href="#">Order History</a></li>
-								<li><a href="#">Returns</a></li>
-								<li><a href="#">Custom Service</a></li>
-								<li><a href="#">Terms & Condition</a></li>
-								<li><a href="#">Order History</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-12 col-md-4 footer-sidebar">
-					<div class="widget widget_social">
-						<span class="text-primary PlayfairDisplay">Talk to Us Now !</span>
-						<h3 class="widget-title">FOLLOW US</h3>
-						<div class="content">
-							<div class="social">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-								<a href="#"><i class="fa fa-instagram"></i></a>
-								<a href="#"><i class="fa fa-pinterest"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
+				 
 			</div>
 		</div>
 	</div>
-	<div class="footer-bottom">
-		<div class="container">
-			<div class="payment">
-				<div class="head"><span>We Accept</span><span class="PlayfairDisplay">Online Payment Be Secured</span>
-				</div>
-				<div class="list">
-					<a href="#" class="item"><img src="images/payments/1.png" alt=""></a>
-					<a href="#" class="item"><img src="images/payments/2.png" alt=""></a>
-					<a href="#" class="item"><img src="images/payments/3.png" alt=""></a>
-					<a href="#" class="item"><img src="images/payments/4.png" alt=""></a>
-				</div>
-			</div>
-		</div>
-	</div>
+	 
 </footer>

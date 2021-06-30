@@ -1,0 +1,224 @@
+<div class="container">
+  <div class="shop-banner">
+       <a href="/product-view/{{_id}}"><img src="/banners/60db1740c7a33d9603db5cf7-001.jpg" alt=""></a>
+        
+    </div>
+  <div class="breadcrumbs style2">
+      <a href="#">Home</a>
+      <span>Categories_Leftsidebar</span>
+  </div>
+  <div class="row">
+    <div class="main-content col-sm-12">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="product-detail-image style2">
+                <div class="main-image-wapper" id="img-container" >
+                    <img class="main-image" src="/pimages/{{details._id}}-001.jpg" alt="">
+                </div>
+       
+                <div class="thumbnails owl-carousel nav-center-center nav-style3" data-responsive='{"0":{"items":3},"481":{"items":4},"600":{"items":3},"1000":{"items":4}}' data-autoplay="true" data-loop="true" data-items="4" data-dots="false" data-nav="true" data-margin="20">
+                    <a data-url="/pimages/{{details._id}}-001.jpg" class="active" href="#"><img  id="zoom_01" src="/pimages/{{details._id}}-001.jpg" data-zoom-image="/pimages/{{details._id}}-001.jpg" alt=""></a>
+                    <a data-url="/pimages/{{details._id}}-002.jpg" href="#"><img src="/pimages/{{details._id}}-002.jpg" alt=""></a>
+                    <a data-url="/pimages/{{details._id}}-003.jpg" href="#"><img  src="/pimages/{{details._id}}-003.jpg"  alt=""></a>
+                    <a data-url="/pimages/{{details._id}}-004.jpg" href="#"><img  src="/pimages/{{details._id}}-004.jpg"  alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="product-details-right style2">
+                <h3 class="product-name">{{details.Name}}</h3>
+                 
+                <span class="price">
+                    <ins>₹ {{ details.OfferPrize}}</ins>
+					 <del>₹ {{details.Prize}}</del>
+                </span>
+                <div class="meta">
+                     {{#ifEqual details.Quantity 0}}
+                    <span>Availalbe: <span class="text-primary " style="color: red;"> Outof Stock</span></span>
+                    {{else}}
+                      <span>Availalbe: <span class="text-primary " > In Stock</span></span>
+                    {{/ifEqual }}
+                </div>
+                <div class="short-descript">
+                    {{details.Description}}
+                     </div>
+                <div class="select-color">
+                  <label>COLOR</label>
+                  <div class="inner">
+                    <a href="#"><span style="background-color:#736357;"></span></a>
+                    <a class="active" href="#"><span style="background-color:#bdb871;"></span></a>
+                    <a href="#"><span style="background-color:#f26522;"></span></a>
+                    <a href="#"><span style="background-color:#fff799;"></span></a>
+                  </div>
+                </div>
+                <div class="select-size">
+                  <label>SIZE OPTIONS</label>
+                  <div class="inner">
+                      <a href="#"><span>S</span></a>
+                      <a class="active" href="#"><span>M</span></a>
+                      <a href="#"><span>L</span></a>
+                      <a href="#"><span>XL</span></a>
+                      <a href="#"><span>XXL</span></a>
+                    </div>
+                </div>
+                <div class="size-chart">
+                    <a href="#">SIZE chart</a>
+                </div>
+
+                <form class="cart-form" enctype="multipart/form-data" method="post">
+                    <div class="quantity">
+                        <a href="#">-</a>
+                        <input type="text" size="4" class="input-text qty text" title="Qty" value="03" name="quantity">
+                        <a href="#">+</a>
+                    </div>
+                    <a class="button button-add-cart" data-quantity="1"  href="#">Add to cart</a>
+                    <a class="wishlist button" href="#"><i class="fa fa-heart-o"></i></a>
+                    <a href="#" class="button compare"><i class="fa fa-exchange"></i></a>
+                </form>
+                <div class="share">
+                    <a href="#"><i class="fa fa-print"></i> Print</a>
+                    <a href="#"><i class="fa fa-envelope-o"></i> Send to a friend</a>
+                </div> 
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- tab -->
+<div class="container">                        
+    <div class="tab-details-product style2">
+        <ul class="box-tabs nav-tab">
+            <li class=""><a data-toggle="tab" href="#tab-1">DESCRIPTION</a></li>
+           
+        </ul>
+        <div class="tab-container">
+              <div id="tab-1" class="tab-panel ">
+                <p>{{details.Description}}</p>
+                 
+            </div>
+              
+        </div>  
+    </div> 
+    <div class="product-slide upsell-products">
+        <div class="section-title text-center"><h3>UPSELL PRODUCTS</h3> </div>
+         <ul class="owl-carousel" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}' data-autoplay="true" data-loop="true" data-items="4" data-dots="false" data-nav="false" data-margin="30">
+            <li class="product-item">
+                <div class="product-inner">
+                    <div class="product-thumb">
+                        <a href="#"><img src="images/products/5.jpg" alt=""></a>
+                        <div class="gorup-button">
+                          <a href="#" class="wishlist"><i class="fa fa-heart"></i></a>
+                          <a href="#" class="compare"><i class="fa fa-exchange"></i></a>
+                          <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name"><a href="#">London Star Sweatshirt</a></h3>
+                        <span class="price">
+                            <ins>£85.00</ins>
+                            <del>£95.00</del>
+                        </span>
+                        <a href="#" class="button">ADD TO CART</a>
+                    </div>
+                </div>
+            </li>
+            <li class="product-item">
+                <div class="product-inner">
+                    <div class="product-thumb">
+                        <a href="#"><img src="images/products/6.jpg" alt=""></a>
+                        <div class="gorup-button">
+                          <a href="#" class="wishlist"><i class="fa fa-heart"></i></a>
+                          <a href="#" class="compare"><i class="fa fa-exchange"></i></a>
+                          <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name"><a href="#">London Star Sweatshirt</a></h3>
+                        <span class="price">
+                            <ins>£85.00</ins>
+                            <del>£95.00</del>
+                        </span>
+                        <a href="#" class="button">ADD TO CART</a>
+                    </div>
+                </div>
+            </li>
+            <li class="product-item">
+                <div class="product-inner">
+                    <div class="product-thumb">
+                        <a href="#"><img src="images/products/7.jpg" alt=""></a>
+                        <div class="gorup-button">
+                          <a href="#" class="wishlist"><i class="fa fa-heart"></i></a>
+                          <a href="#" class="compare"><i class="fa fa-exchange"></i></a>
+                          <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name"><a href="#">London Star Sweatshirt</a></h3>
+                        <span class="price">
+                            <ins>£85.00</ins>
+                            <del>£95.00</del>
+                        </span>
+                        <a href="#" class="button">ADD TO CART</a>
+                    </div>
+                </div>
+            </li>
+            <li class="product-item">
+                <div class="product-inner">
+                    <div class="product-thumb">
+                        <a href="#"><img src="images/products/8.jpg" alt=""></a>
+                        <div class="gorup-button">
+                          <a href="#" class="wishlist"><i class="fa fa-heart"></i></a>
+                          <a href="#" class="compare"><i class="fa fa-exchange"></i></a>
+                          <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name"><a href="#">London Star Sweatshirt</a></h3>
+                        <span class="price">
+                            <ins>£85.00</ins>
+                            <del>£95.00</del>
+                        </span>
+                        <a href="#" class="button">ADD TO CART</a>
+                    </div>
+                </div>
+            </li>
+        </ul>   
+    </div> 
+</div> <!--END CONTAINER-->  
+<!-- ./tab -->
+<div class="margin-top-60 margin-bottom-30">  
+    <div class="container">  
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
+              <div class="element-icon style2">
+                <div class="icon"><i class="flaticon flaticon-origami28"></i></div>
+                <div class="content">
+                  <h4 class="title">FREE SHIPPING WORLD WIDE</h4>
+                </div>
+              </div>
+          </div>
+          <div class="col-sm-12 col-md-4">
+              <div class="element-icon style2">
+                <div class="icon"><i class="flaticon flaticon-curvearrows9"></i></div>
+                <div class="content">
+                  <h4 class="title">MONEY BACK GUARANTEE</h4>
+                </div>
+              </div>
+          </div>
+          <div class="col-sm-12 col-md-4">
+              <div class="element-icon style2">
+                <div class="icon"><i class="flaticon flaticon-headphones54"></i></div>
+                <div class="content">
+                  <h4 class="title">ONLINE SUPPORT 24/7</h4>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>  
+ 
+</div>
+
+
+
+ 

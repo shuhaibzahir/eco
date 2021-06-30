@@ -1,0 +1,178 @@
+ 
+<div class="banner">
+	<div class="banner-content">
+		<img src="/images/mainbrands/catBanner.jpg" alt="">
+	</div>
+</div>
+<div class="main-container left-slidebar">
+	<div class="container">
+		<div class="row">
+			<div class="main-content col-sm-8 col-md-9">
+				<div class="shop-top">
+					<div class="shop-top-left">
+						<div class="breadcrumbs">
+		                    <a href="#">Home</a>
+		                    <span>Categories Leftsidebar</span>
+		                </div>
+					</div>
+					<div class="shop-top-right">
+						<span class="woocommerce-result-count">Showing 1-10 of 53 results</span>
+						<div class="orderby-wapper">
+	                    	<select class="orderby">
+		                        <option value="">SORT BY NEWNESS</option>
+		                        <option value="">Short by price</option>
+		                    </select>
+	                    </div>
+	                    <div class="show-grid-list">
+                            <span class="label-filter">VIEW:</span>
+                            <a class="show-grid active" href="#"><i class="fa fa-th"></i></a>
+                            <a class="show-list" href="#"><i class="fa fa-list"></i></a>
+                        </div>
+					</div>
+				</div>
+				<ul class="product-list-grid desktop-columns-3 tablet-columns-2 mobile-columns-1 row">
+					{{#each allProduct}}
+					
+					<li class="product-item col-sm-6 col-md-4">
+						<div class="product-inner">
+							<div class="product-thumb has-back-image">
+								<a href="/product/view/{{_id}}"><img src="/pimages/{{_id}}-001.jpg" alt=""></a>
+								<a class="back-image" href="/product/view/{{_id}}"><img src="/pimages/{{_id}}-002.jpg" alt=""></a>
+								<div class="gorup-button">
+									<a href="#" class="wishlist"><i class="fa fa-heart"></i></a>
+									<a href="#" class="compare"><i class="fa fa-exchange"></i></a>
+									<a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+								</div>
+							</div>
+							<div class="product-info">
+								<h3 class="product-name"><a href="/product/view/{{_id}}">{{Name}}</a></h3>
+								<span class="price">
+									
+									<ins>₹ {{ OfferPrize}}</ins>
+									<del>₹ {{Prize}}</del>
+								</span>
+								{{#ifEqual Quantity 0}}
+								<button class="button" style="background-color: red;">Outof Stock</button>
+								{{else}}
+								<a href="#" class="button">ADD TO CART</a>
+								{{/ifEqual}}
+							</div>
+						</div>
+					</li>
+					{{/each}} 
+				</ul>
+				<div class="navigation">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-long-arrow-left"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li ><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fa fa-long-arrow-right"></i></a></li>
+                    </ul>
+                </div>
+			</div>
+ <!--................................ Product category ................................................-->			
+			<div class="col-sm-4 col-md-3 sidebar">
+                    <!-- Product category -->
+                    <div class="widget widget_product_categories">
+                        <h2 class="widget-title">Categories</h2>
+                        <ul class="product-categories">
+                            <li><a href="#">Sunglasses <span class="count">(100)</span></a></li>
+                            <li><a href="#">Watches<span class="count">(20)</span></a></li>
+                            <li class="current-cat"><a href="#">Jewelry<span class="count">(20)</span></a></li>
+                            <li><a href="#">Hats, Scraves & Gloves<span class="count">(20)</span></a></li>
+                            <li><a href="#">Underwear & Socks<span class="count">(20)</span></a></li>
+                            <li><a href="#">Grooming<span class="count">(20)</span></a></li>
+                            <li><a href="#">Belts<span class="count">(20)</span></a></li>
+                        </ul>
+                    </div>
+                    <!-- ./Product category -->
+                    <!-- By color -->
+                    <div class="widget widget_layered_nav">
+                        <h2 class="widget-title">COLOUR</h2>
+                        <ul class="product-categories">
+                            <li><a href="#">White<span class="count">(20)</span></a></li>
+                            <li><a href="#">Black<span class="count">(20)</span></a></li>
+                            <li><a href="#">Blue<span class="count">(20)</span></a></li>
+                            <li><a href="#">Yellow<span class="count">(20)</span></a></li>
+                            <li><a href="#">Brown<span class="count">(20)</span></a></li>
+                            <li><a href="#">Red<span class="count">(20)</span></a></li>
+                            <li><a href="#">Teal<span class="count">(20)</span></a></li>
+
+                        </ul>
+                    </div>
+                     <!-- ./By color -->
+                     <!-- Filter price -->
+                    <div class="widget widget_price_filter">
+                        <h2 class="widget-title">PRICES</h2>
+                        <div class="price_slider_wrapper">
+                            <div class="amount-range-price">Price: $50 - $350</div>
+                            <div data-label-reasult="price:" data-min="0" data-max="500" data-unit="$" class="slider-range-price " data-value-min="50" data-value-max="350"></div>
+                            <button class="button">Filter</button>
+                        </div>
+                    </div>
+                    <!-- ./Filter price -->
+                     <!-- By color -->
+                    <div class="widget widget_layered_nav">
+                        <h2 class="widget-title">SIZE Option</h2>
+                        <ul class="product-categories">
+                            <li><a href="#">Very Small<span class="count">(20)</span></a></li>
+                            <li><a href="#">Small<span class="count">(20)</span></a></li>
+                            <li><a href="#">Medium<span class="count">(20)</span></a></li>
+                            <li><a href="#">Large<span class="count">(20)</span></a></li>
+                            <li><a href="#">Very Large<span class="count">(20)</span></a></li>
+
+                        </ul>
+                    </div>
+                     <!-- ./By color -->
+                    <!-- Product tags -->
+                    <div class="widget widget_product_tag_cloud">
+                        <h2 class="widget-title">POPULAR TAGS</h2>
+                        <div class="tagcloud">
+                            <a href="#">Cotton</a>
+                            <a href="#">Leggings</a>
+                            <a href="#">Men</a>
+                            <a href="#">Shirt</a>
+                            <a href="#">T-shirt</a>
+                            <a href="#">COSMETIC</a>
+                            <a href="#">SOFT WEAR</a>
+                            <a href="#">ACCESSORIES</a>
+                            <a href="#">LIFE STYLE</a>
+                        </div>
+                    </div>
+                    <!-- ./Product tags -->
+            </div>
+		</div>
+	</div>
+    <div class="margin-top-0 margin-bottom-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div class="element-icon style2">
+                        <div class="icon"><i class="flaticon flaticon-origami28"></i></div>
+                        <div class="content">
+                            <h4 class="title">FREE SHIPPING WORLD WIDE</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="element-icon style2">
+                        <div class="icon"><i class="flaticon flaticon-curvearrows9"></i></div>
+                        <div class="content">
+                            <h4 class="title">MONEY BACK GUARANTEE</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="element-icon style2">
+                        <div class="icon"><i class="flaticon flaticon-headphones54"></i></div>
+                        <div class="content">
+                            <h4 class="title">ONLINE SUPPORT 24/7</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+ 
