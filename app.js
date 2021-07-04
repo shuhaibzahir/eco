@@ -18,8 +18,20 @@ db.dbConnect(process.env.DB_URL)
 // view engine setup
 var hbs = exphbs.create({
   helpers: {
-      ifEqual: function(arg1, arg2, options) {
+    ifEqual: function(arg1, arg2, options) {
         return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+    },
+    ge: function( a, b ){
+      var next =  arguments[arguments.length-1];
+      return (a >= b) ? next.fn(this) : next.inverse(this);
+    },
+    ne: function( a, b ){
+      var next =  arguments[arguments.length-1];
+      return (a !== b) ? next.fn(this) : next.inverse(this);
+    },
+    gt:function( a, b ){
+      var next =  arguments[arguments.length-1];
+      return (a > b) ? next.fn(this) : next.inverse(this);
     }
   },
   defaultLayout: 'layout',
@@ -45,8 +57,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
-  saveUninitialized: true,
-  cookie: { }
+   saveUninitialized: true,
+  cookie : {
+    maxAge : 40 * 60 * 1000
+  },
 }))
 app.use('/admin', admin);
 app.use('/', usersRouter);

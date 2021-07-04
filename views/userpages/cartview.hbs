@@ -1,0 +1,174 @@
+<style>
+    .qtyClass{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+ <div class="main-container no-sidebar">
+        <div class="container">
+            <div class="main-content">
+                <div class="page-title">
+                    <h3>SHOPPING CART</h3>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        {{#ne productData.length 0}}
+                        <table class="shop_table cart">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="product-name">Product</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Qty</th>
+                                    <th class="product-subtotal">Total</th>
+                                    <th class="product-remove">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                {{#each productData}}
+                                <tr>
+                                    <td class="product-thumbnail"><img src="/pimages/{{pId}}-001.jpg" alt=""></td>
+
+                                    <td class="product-name"><a href="#">{{pName}}</a></td>
+                                    <td >₹  <span id="prize{{pId}}">{{OfferPrize}}</span>  
+                                        <span class="price">
+                                         <del>₹ {{prize}}</del>
+                                         </span></td>
+                                         <td class="qtyClass">
+                                          {{#gt qty 1 }}
+                                            
+                                           <input type="button" class="button" id="decBtn{{pId}}" value="-" onclick="changeQty(-1,'{{pId}}','{{maxQuantity}}')"> 
+                                            {{else}}
+                                             <input type="button" class="button" id="decBtn{{pId}}" value="-" onclick="changeQty(-1,'{{pId}}','{{maxQuantity}}')" style="display: none;"> 
+                                           {{/gt}}
+
+                                          <input id="qty{{pId}}" class="qty" type="text" min="1" max="{{maxQuantity}}" value="{{qty}}"   disabled >
+                                             
+                                          <input type="button" value="+"  class="button" onclick="changeQty(1,'{{pId}}','{{maxQuantity}}')"  > 
+                                            
+                                          </td>
+                                     
+                                     
+                                     
+                                     <td id="total{{pId}}">{{total}}</td>
+                                    <td class="product-remove"><a href="/delete/cart-item/{{pId}}"><i class="fa fa-close"></i></a></td>
+                                </tr>
+                              {{/each }}
+                            
+                            </tbody>
+                        </table>
+                        {{else}}
+                        <h1>No Item In Cart</h1>
+                         <a href="/allproduct" class="button button-add-cart">Shop Now</a>
+                         {{/ne}}
+                       
+                    </div>
+                   
+                </div>
+                
+                 <div class="row">
+                         {{!-- <div class="box-coupon">
+                            <div class="coupon">
+                                <h3 class="coupon-box-title">Coupon</h3>
+                                <div class="inner-box">
+                                    <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Coupon code">
+                                    <input type="submit" class="button" name="apply_coupon" value="Apply Coupon">
+                                </div>
+                            </div>
+                        </div> --}}
+                    </div>
+                    {{#ne productData.length 0}}
+                    <div class="col-sm-12 col-md-4">
+                        <div class="box-cart-total">
+                            <h2 class="title">Cart Totals</h2>
+                            <table>
+                                <tr>
+                                    <td>Subtotal</td>
+                                    <td>₹ <span class="price" id="subTotal">{{subtotal}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Shipping</td>
+                                    {{#ifEqual shipCharge 0}}
+                                    <td>
+                                        <label style="color: green;" id="shipping"><i class="fas fa-shipping-fast"></i>  Free Shipping</label>
+                                    </td>
+                                    {{else}}
+                                    <td>
+                                        <label style="color: red;" id="shipping"><i class="fas fa-shipping-fast"></i>  Shipping Charge ₹ 50</label>
+                                    </td>
+                                    {{/ifEqual}}
+                                </tr>
+                                <tr class="order-total">
+                                    <td>Toal</td>
+                                    <td> <span class="price" id="grandTotal">{{grandTotal}}</span>  <span class="price">₹</span></td>
+                                </tr>
+                            </table>
+                            <a class="button medium" href="/allproduct">CONTINUE SHOPPING</a>
+                            <a  href="/checkout" class="button btn-primary medium ">PROCEED TO CHECKOUT</a>
+                        </div>
+                    </div>
+                    {{/ne }}
+            </div>
+        </div>
+        <div class="margin-top-60">
+           <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4">
+                        <div class="element-icon style2">
+                            <div class="icon"><i class="flaticon flaticon-origami28"></i></div>
+                            <div class="content">
+                                <h4 class="title">FREE SHIPPING WORLD WIDE</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <div class="element-icon style2">
+                            <div class="icon"><i class="flaticon flaticon-curvearrows9"></i></div>
+                            <div class="content">
+                                <h4 class="title">MONEY BACK GUARANTEE</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <div class="element-icon style2">
+                            <div class="icon"><i class="flaticon flaticon-headphones54"></i></div>
+                            <div class="content">
+                                <h4 class="title">ONLINE SUPPORT 24/7</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+
+    {{!-- <script>
+      
+    function imposeMinMax(el,pid){
+    if(el.value != ""){
+    if(parseInt(el.value) < parseInt(el.min)){
+      el.value = el.min;
+    }
+    if(parseInt(el.value) > parseInt(el.max)){
+      el.value = el.max;
+    }
+   }
+             let qty= parseInt(el.value);
+             
+            let  prize=  document.getElementById("prize"+pid);
+             
+            prize = prize.innerHTML;
+ 
+            let total = document.getElementById("total"+pid)
+            let check = prize * qty;
+           
+             total.innerText=check
+    }
+    
+
+ </script>
+  --}}
+
+ 

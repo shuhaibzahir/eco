@@ -1,0 +1,279 @@
+<link rel="stylesheet" href="/css/userprofile.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div class="container ">
+    <div class="row gutters">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+            <div class="card h-100 ">
+                <div class="card-body" style="padding:50px; display:flex; justify-content:center; align-items:center">
+                    <div class="account-settings" style="align-items: center;">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+
+
+                                <h4 class="title" style="padding-bottom:30px;">Profile Image</h4>
+                                <div class="fileinput fileinput-new text-center">
+                                    <div class="fileinput-new ">
+                                        <img src="/images/userimage/{{usernav.uid}}-001.jpg" onerror="this.onerror=null; this.src='https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png'" id="chekPreview1"
+                                            alt="...">
+
+                                    </div>
+                                    <div>
+
+                                        <span class="btn btn-rose btn-round btn-file">
+
+                                            <input type="file" id="image1" accept="image/gif, image/jpeg, image/png"
+                                                style="display: none;" />
+
+                                            <input type="button" class="btn btn-dark" value="change"
+                                                onclick="document.getElementById('image1').click();" />
+                                            <form action="/changeprofile" method="post">
+                                                <textarea name="image1_b64" id="imageValue1" cols="30" rows="10"
+                                                    hidden></textarea>
+                                                <input type="submit" class="btn btn-dark" id="uploadPhoto"
+                                                    value="submit" style="margin-top: 20px;" hidden>
+                                            </form>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body" style="padding: 50px;">
+                    <form action="">
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mb-2 text-primary">Personal Details</h6>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" class="form-control" id="fullName" value="{{usernav.name}}"
+                                        placeholder="Enter full name" name="userFullname" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="eMail">Email</label>
+                                    <input type="email" class="form-control" name="email" id="eMail"
+                                        value="{{usernav.email}}" placeholder="Enter email ID" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" class="form-control" name="phone" id="phone"
+                                        value="{{usernav.phone}}" placeholder="Enter phone number" disabled>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="text-right">
+                                    <a id="edit" class="btn btn-secondary" onclick="clickEdit()"
+                                        style="text-decoration:none; color:#ffff;">Edit</a>
+                                    <a id="cancel" class="btn btn-secondary" onclick="clickCancel()"
+                                        style="display: none;text-decoration:none; color:#ffff;">Cancel</a>
+                                    <button id="update" type="submit" id="submit" class="btn btn-primary"
+                                        style="display: none;">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="card-body" style="padding: 50px;">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                             Change Password
+                        </button>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{{!-- modal for update password --}}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change Your Password</h5>
+               
+            </div>
+            <div class="modal-body">
+                <form action="/user-pass/change" style="padding: 20px;">
+                                 <div class="mb-3">
+                                     <label for="exampleInputEmail1" class="form-label">Old Password</label>
+                                     <input type="password" class="form-control">
+                                </div>
+                                 <div class="mb-3">
+                                     <label for="exampleInputEmail1" class="form-label">New Password</label>
+                                     <input type="text" class="form-control" >
+                                </div>
+                                 <div class="mb-3">
+                                     <label for="exampleInputEmail1" class="form-label">Confirm Password</label>
+                                     <input type="password" class="form-control">
+                                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary"> change</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crop Image Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sampleImage1" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview" id="preview1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="crop1" class="btn btn-primary">Crop</button>
+                <button type="button" class="btn btn-secondary" onclick="canel()" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('document').ready(function () {
+        var image1 = document.getElementById('sampleImage1');
+        var modal1 = $('#modal1');
+        var cropper1;
+
+        $('#image1').change(function (event) {
+            var files = event.target.files;
+            var done = function (url) {
+                image1.src = url;
+                modal1.modal('show');
+            };
+
+            if (files && files.length > 0) {
+                reader = new FileReader();
+                reader.onload = function (event) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+
+        modal1.on('shown.bs.modal', function () {
+            cropper1 = new Cropper(image1, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview1'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper1.destroy();
+            cropper1 = null;
+        });
+
+        $('#crop1').click(function () {
+            canvas = cropper1.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal1.modal('hide');
+                    $("#imageValue1").val(base64data)
+                    $('#chekPreview1').attr('src', base64data);
+                    $("#uploadPhoto").removeAttr('hidden')
+
+                };
+            });
+        });
+
+
+    })
+
+</script>
+<script>
+    function canel() {
+        $('#modal1').modal('hide');
+    }
+</script>
+<script>
+    function clickEdit() {
+        let field = $("input[type='text']")
+        for (let index = 0; index < field.length; index++) {
+            field[index].removeAttribute("disabled")
+        }
+        let emailField = $("input[type='email']")
+
+        for (let index = 0; index < emailField.length; index++) {
+            emailField[index].removeAttribute("disabled")
+        }
+        $("#cancel").show()
+        $("#update").show()
+        $("#edit").hide()
+    }
+
+    function clickCancel() {
+        let field = $("input[type='text']")
+        for (let index = 0; index < field.length; index++) {
+            field[index].setAttribute("disabled", true)
+        }
+        let emailField = $("input[type='email']")
+
+        for (let index = 0; index < emailField.length; index++) {
+            emailField[index].setAttribute("disabled", true)
+        }
+        $("#cancel").hide()
+        $("#update").hide()
+        $("#edit").show()
+    }
+</script>

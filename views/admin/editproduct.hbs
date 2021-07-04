@@ -141,7 +141,7 @@
                                                 <div class="col-md-4">
                                                     <label class="bmd-label-floating">Quantity</label>
                                                     <div class="form-group">
-                                                        <input type="number" class="form-control"
+                                                        <input type="number" min="0" class="form-control"
                                                             placeholder="Product Quantity" name="quantity" value="{{pDetails.Quantity}}" required>
                                                     </div>
                                                 </div>
@@ -440,6 +440,8 @@
     </div>
 </div>
 <!-- Modal  4 end-->
+
+
 <script>
      $('document').ready(function () {
         //modal1 and image 1

@@ -121,3 +121,21 @@ $("#subCategory").submit(function(event){
         }
     })
 })
+
+
+function  changeOStatus(cartId, pId){
+    let statusValue = $("#st_Value").val()
+    console.log(statusValue)
+    $.ajax({
+        url: "/admin/change/order/status",
+        type: "POST",
+        data: {cId:cartId, proId:pId},
+        success: function (result) {
+             
+
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}

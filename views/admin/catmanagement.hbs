@@ -46,8 +46,8 @@
                                             <div class="card-body ">
                                                 <form method="POST" id="subCategory" action="/admin/add-subcat"
                                                     enctype="multipart/form-data">
-                                                    <div class="row">
-                                                          <div class="form-group col-md-3">
+                                                    <div class="row ">
+                                                          <div class="col-4" >
                                                             <label class="bmd-label-floating">Select Product
                                                                 Type</label>
                                                             <div class="form-group ">
@@ -62,14 +62,15 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                            <div class="form-group col-md-3">
+
+                                                            <div class=" col-4" >
                                                             <label class="bmd-label-floating">Select Option</label>
                                                             <div class="form-group ">
 
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="option" required>
-                                                                    <option disabled selected>Product Type</option>
+                                                                    <option disabled selected>Select Option</option>
 
                                                                     <option value="brand ">Brand</option>
                                                                     <option value="category ">Category</option>
@@ -79,7 +80,9 @@
                                                             </div>
                                                         </div>
                                                       
-                                                        <div class="form-group col-md-6">
+                                                      
+                                                    </div>
+                                                      <div class="form-group col-md-6">
                                                             <label class="bmd-label-floating">Enter Your Sub </label>
                                                             <div class="form-group">
                                                                 <input type="text" class="form-control"
@@ -88,11 +91,10 @@
                                                             </div>
 
                                                         </div>
-                                                        {{!-- category select --}}
+                                                        
                                                     
 
                                                         <p id="cat-add-alert" style="color: red;"></p>
-                                                    </div>
                                                     <div class="card-footer ">
                                                         <button type="submit "
                                                            class="btn btn-fill btn-rose">Submit</button>

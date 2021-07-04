@@ -1,0 +1,149 @@
+<div class="container p-5">
+    <div class="main-container">
+        <div class="container  ">
+            <div class="main-content">
+                <div class="page-title">
+                    <h3>CHECKOUT</h3>
+                </div>
+                <form action="/checkout" method="POST">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-checkout">
+                            <h5 class="form-title">BILLING AND SHIPPING ADDRESS</h5>
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                     <label class="form-check-label" for="inlineCheckbox1"> SELECT ADDRESS</label>
+                                    <select class="custom-select" name="addressName" id="addSelect" onchange="checkAddress('{{uid}}')">
+                                        <option  selected disabled>Select Address</option>
+                                        {{#each address }}
+                                            
+                                            <option value="{{AddressName}}">{{AddressName}}</option>
+                                        {{/each}}
+                                        <option  value="false">No Select</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p><input type="text"  value="" id="addname" name="Adname" placeholder="New Address name" required></p>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <p><input type="text" name="Fname" id="first" placeholder="First Name" required></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p><input type="text" name="Lname" id="last" placeholder="Last Name" required></p>
+                                </div>
+                            </div>
+                            <p><input type="text"  name="Houseno"  id="houseno"  placeholder="House No" required></p>
+                            <p><input type="text" name="Address" id="addressfull" placeholder="Address" required></p>
+                            <p><input type="text" name="Town"  id="town" placeholder="Town / City"></p>
+                            <p><input type="text"  name="State" id="state"  placeholder="State / Country" required></p>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p><input type="text" id="zipcode"  name="Post" placeholder="Post Code" required></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p><input type="tel" id="phone"  name="Phone" placeholder="Phone" required></p>
+                                </div>
+                            </div>
+                            <div class="form-check form-check-inline" id="saveAdd">
+                                <input class="form-check-input"   name="saveaddress" type="checkbox" id="inlineCheckbox1" value="true">
+                                <label class="form-check-label" for="inlineCheckbox1"> SAVE ADDRESS</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-checkout order">
+                            <h5 class="form-title">YOUR ORDER</h5>
+                            <table class="shop-table order">
+                                <thead>
+                                    <tr>
+                                        <th class="product-name">PRODUCT</th>
+                                        <th class="total">TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="product-name">Cart Items</td>
+                                        <td class="total"><span class="price">{{itemCount}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="product-name">Subtotal</td>
+                                        <td class="total"><span class="price">₹ {{subtotal}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="subtotal">Shipping Charge</td>
+                                        {{#ifEqual shipCharge 0}}
+                                        <td class="total"><span class="price" style="color: green;">FREE</span></td>
+                                        {{else}}
+                                         <td class="total"><span class="price" style="color: red;"> ₹ {{shipCharge}}</span></td>
+                                        {{/ifEqual}}
+                                    </tr>
+                                    
+                                    <tr class="order-total">
+                                        <td class="subtotal">ORDER TOTAL</td>
+                                        <td class="total"><span class="price">₹ {{grandTotal}}</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                              <div class="form-checkout checkout-payment">
+                            <h5 class="form-title">YOUR PAYMENT</h5>
+                            <div class="payment_methods">
+                                {{!-- <div class="payment_method">
+                                    <label><input name="payment_method" value="card" type="radio">Credit Or Debit Card</label>
+                                     
+                                </div> --}}
+                                <div class="payment_method">
+                                    <label><input name="payment_method" value="cashonDelivery" type="radio" required>Cash On Delivery</label>
+                                    
+                                </div>
+                                {{!-- <div class="payment_method">
+                                    <label><input name="payment_method" value="paypal" type="radio">PayPal</label>
+                                    
+                                </div> --}}
+                            </div>
+                        </div>
+                            <button  type="submit" class="button btn-primary medium">PROCEED TO CHECKOUT</button>
+                        </div>
+                         
+                    </div>
+
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="margin-top-10">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4">
+                        <div class="element-icon style2">
+                            <div class="icon"><i class="flaticon flaticon-origami28"></i></div>
+                            <div class="content">
+                                <h4 class="title">FREE SHIPPING WORLD WIDE</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <div class="element-icon style2">
+                            <div class="icon"><i class="flaticon flaticon-curvearrows9"></i></div>
+                            <div class="content">
+                                <h4 class="title">MONEY BACK GUARANTEE</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <div class="element-icon style2">
+                            <div class="icon"><i class="flaticon flaticon-headphones54"></i></div>
+                            <div class="content">
+                                <h4 class="title">ONLINE SUPPORT 24/7</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

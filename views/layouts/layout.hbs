@@ -4,14 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=0" />
     <meta charset="UTF-9" />
     <title>Zeebra cross</title>
+    
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" />
-     <link rel="stylesheet" type="text/css" href="/zoom/style.css" />
-    <link rel="stylesheet" type="text/css" href="/css/owl.carousel.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	  <link rel="stylesheet" type="text/css" href="/css/owl.carousel.css" />
     <link rel="stylesheet" type="text/css" href="/css/chosen.css" />
     <link rel="stylesheet" type="text/css" href="/css/lightbox.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/pe-icon-7-stroke.css" />
     <link rel="stylesheet" type="text/css" href="/css/jquery.mCustomScrollbar.css" />
+    
+    <link rel="stylesheet" href="https://unpkg.com/dropzone/dist/dropzone.css" />
+    <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/css/magnific-popup.css" />
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat" />
@@ -31,8 +35,11 @@
     {{{body}}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/ajax.js"></script>
-    <script type="text/javascript" src="/zoom/zoom-image.js"></script>
-     <script type="text/javascript" src="/zoom/main.js"></script>
+   	 
+ 
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/dropzone"></script>
+		<script src="https://unpkg.com/cropperjs"></script>
     <script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/owl.carousel.min.js"></script>
@@ -48,7 +55,28 @@
     <script type="text/javascript" src="/js/jquery.magnific-popup.min.js"></script>
     <script type="text/javascript" src="/js/masonry.js"></script>
     <script type="text/javascript" src="/js/functions.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="/zoom/zoomsl.js"></script>
+   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
+    
+  <style>
+      .glass{
+          border-radius: 100px;
+          border: 5px solid #fff;
+      }
+  </style>
+ <script>
+        $(document).ready(function () {
+            $(".imageView").imagezoomsl({
+               /* innerzoommagnifier: true,
+                classmagnifier: "glass",
+                magnifiersize: [200, 200],
+                disablewheel: false  */
+            });
+        });
+    </script>
+  
 </body>
 
 </html>

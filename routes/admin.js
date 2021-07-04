@@ -507,7 +507,26 @@ router.get("/delete/sp-banner/:id",(req,res)=>{
   })
 })
 
+// .................order managent........................
+router.get("/order-manage",(req,res)=>{
+  userDB.getAllOrders().then((result)=>{
+    let orderData = result
+    console.log(orderData)
+    console.log(orderData[0].products)
+    res.render("admin/orderDetails",{layout: "adminLayout",
+    adminStatus: true,orderData})
+  })
+ 
+})
 
+router.post("/change/order/status",(req,res)=>{
+  console.log(req.body)
+})
+
+
+
+
+// ..................oreder end..............................
 
 // ...........admin logout................
 router.get("/account/logout", (req, res) => {

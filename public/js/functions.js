@@ -471,11 +471,13 @@
         // PRODUCT DETAIL IMAGE
         $(document).on('click','.product-detail-image .thumbnails a',function(){
           var url = $(this).data('url');
+           
           $(this).closest('.product-detail-image .thumbnails').find('a').each(function(){
             $(this).removeClass('active');
           })
           $(this).addClass('active');
           $(this).closest('.product-detail-image').find('.main-image').attr('src',url);
+          $(this).closest('.product-detail-image').find('.imageView').attr('data-large',url);
           return false;
         })
         

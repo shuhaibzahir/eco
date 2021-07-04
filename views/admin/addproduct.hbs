@@ -108,8 +108,8 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Prize</label>
                                                             <div class="form-group">
-                                                                <input type="number" step="0.01" class="form-control"
-                                                                    placeholder="Enter Product Prize" name="prize"
+                                                                <input type="number" step="0.01" class="form-control prizeField"
+                                                                    placeholder="Enter Product Prize" onkeyUp="test_fn(this.value,'prizeField')"  name="prize"
                                                                     required>
                                                             </div>
                                                         </div>
@@ -171,7 +171,7 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Quantity</label>
                                                             <div class="form-group">
-                                                                <input type="number" class="form-control"
+                                                                <input type="number" min="0" class="form-control"
                                                                     placeholder="Product Quantity" name="quantity"
                                                                     required>
                                                             </div>
@@ -401,8 +401,8 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Prize</label>
                                                             <div class="form-group">
-                                                                <input type="number" step="0.01" class="form-control"
-                                                                    placeholder="Enter Product Prize" name="prize"
+                                                                <input type="number" step="0.01" class="form-control prizeField2"
+                                                                    placeholder="Enter Product Prize" onkeyUp="test_fn(this.value,'prizeField2')"  name="prize"
                                                                     required>
                                                             </div>
                                                         </div>
@@ -493,7 +493,7 @@
                                                             <div class="form-group">
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
-                                                                    title="Single Select" name="mood">
+                                                                    title="Single Select" name="mood" required>
                                                                     <option disabled selected>Single Option</option>
                                                                     <option value="indoor">Indoor </option>
                                                                     <option value="outdoor">Outdoor</option>
@@ -695,8 +695,8 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Prize</label>
                                                             <div class="form-group">
-                                                                <input type="number" step="0.01" class="form-control"
-                                                                    placeholder="Enter Product Prize" name="prize"
+                                                                <input type="number" step="0.01" class="form-control prizeField3"
+                                                                    placeholder="Enter Product Prize"  onkeyUp="test_fn(this.value,'prizeField3')"  name="prize"
                                                                     required>
                                                             </div>
                                                         </div>
@@ -1326,7 +1326,13 @@
 
 
 
-
+<script>
+    function test_fn(xxx,clss) {
+  var xxx = xxx.replace(/[^0-9,.]+/g, "");
+  document.querySelector("."+clss).value = xxx;
+}
+ 
+</script>
 
 <script>
     $('document').ready(function () {

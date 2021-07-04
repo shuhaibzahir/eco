@@ -1,0 +1,167 @@
+<style>
+  #datatables>thead>tr>th[class*="sort"]::before {
+    display: none
+  }
+
+  #datatables>thead>tr>th[class*="sort"]::after {
+    display: none
+  }
+</style>
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row justify-content-center" style="align-items: center">
+
+      <div class="col-md-3">
+        <div class="card ">
+          <div class="card-header card-header-rose card-header-text">
+            <div class="card-icon">
+              <i class="fab fa-product-hunt"></i>
+            </div>
+            <h4 class="card-title">Select Product Type</h4>
+          </div>
+          <div class="card-body ">
+            <div class="form-group ">
+              <select class="selectpicker" data-size="7" data-style="btn btn-success btn-round" title="Single Select"
+                name="product_type" required>
+                <option disabled selected>Select Type</option>
+                <option disabled selected>Select Type</option>
+                <option disabled selected>Select Type</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      {{!-- from date --}}
+      <div class="col-md-3">
+        <div class="card ">
+          <div class="card-header card-header-rose card-header-text">
+            <div class="card-icon">
+              <i class="material-icons">library_books</i>
+            </div>
+            <h4 class="card-title">From Date</h4>
+          </div>
+          <div class="card-body ">
+            <div class="form-group">
+              <input type="text" class="form-control datepicker" value="10/06/2018">
+            </div>
+          </div>
+        </div>
+      </div>
+      {{!-- to date --}}
+      <div class="col-md-3">
+        <div class="card ">
+          <div class="card-header card-header-rose card-header-text">
+            <div class="card-icon">
+              <i class="material-icons">library_books</i>
+            </div>
+            <h4 class="card-title">To Date</h4>
+          </div>
+          <div class="card-body ">
+            <div class="form-group">
+              <input type="text" class="form-control datepicker" value="10/06/2018">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-fill btn-rose">Submit</button>
+
+
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="fas fa-store-alt"></i>
+            </div>
+            <h4 class="card-title">All Orders</h4>
+          </div>
+          <div class="card-body">
+            <div class="toolbar">
+              <!--        Here you can write extra buttons/actions for the toolbar              -->
+            </div>
+            <div class="material-datatables">
+              <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0"
+                width="100%" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Order Id</th>
+                    <th>User Id</th>
+                    <th>P_Name</th>
+                    <th>Type</th>
+                    <th>Qty</th>
+                     <th>Ship</th>
+                    <th>Total</th>
+                    <th>Order Date</th>
+                    <th>Method</th>
+                    <th>Status</th>
+                    {{!-- //class="disabled-sorting text-right"// --}}
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Order Id</th>
+                    <th>User Id</th>
+                    <th>P_Name</th>
+                    <th>Type</th>
+                    <th>Qty</th>
+                    <th>Ship</th>
+                    <th>Total</th>
+                    <th>Order Date</th>
+                    <th>Method</th>
+                    <th>Status</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+
+                  {{#each orderData}}
+                  {{#each products}}
+                  <tr>
+                    <td>{{../_id}}</td>
+                    <td><a href="">{{../userId}}</a></td>
+                    <td>{{productname}}</td>
+                    <td>{{pType}}</td>
+                    <td>{{qty}}</td>
+                    <td>₹ {{../shippingCharg}}</td>
+                    <td> ₹ {{../totalOfOrder}}</td>
+                    <td>{{../placedDated}}</td>
+                    <td>{{../payment}}</td>
+                    <td>
+         
+                        <select class="custom-select" data-size="7"
+                          data-style="btn btn-dark" id="st_Value" onchange="changeOStatus('{{../_id}}','{{pid}}')" name="status" required >
+                         <option value="{{status}}"  selected disabled>{{status}} </option>
+                         <option value="Shipped" >Shipped</option>
+                         <option value="Delivered" >Delivered </option>
+
+                        </select>
+                      
+                    </td>
+                  </tr>
+                  {{/each}}
+                  {{/each}}
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    // initialise Datetimepicker and Sliders
+    md.initFormExtendedDatetimepickers();
+    if ($('.slider').length != 0) {
+      md.initSliders();
+    }
+  });
+</script>

@@ -1,3 +1,9 @@
+<style>
+ 
+  .mini-cart .count .alert{
+    background-color:green;
+  }
+</style>
 <div id="box-mobile-menu" class="box-mobile-menu full-height full-width">
 	<div class="box-inner">
 		<span class="close-menu"><span class="icon pe-7s-close"></span></span>
@@ -11,7 +17,7 @@
 				<div class="row">
 					<div class="col-sm-12 col-md-3 logo-wapper">
 						<div class="logo">
-							<a href="#"><img src="images/logo.svg" alt=""></a>
+							<a href="/"><img src="/images/logo.svg" alt=""></a>
 						</div>
 					</div>
 					<div class="col-sm-12 col-md-9 menu-wapper">
@@ -26,45 +32,13 @@
 							</form>
 
 							<div class="mini-cart">
-								<a class="cart-link" href="#"><span class="pe-7s-cart"></span> <span
-										class="count">3</span></a>
-								<div class="show-shopping-cart">
-									<h3 class="title">YOU HAVE <span class="text-primary">(3 ITEMS)</span> IN YOUR CART
-									</h3>
-									<ul class="list-product">
-										<li>
-											<div class="thumb">
-												<img src="images/products/1.png" alt="">
-											</div>
-											<div class="info">
-												<h4 class="product-name"><a href="#">LONDON STAR SWEATSHIRT</a></h4>
-												<span class="price">1x£375.00</span>
-												<a class="remove-item" href="#"><i class="fa fa-close"></i></a>
-											</div>
-										</li>
-										<li>
-											<div class="thumb">
-												<img src="images/products/1.png" alt="">
-											</div>
-											<div class="info">
-												<h4 class="product-name"><a href="#">LONDON STAR SWEATSHIRT</a></h4>
-												<span class="price">1x£375.00</span>
-												<a class="remove-item" href="#"><i class="fa fa-close"></i></a>
-											</div>
-										</li>
-									</ul>
-									<div class="sub-total">
-										Subtotal:£255.00
-									</div>
-									<div class="group-button">
-										<a href="#" class="button">Shopping Cart</a>
-										<a href="#" class="check-out button">CheckOut</a>
-									</div>
-								</div>
+								<a class="cart-link" href="/view-cart"><span class="pe-7s-cart"></span><span
+										class="count cartAdded" id="count">{{usernav.cart.length}}</span></a>
+								
 							</div>
 							<div class="box-settings">
 								{{#if usernav}}
-								<i class="far fa-user-circle" style="font-size: 24px; padding-left:10px"> <span style="font-family:  Roboto ; font-weight: bold; color:#c99947">{{usernav.name}}</span></i>
+								<img src="/images/userimage/{{usernav.uid}}-001.jpg" onerror="this.onerror=null; this.src='https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png'" alt="" style="width:30px; border-radius:30px"> <span style="margin-left:5px;font-family:  Roboto ; font-weight: bold; color:#c99947">{{usernav.name}}</span> 
 								{{else}}
 								<i class="far fa-user-circle" style="font-size: 24px; padding-left:10px"> <span style="font-family:  Roboto ; font-weight: bold; color:#c99947"></span></i>
 								{{/if}}
@@ -75,9 +49,9 @@
 											<ul>
 												<li><a href="#"><i
 															class="icon-heart icons"></i><span>Wishlist</span></a></li>
-												<li><a href="#"><i class="icon-user icons"></i><span>
-															MyAccount</span></a></li>
-												<li><a href="#"><i class="icon-note icons"></i><span>Checkout</span></a>
+												<li><a href="/myaccount"><i class="icon-user icons"></i><span>
+															My Account</span></a></li>
+												<li><a href="/view-cart"><i class="icon-note icons"></i><span>My Cart</span></a>
 												</li>
 												 {{#if usernav}}
 												<li><a href="/logout"><i class="icon-lock-open icons"></i><span>Logout</span></a></li>
@@ -92,7 +66,7 @@
 						</div>
 						<ul class="boutique-nav main-menu clone-main-menu">
 						
-							<li class="menu-item-has-children item-megamenu">
+							{{!-- <li class="menu-item-has-children item-megamenu">
 								<a href="#">categories</a>
 								<div style="width:820px; background-image:url('images/bg-megamenu.png'); "
 									class="sub-menu megamenu megamenu-bg">
@@ -155,7 +129,7 @@
 										</div>
 										</div>
 								</div>
-							</li>
+							</li> --}}
 							<li class="item-megamenu"><a href="/allproduct">All Products</a></li>
 						</ul>
 						<span class="mobile-navigation"><i class="fa fa-bars"></i></span>
