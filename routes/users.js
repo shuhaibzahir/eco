@@ -276,7 +276,7 @@ router.get("/product/view/:id",(req,res)=>{
 })
  //............................................stering cart.............................
  router.post("/addto-cart",(req,res)=>{
-     console.log(req.body)
+     
     if(req.session.user){
         let uid= req.session.user.uid
         let  pid=req.body.productID;
@@ -287,7 +287,9 @@ router.get("/product/view/:id",(req,res)=>{
         req.session.user.cart= result.userData.cart
         res.json({status:result.status})    
         
-    }).catch((err)=>console.log(err))
+    }).catch((err)=>{
+        res.json({status:"Noqty"})    
+    })
     }else{
         res.json({status:"notLoginned"})
     }
@@ -484,7 +486,18 @@ router.get("/payment/succcess",auth,(req,res)=>{
 
 
 router.get("/myaccount",auth,(req,res)=>{
-    res.render("userpages/userProfile",{userLayout:true,usernav:req.session.user})
+
+    userDB.getOneUser(req.session.user.uid).then((data)=>{
+        let address = data.address;
+        userDB.getUserOrder(req.session.user.uid).then((orders)=>{
+             
+            res.render("userpages/userProfile",{userLayout:true,usernav:req.session.user,address,orders})
+        })
+
+        
+       
+    })
+   
 })
 
 
@@ -496,6 +509,71 @@ router.post("/changeprofile",auth,(req,res)=>{
       fs.writeFileSync(path1, base64Data1, { encoding: 'base64' });
       res.redirect("/myaccount")
 })
+
+router.get("/address-manage",(req,res)=>{
+    
+})
+
+
+router.get("/change/address/:address",auth,(req,res)=>{
+    let id = req.session.user.uid
+    let add = req.params.address
+  
+    userDB.getAddress(id,add).then((adrs)=>{
+        
+        res.render("userpages/addressEdit",{userLayout:true,usernav:req.session.user,adrs})
+    })
+   
+})
+
+router.post("/update/address",auth,(req,res)=>{
+    let billAddress = {
+        AddressName:req.body.Adname,
+        FirstName:req.body.Fname,
+        LastName : req.body.Lname,
+        HouseNo: req.body.Houseno,
+        Address:req.body.Address,
+        Town: req.body.Town,
+        State:req.body.State,
+        Pincode:req.body.Post,
+        Phone: req.body.Phone
+    }
+    let uid = req.session.user.uid;
+    let ogName = req.body.orginalName;
+    userDB.addAddressToUser(uid, billAddress,ogName).then((result)=>{
+        console.log(result)
+        res.redirect("/myaccount")
+    })
+ 
+})
+
+router.get("/delete/address/:topic",auth,(req,res)=>{
+    let uid = req.session.user.uid;
+    let addname = req.params.topic;
+    userDB.deleteAddress(uid,addname).then((result)=>{
+        console.log(result)
+        res.redirect("/myaccount")
+    })
+})
+
+router.post("/user/update/profile",(req,res)=>{
+    let uid = req.session.user.uid;
+    let updateDta = {
+     name : req.body.userFullname,
+     email: req.body.email,
+     phone :req.body.phone
+    }
+    userDB.updateUserDetail(uid, updateDta).then((result)=>{
+        res.json({status:true})
+    }).catch((err)=>{
+        res.json({status:false, msg:err})
+    })
+       
+             
+})
+
+
+
 //..............................profile end 
 router.get("/logout",(req,res)=>{
     delete req.session.user;

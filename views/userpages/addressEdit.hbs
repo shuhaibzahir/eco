@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row   " style="display:flex; justify-content: center;">
+        <div class="col-sm-6">
+            <form action="/update/address" method="post"> 
+            <div class="form-checkout">
+                <h5 class="form-title">BILLING AND SHIPPING ADDRESS</h5>
+                <div class="row">
+
+
+                    <div class="col-sm-6">
+                        <p><input type="text" value="{{adrs.AddressName}}" id="addname" name="Adname" placeholder="New Address name"
+                                required></p>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <p><input type="text" name="Fname" value="{{adrs.FirstName}}" id="first" placeholder="First Name" required></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p><input type="text" name="Lname" id="last" value="{{adrs.LastName}}" placeholder="Last Name" required></p>
+                    </div>
+                </div>
+                <p><input type="text" name="Houseno" value="{{adrs.HouseNo}}" id="houseno" placeholder="House No" required></p>
+                <p><input type="text" name="Address" value="{{adrs.Address}}" id="addressfull" placeholder="Address" required></p>
+                <p><input type="text" name="Town"  value="{{adrs.Town}}"  id="town" placeholder="Town / City"></p>
+                <p><input type="text" name="State"  value="{{adrs.State}}" id="state" placeholder="State / Country" required></p>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p><input type="text" id="zipcode"  value="{{adrs.Pincode}}"  name="Post" placeholder="Post Code" required></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p><input type="tel" id="phone" value="{{adrs.Phone}}" name="Phone" placeholder="Phone" required></p>
+                    </div>
+                </div>
+                <input type="text" value="{{adrs.AddressName}}" name="orginalName" hidden>
+                <button type="submit" class="button btn-primary medium">Update</button>
+    
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

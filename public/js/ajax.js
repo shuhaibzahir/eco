@@ -133,13 +133,10 @@ $("#cartAdding").submit(function (event) {
 })
 
 function addingCart(id){
-    $(`#${id}`).submit(function (event) {
-        event.preventDefault()
-        let form = $(this);
-        $.ajax({
+         $.ajax({
             url: "/addto-cart",
             type: "POST",
-            data: form.serialize(),
+            data: {productID:id},
             success: function (result) {
                 if (result.status == "already") {
                    
@@ -162,13 +159,21 @@ function addingCart(id){
                     })
                 } else if (result.status == "notLoginned") {
                     window.location.href = "/login"
+                }else if(result.status =="Noqty"){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'No More Quanity',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
             },
             error: function (err) {
                 console.log(err)
             }
         })
-    })
+    
 }
 
 function changeQty(qty,id,max){
@@ -285,4 +290,34 @@ function changeQty(qty,id,max){
        }
         
     } 
+
  
+
+ 
+$("#userProfile").submit(function (event) {
+    event.preventDefault()
+    let form = $(this);
+    $.ajax({
+        url: "/user/update/profile",
+        type: "POST",
+        data: form.serialize(),
+        success: function (result) {
+            if (result.status ) {
+                window.location.href = "/myaccount"
+             
+            } else {
+                
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: result.msg,
+                    showConfirmButton: true,
+                   
+                })
+            } 
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+})

@@ -438,5 +438,17 @@ module.exports = {
                 }
             })
         })
+    },
+    productQtyChange:(data)=>{
+        return new Promise((resolve,reject)=>{
+            Product.findOneAndUpdate({_id:data.product},{$set:{Quantity:data.newQty}},(err,rs)=>{
+                if(err){
+                    console.log(err)
+                }else{
+
+                resolve(rs)
+                }
+            })
+        })
     }
 }

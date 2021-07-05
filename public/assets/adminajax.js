@@ -123,16 +123,19 @@ $("#subCategory").submit(function(event){
 })
 
 
-function  changeOStatus(cartId, pId){
-    let statusValue = $("#st_Value").val()
-    console.log(statusValue)
+function  changeOStatus(orderId, pId,val){
+    // let statusValue = $("#val"+pId).val()
+    console.log(orderId, pId,val)
     $.ajax({
         url: "/admin/change/order/status",
         type: "POST",
-        data: {cId:cartId, proId:pId},
+        data: {oId:orderId, proId:pId,value:val},
         success: function (result) {
-             
-
+             if(result.status){
+                window.location.href="/admin/order-manage"
+             }else{
+                 alert("some issue")
+             }
         },
         error: function (err) {
             console.log(err)

@@ -53,7 +53,7 @@
                                      
                                      
                                      <td id="total{{pId}}">{{total}}</td>
-                                    <td class="product-remove"><a href="/delete/cart-item/{{pId}}"><i class="fa fa-close"></i></a></td>
+                                    <td class="product-remove"><a href="/delete/cart-item/{{pId}}" onclick="return confirm('are you sure?')"><i class="fa fa-close"></i></a></td>
                                 </tr>
                               {{/each }}
                             

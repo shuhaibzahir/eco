@@ -3,7 +3,7 @@ const {
     ObjectId
 } = require('mongodb');
 
-const productDB= require("../helper/product")
+const productDB = require("../helper/product")
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -16,8 +16,8 @@ const UserSchema = new mongoose.Schema({
     date: String,
     cart: Array,
     wishlish: Array,
-    address:Array,
-    shippingCharg:Number
+    address: Array,
+    shippingCharg: Number
 })
 const User = mongoose.model('User', UserSchema);
 
@@ -25,14 +25,14 @@ const User = mongoose.model('User', UserSchema);
 // cart schema 
 
 const orderSchema = new mongoose.Schema({
-    userId : ObjectId,
-    products : Array,
-    address:Object,
-    payment:String,
-    placedDated:String,
-    totalOfOrder:Number,
-    shippingCharg:Number
- 
+    userId: ObjectId,
+    products: Array,
+    address: Object,
+    payment: String,
+    placedDated: String,
+    totalOfOrder: Number,
+    shippingCharg: Number
+
 })
 
 const Order = mongoose.model("order", orderSchema)
@@ -207,7 +207,7 @@ module.exports = {
     // ...................cart managemet...............................
     addToCart: (id, productID) => {
         return new Promise(async (resolve, reject) => {
-            
+
             let userCart = await User.findOne({
                 $and: [{
                     _id: id
@@ -219,39 +219,65 @@ module.exports = {
                     }
                 }]
             })
-            console.log(userCart)
+
+
+            // orginal product quantity
+            let orginalQty;
+            await productDB.getOneProduct(productID).then((orginal) => {
+                orginalQty = orginal.Quantity
+            })
+            console.log("this is orgianl quantity", orginalQty)
+
+
             if (userCart) {
-                let updateQuery = {
-                    $inc: {
-                        "cart.$.qty": 1
-                    }
-                }
-                User.updateOne({
-                    _id: id,
-                    cart: {
-                        $elemMatch: {
-                            pid: ObjectId(productID)
+                let flag = false
+                // checking quantity
+                userCart.cart.forEach((item) => {
+                    if (item.pid == productID) {
+                        console.log("this is demmy quantity", item.qty)
+                        if (item.qty < orginalQty) {
+                            console.log("this is demmy quantity", item.qty)
+                            flag = true;
+                        } else {
+                            flag = false;
                         }
                     }
-                }, updateQuery, (err, updated) => {
-                    if (!err) {
-                        User.findOne({
-                            _id: id
-                        }, (nrr, data) => {
-                            if (nrr) {
-                                console.log(nrr)
-                            } else {
-
-                                resolve({
-                                    status: "already",
-                                    userData: data
-                                })
-                            }
-                        })
-                    } else {
-                        console.log(err)
-                    }
                 })
+                if (flag) {
+                    let updateQuery = {
+                        $inc: {
+                            "cart.$.qty": 1
+                        }
+                    }
+                    User.updateOne({
+                        _id: id,
+                        cart: {
+                            $elemMatch: {
+                                pid: ObjectId(productID)
+                            }
+                        }
+                    }, updateQuery, (err, updated) => {
+                        if (!err) {
+                            User.findOne({
+                                _id: id
+                            }, (nrr, data) => {
+                                if (nrr) {
+                                    console.log(nrr)
+                                } else {
+
+                                    resolve({
+                                        status: "already",
+                                        userData: data
+                                    })
+                                }
+                            })
+                        } else {
+                            console.log(err)
+                        }
+                    })
+                } else {
+                    reject("No Quanity Left")
+                }
             } else {
                 let cartItem = {
                     pid: ObjectId(productID),
@@ -273,7 +299,7 @@ module.exports = {
                             if (nrr) {
                                 console.log(nrr)
                             } else {
-                                
+
                                 console.log(data)
                                 resolve({
                                     status: "new",
@@ -326,7 +352,9 @@ module.exports = {
                         maxQuantity: "$newOne.Quantity",
                         discount: "$newOne.Discount",
                         OfferPrize: "$newOne.OfferPrize",
-                        total:{$multiply:["$cart.qty","$newOne.OfferPrize"]}
+                        total: {
+                            $multiply: ["$cart.qty", "$newOne.OfferPrize"]
+                        }
 
                     }
                 }
@@ -336,18 +364,24 @@ module.exports = {
         })
     },
 
-    deleteCartItem:(uid,proId)=>{
-        return new Promise((resolve,reject)=>{
-         
-            User.updateOne({_id:uid},{
-                $pull:{cart:{pid:ObjectId(proId)}}
-            },(err,result)=>{
+    deleteCartItem: (uid, proId) => {
+        return new Promise((resolve, reject) => {
+
+            User.updateOne({
+                _id: uid
+            }, {
+                $pull: {
+                    cart: {
+                        pid: ObjectId(proId)
+                    }
+                }
+            }, (err, result) => {
                 resolve(true)
             })
         })
     },
-    changeQty:(user,prId,pqty)=>{
-        return new Promise((resolve, reject)=>{
+    changeQty: (user, prId, pqty) => {
+        return new Promise((resolve, reject) => {
             let updateQuery = {
                 $inc: {
                     "cart.$.qty": pqty
@@ -361,17 +395,17 @@ module.exports = {
                     }
                 }
             }, updateQuery, (err, updated) => {
-                if(err){
+                if (err) {
                     console.log(err)
-                }else{
+                } else {
                     User.findOne({
-                        _id:user
+                        _id: user
                     }, (nrr, data) => {
                         if (nrr) {
                             console.log(nrr)
                         } else {
 
-                             resolve(data)
+                            resolve(data)
                         }
                     })
                 }
@@ -379,166 +413,317 @@ module.exports = {
         })
     },
 
-    addingOrder:(id,billAddress,payment,savingAdd)=>{
-        return new Promise(async(resolve,reject)=>{
+    addingOrder: (id, billAddress, payment, savingAdd) => {
+        return new Promise(async (resolve, reject) => {
 
-            if(savingAdd){
-                User.findOneAndUpdate({_id:id},{$push:{
-                     address:billAddress
-                }},function(err,upresult){
-                    if(err){
+            if (savingAdd) {
+                User.findOneAndUpdate({
+                    _id: id
+                }, {
+                    $push: {
+                        address: billAddress
+                    }
+                }, function (err, upresult) {
+                    if (err) {
                         console.log(err)
-                    }else{
+                    } else {
                         console.log(upresult)
                     }
                 })
             }
 
             let data = await User.aggregate([{
-                $match: {
-                    _id: ObjectId(id)
-                }
-            }, {
-                $unwind: "$cart"
-            },
-            {
-                $lookup: {
-                    from: "products",
-                    localField: "cart.pid",
-                    foreignField: "_id",
-                    as: "newOne"
-                }
-            },
-            {
-                $project: {
-                    cart: 1,
-                    newOne: 1
-                }
-            },
-            {
-                $unwind: "$newOne"
-            },
-            {
-                $project: {
-                    userId: "$_id",
-                    _id: 0,
-                    pId: "$newOne._id",
-                    qty: "$cart.qty",
-                    pName: "$newOne.Name",
-                    Ptype: "$newOne.Type",
-                    prize: "$newOne.Prize",
-                    color: "$newOne.Color",
-                    size: "$newOne.Size",
-                    maxQuantity: "$newOne.Quantity",
-                    discount: "$newOne.Discount",
-                    OfferPrize: "$newOne.OfferPrize",
-                    total:{$multiply:["$cart.qty","$newOne.OfferPrize"]}
+                    $match: {
+                        _id: ObjectId(id)
+                    }
+                }, {
+                    $unwind: "$cart"
+                },
+                {
+                    $lookup: {
+                        from: "products",
+                        localField: "cart.pid",
+                        foreignField: "_id",
+                        as: "newOne"
+                    }
+                },
+                {
+                    $project: {
+                        cart: 1,
+                        newOne: 1
+                    }
+                },
+                {
+                    $unwind: "$newOne"
+                },
+                {
+                    $project: {
+                        userId: "$_id",
+                        _id: 0,
+                        pId: "$newOne._id",
+                        qty: "$cart.qty",
+                        pName: "$newOne.Name",
+                        Ptype: "$newOne.Type",
+                        prize: "$newOne.Prize",
+                        color: "$newOne.Color",
+                        size: "$newOne.Size",
+                        maxQuantity: "$newOne.Quantity",
+                        discount: "$newOne.Discount",
+                        OfferPrize: "$newOne.OfferPrize",
+                        total: {
+                            $multiply: ["$cart.qty", "$newOne.OfferPrize"]
+                        }
 
+                    }
                 }
-            }
             ])
 
             // delete cart items;
-            User.findOneAndUpdate({_id:id},{$unset:{cart:""}},(err,dl)=>{
-                if(err){
+
+
+            User.findOneAndUpdate({
+                _id: id
+            }, {
+                $unset: {
+                    cart: ""
+                }
+            }, (err, dl) => {
+                if (err) {
                     console.log(err)
 
-                }else{
+                } else {
                     console.log(dl)
                 }
             })
 
-
-
-
-            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            let delivery = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString("en-US", options);       
+            var options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            let delivery = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString("en-US", options);
             var today = new Date().toLocaleString("en-US", options)
-            let cartDat=[]
-            let orderTotal=0;
+            let cartDat = []
+            let orderTotal = 0;
+            //  cartDuplicateforRemoveProduct
+            let cartDuplicate = [];
 
-            data.forEach((items)=>{
-                let pdata ={
-                    pid:items.pId,
-                    qty:items.qty,
-                    productname:items.pName,
-                    pType:items.Ptype,
-                    prize:items.prize,
-                    total:items.total,
-                    status:'Orderd',
-                    orderDate:today,
-                    shipDate:"",
-                    expDelivery:delivery,
-                    DeliveredDate:""
+            data.forEach((items) => {
+                let pdata = {
+                    pid: items.pId,
+                    qty: items.qty,
+                    productname: items.pName,
+                    pType: items.Ptype,
+                    prize: items.prize,
+                    total: items.total,
+                    status: 'PLACED',
+                    orderDate: today,
+                    shipDate: "",
+                    expDelivery: delivery,
+                    DeliveredDate: ""
 
                 }
-                orderTotal=orderTotal+parseInt(items.total);
+                let realqty = (items.maxQuantity - items.qty);
+                if (realqty >= 0) {
+                    realqty = realqty
+                } else {
+                    realqty = 0;
+                }
+                let cartDup = {
+                    product: items.pId,
+                    newQty: realqty
+                }
+                cartDuplicate.push(cartDup)
+                orderTotal = orderTotal + parseInt(items.total);
                 cartDat.push(pdata)
             })
-           
-            let shipCharge;
-            if(orderTotal < 3000){
-                shipCharge=120;
-            }else{
-                shipCharge =0
-            }
-            
-           
-            let order = new Order({
-                userId :ObjectId(id),
-                products:cartDat,
-                address:billAddress,
-                payment:payment,
-                totalOfOrder:Number(orderTotal),
-                placedDated:today,
-                shippingCharg:shipCharge
+
+            cartDuplicate.forEach((pdata) => {
+                productDB.productQtyChange(pdata).then((updatedQty) => {
+                    console.log(updatedQty)
+                })
             })
-           
-            order.save((err,room)=>{
-                if(err){
+
+
+
+            let shipCharge;
+            if (orderTotal < 3000) {
+                shipCharge = 120;
+            } else {
+                shipCharge = 0
+            }
+
+
+            // reomve product quantity by order
+
+            let order = new Order({
+                userId: ObjectId(id),
+                products: cartDat,
+                address: billAddress,
+                payment: payment,
+                totalOfOrder: Number(orderTotal),
+                placedDated: today,
+                shippingCharg: shipCharge
+            })
+
+            order.save((err, room) => {
+                if (err) {
                     reject(err)
-                }else{
+                } else {
                     resolve(room)
                 }
             })
 
-             
-            
+
+
         })
     },
-    getAddress:(uid,addname)=>{
-        
-        return new Promise(async(resolve, reject )=>{
-            console.log(uid,addname)
-             let data ;
-             await  User.findOne({_id:uid},(err,result)=>{
-                if(err){
+    getAddress: (uid, addname) => {
+        return new Promise(async (resolve, reject) => {
+
+            let data;
+            await User.findOne({
+                _id: uid
+            }, (err, result) => {
+                if (err) {
                     reject(err)
-                }else{
-                  data= result
+                } else {
+                    data = result
                 }
-            
+
             })
-            let address ;
-            console.log(data)
-            data.address.forEach((itm)=>{
-                if(itm.AddressName==addname){
-                    address= itm
+            let address;
+
+            data.address.forEach((itm) => {
+                if (itm.AddressName == addname) {
+                    address = itm
                 }
             })
-           
+
             resolve(address)
         })
     },
-    getAllOrders:()=>{
-        return new Promise((resolve, reject)=>{
-            Order.find({},(err,re)=>{
-                if(!err){
+    getAllOrders: () => {
+        return new Promise((resolve, reject) => {
+            Order.find({}, (err, re) => {
+                if (!err) {
                     resolve(re)
-                }else{
+                } else {
                     reject(err)
                 }
             }).lean()
+        })
+    },
+    changeOrderStatus: (oid, productID, st) => {
+        return new Promise((resolve, reject) => {
+
+            console.log(oid, productID)
+            console.log(st)
+            Order.updateOne({
+                _id: ObjectId(oid),
+                products: {
+                    $elemMatch: {
+                        pid: ObjectId(productID)
+                    }
+                }
+            }, {
+                $set: {
+                    'products.$.status': st
+                }
+            }, (err, result) => {
+                resolve(result)
+            })
+        })
+    },
+    getUserOrder: (uid) => {
+        return new Promise((resolve, reject) => {
+            Order.find({
+                userId: ObjectId(uid)
+            }, (err, result) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    resolve(result)
+                }
+            }).lean()
+        })
+    },
+    addAddressToUser: (uid, address,ogName) => {
+        return new Promise((resolve, reject) => {
+       
+            User.updateOne({
+                _id: ObjectId(uid),
+                address: {
+                    $elemMatch: {
+                        AddressName: ogName
+                    }
+                }
+            }, {
+                $set: {
+
+                    'address.$.AddressName': address.AddressName,
+                    'address.$.FirstName': address.FirstName,
+                    'address.$.LastName': address.LastName,
+                    'address.$.HouseNo': address.HouseNo,
+                    'address.$.Address': address.Address,
+                    'address.$.Town': address.Town,
+                    'address.$.State': address.State,
+                    'address.$.Pincode': address.Pincode,
+                    'address.$.Phone': address.Phone,
+
+
+
+                }
+            }, (err, result) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    resolve(result)
+                }
+            })
+        })
+    },
+    deleteAddress:(uid,addname)=>{
+        return new Promise((resolve, reject)=>{
+            User.updateOne({
+                _id: uid
+            }, {
+                $pull: {
+                    address: {
+                        AddressName: addname
+                    }
+                }
+            }, (err, result) => {
+                resolve(true)
+            })
+        })
+      
+    },
+    updateUserDetail:(uid, updateData)=>{
+        return new Promise(async(resolve,reject)=>{
+            let data  = await User.find( { $or: [ {email:updateData.email },{phone:updateData.phone}]})
+            let flag = false
+            if(data.length ==1){
+                if(data._id== uid){
+                    flag = true;
+
+                }else{
+                    flag = false;
+                    reject("Email or Phone Number Already existed")
+                }
+           }else{
+
+                flag = false    
+                reject("Email or Phone Number Already Exist")
+           }
+
+           if(flag){
+               User.updateOne({_id:ObjectId(uid)},{$set:{updateData}},(err,result)=>{
+                   console.log(result)
+                   resolve(true)
+               })
+           }
         })
     }
 }

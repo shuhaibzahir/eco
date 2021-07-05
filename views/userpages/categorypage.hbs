@@ -51,16 +51,16 @@
                                     <ins>₹ {{ OfferPrize}}</ins>
                                     <del>₹ {{Prize}}</del>
                                 </span>
-                                  <form id="{{_id}}" method="post">
+                                   
 
                                     {{#ifEqual Quantity 0}}
                                     <a class="button button-add-cart" data-quantity="1" style="background: red;">Out Of
                                         Stock</a>
                                     {{else}}
-                                    <input name="productID" value="{{_id}}" hidden>
-                                    <input class="button button-add-cart" onclick="addingCart('{{_id}}')" type="submit" value="Add to Cart">
+                                     
+                                    <button class="button button-add-cart" onclick="addingCart('{{_id}}')">Add to Cart</button>
                                     {{/ifEqual}}
-                                </form>
+                                
 
                             </div>
                         </div>

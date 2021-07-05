@@ -19,6 +19,7 @@ router.get('/', function (req, res, next) {
     res.redirect("/admin/dashboard")
   } else {
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+ 
     res.render("admin/adminlogin", {
       layout: "adminLayout"
     })
@@ -55,6 +56,7 @@ router.post('/login', (req, res) => {
 
 // ..........Admin Dashboard..................................
 router.get("/dashboard", auth, (req, res) => {
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   res.render("admin/dashboard", {
     layout: "adminLayout",
     adminStatus: true,
@@ -83,6 +85,7 @@ router.get("/add-product", auth, (req, res) => {
       }
     });
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+
     res.render("admin/addproduct", {
       layout: "adminLayout",
       adminStatus: true,
@@ -198,12 +201,13 @@ router.get("/edit-product/:topic",(req,res)=>{
       let types = [];
       let brands=[];
     productDB.categorOnly().then((allgroupedCat)=>{
+
       console.log(allgroupedCat)
       let [filterdCat,brandsOfP,typesOfP]=allgroupedCat
       categories.push(...filterdCat)
       types.push(...typesOfP)
       brands.push(...brandsOfP)
-       
+       res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
       res.render("admin/editproduct",{layout: "adminLayout",
       adminStatus: true,
       pDetails:result,
@@ -316,7 +320,7 @@ router.get("/user-data", auth, (req, res) => {
 // ................user-data get method end.......................
 
 // ................user-data change status.......................
-router.post("/user/change-status", (req, res) => {
+router.post("/user/change-status", auth,(req, res) => {
   console.log(req.body)
   console.log(req.body)
   userDB.changeStatus(req.body).then((data) => {
@@ -331,7 +335,7 @@ router.post("/user/change-status", (req, res) => {
 // ................user-data get change status end.......................
 
 // .............category section....................
-router.get("/cat-manage", (req, res) => {
+router.get("/cat-manage",auth, (req, res) => {
   productDB.categoryFetching().then((dat) => {
     let clothes;
     let watches;
@@ -348,6 +352,7 @@ router.get("/cat-manage", (req, res) => {
         console.log(item)
       }
     });
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.render("admin/catmanagement", {
       layout: "adminLayout",
       adminStatus: true,
@@ -364,7 +369,7 @@ router.get("/cat-manage", (req, res) => {
 
 
 // .............category main catgory start....................
-router.post("/main-section", (req, res) => {
+router.post("/main-section", auth,(req, res) => {
   let sectionCatst = {}
   let section = req.body.section
   section = section.toUpperCase()
@@ -386,7 +391,7 @@ router.post("/main-section", (req, res) => {
 
 
 // .................sub cat adding ............................
-router.post("/add-subcat", (req, res) => {
+router.post("/add-subcat",auth, (req, res) => {
 
   let nameOfPropery = req.body.name.toUpperCase()
   let subCatStatus = {}
@@ -409,7 +414,7 @@ router.post("/add-subcat", (req, res) => {
 
 // .........delete sub category ....................
 
-router.get("/del-cat/:section/:options/:item", (req, res) => {
+router.get("/del-cat/:section/:options/:item",auth, (req, res) => {
  
   let section = req.params.section.toUpperCase()
   let item = req.params.item.toUpperCase() 
@@ -429,9 +434,9 @@ router.get("/del-cat/:section/:options/:item", (req, res) => {
 //....................delete sub end...................
 
 // ..........banner section .............
-router.get("/add/home-banner",(req,res)=>{
+router.get("/add/home-banner",auth,(req,res)=>{
   productDB.getAllBanner().then((ban)=>{
-    console.log(ban)
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.render("admin/homeBanner",{layout: "adminLayout",
   adminStatus: true,
     banner:ban,
@@ -442,7 +447,7 @@ router.get("/add/home-banner",(req,res)=>{
   
 })
 
-router.post("/add/home-banner",(req,res)=>{
+router.post("/add/home-banner",auth,(req,res)=>{
      productDB.addBanner(req.body).then((result)=>{
       let image1 = req.body.image1_b64;
       const path1 = `./public/banners/${result._id}-001.jpg`;
@@ -454,7 +459,7 @@ router.post("/add/home-banner",(req,res)=>{
    })
 })
 
-router.get("/delete/banner/:id",(req,res)=>{
+router.get("/delete/banner/:id",auth,(req,res)=>{
   let banId = req.params.id
   console.log(banId)
   productDB.delteBanner(banId).then((result)=>{
@@ -474,6 +479,7 @@ router.get("/add/special-banner",(req,res)=>{
     brand.push(...dataFetched[1])
     type.push(...dataFetched[2])
   productDB.getAllSpecialBanner().then((spBanner)=>{
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.render("admin/specialOffer",{layout: "adminLayout",
     adminStatus: true,brand,type,bannerData:spBanner})
   }).catch((err)=>{
@@ -486,7 +492,7 @@ router.get("/add/special-banner",(req,res)=>{
   
 })
 
-router.post("/add/special-banner",(req,res)=>{
+router.post("/add/special-banner",auth,(req,res)=>{
   productDB.addSpecialBrand(req.body).then((savedData)=>{
     let image1 = req.body.image1_b64;
       const path1 = `./public/spbanner/${savedData._id}-001.jpg`;
@@ -499,7 +505,7 @@ router.post("/add/special-banner",(req,res)=>{
 })
 
 
-router.get("/delete/sp-banner/:id",(req,res)=>{
+router.get("/delete/sp-banner/:id",auth,(req,res)=>{
   let spBannerId = req.params.id
   productDB.deleteSpBanner(spBannerId).then((result)=>{
     fs.unlink("./public/spbanner/" +spBannerId + "-001.jpg",(err)=> {if(err){console.log(err)}})
@@ -508,19 +514,26 @@ router.get("/delete/sp-banner/:id",(req,res)=>{
 })
 
 // .................order managent........................
-router.get("/order-manage",(req,res)=>{
+router.get("/order-manage",auth,(req,res)=>{
   userDB.getAllOrders().then((result)=>{
     let orderData = result
     console.log(orderData)
     console.log(orderData[0].products)
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.render("admin/orderDetails",{layout: "adminLayout",
     adminStatus: true,orderData})
   })
  
 })
 
-router.post("/change/order/status",(req,res)=>{
-  console.log(req.body)
+router.post("/change/order/status",auth,(req,res)=>{
+  let orderId = req.body.oId;
+  let productId = req.body.proId;
+  let value = req.body.value;
+  console.log(orderId, productId, value)
+  userDB.changeOrderStatus(orderId,productId,value).then((result)=>{
+    res.json({status:true})
+  })
 })
 
 
