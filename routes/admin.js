@@ -20,9 +20,7 @@ router.get('/', function (req, res, next) {
   } else {
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
  
-    res.render("admin/adminlogin", {
-      layout: "adminLayout"
-    })
+    res.render("admin/loginpage",{layout: "adminLayout",})
   }
 
 });
@@ -88,6 +86,7 @@ router.get("/add-product", auth, (req, res) => {
 
     res.render("admin/addproduct", {
       layout: "adminLayout",
+      adminData: req.session.admin.details,
       adminStatus: true,
       clothes,
       watches,
@@ -209,6 +208,7 @@ router.get("/edit-product/:topic",(req,res)=>{
       brands.push(...brandsOfP)
        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
       res.render("admin/editproduct",{layout: "adminLayout",
+      adminData: req.session.admin.details,
       adminStatus: true,
       pDetails:result,
       categories,
@@ -354,7 +354,9 @@ router.get("/cat-manage",auth, (req, res) => {
     });
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.render("admin/catmanagement", {
+      
       layout: "adminLayout",
+      adminData: req.session.admin.details,
       adminStatus: true,
       types: dat,
       clothes,
@@ -438,6 +440,7 @@ router.get("/add/home-banner",auth,(req,res)=>{
   productDB.getAllBanner().then((ban)=>{
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.render("admin/homeBanner",{layout: "adminLayout",
+    adminData: req.session.admin.details,
   adminStatus: true,
     banner:ban,
 })
@@ -481,7 +484,7 @@ router.get("/add/special-banner",(req,res)=>{
   productDB.getAllSpecialBanner().then((spBanner)=>{
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.render("admin/specialOffer",{layout: "adminLayout",
-    adminStatus: true,brand,type,bannerData:spBanner})
+    adminStatus: true, adminData: req.session.admin.details,brand,type,bannerData:spBanner})
   }).catch((err)=>{
     console.log(err)
   })
@@ -517,11 +520,9 @@ router.get("/delete/sp-banner/:id",auth,(req,res)=>{
 router.get("/order-manage",auth,(req,res)=>{
   userDB.getAllOrders().then((result)=>{
     let orderData = result
-    console.log(orderData)
-    console.log(orderData[0].products)
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.render("admin/orderDetails",{layout: "adminLayout",
-    adminStatus: true,orderData})
+    adminStatus: true,orderData, adminData: req.session.admin.details,})
   })
  
 })
@@ -532,10 +533,41 @@ router.post("/change/order/status",auth,(req,res)=>{
   let value = req.body.value;
   console.log(orderId, productId, value)
   userDB.changeOrderStatus(orderId,productId,value).then((result)=>{
+    console.log(result)
     res.json({status:true})
   })
 })
 
+
+
+router.post("/cancel/order/",(req,res)=>{
+  let orderId = req.body.order;
+  let productId = req.body.product;
+  let userId = req.body.user;
+  userDB.cancelOrder(userId,orderId, productId).then((result)=>{
+     res.json({status:true})
+  }).catch((err)=>{
+    console.log(err)
+  })
+})
+
+router.get("/user/oderdetails/:topic",auth,(req,res)=>{
+  let user = req.params.topic;
+  userDB.getOneUser(user).then((userData)=>{
+    let userDetails = userData
+   
+    userDB.getUserOrder(user).then((result)=>{
+      let orderDetails = result;
+      console.log(userDetails)
+      console.log(orderDetails)
+      console.log(orderDetails[0].products[0] )
+      res.render("admin/userOrders",{layout: "adminLayout",adminStatus: true, adminData: req.session.admin.details,userDetails,orderDetails})
+    })
+  })
+ 
+})
+
+ 
 
 
 

@@ -4,10 +4,8 @@ var router = express.Router();
 const userDB = require("../helper/userdb")
 const client = require('twilio')(process.env.TWILIO_ID, process.env.TWILIO_TOKEN);
 const productDB = require("../helper/product");
-const { route } = require('./admin');
+ 
  const fs = require('fs');
-const { UserBindingContext } = require('twilio/lib/rest/chat/v2/service/user/userBinding');
-const { AuthCallsIpAccessControlListMappingContext } = require('twilio/lib/rest/api/v2010/account/sip/domain/authTypes/authCallsMapping/authCallsIpAccessControlListMapping');
  
 
 // check authentication
@@ -283,11 +281,13 @@ router.get("/product/view/:id",(req,res)=>{
          
         console.log("this id user id "+ uid)
         console.log("this is product Id "+ pid)
-    userDB.addToCart(uid,pid).then((result)=>{
+        userDB.addToCart(uid,pid).then((result)=>{
+            console.log(result)
         req.session.user.cart= result.userData.cart
         res.json({status:result.status})    
         
     }).catch((err)=>{
+        console.log("ha its coming here")
         res.json({status:"Noqty"})    
     })
     }else{
@@ -490,7 +490,7 @@ router.get("/myaccount",auth,(req,res)=>{
     userDB.getOneUser(req.session.user.uid).then((data)=>{
         let address = data.address;
         userDB.getUserOrder(req.session.user.uid).then((orders)=>{
-             
+             console.log(orders[0].products[0])
             res.render("userpages/userProfile",{userLayout:true,usernav:req.session.user,address,orders})
         })
 
@@ -510,10 +510,7 @@ router.post("/changeprofile",auth,(req,res)=>{
       res.redirect("/myaccount")
 })
 
-router.get("/address-manage",(req,res)=>{
-    
-})
-
+ 
 
 router.get("/change/address/:address",auth,(req,res)=>{
     let id = req.session.user.uid
@@ -573,6 +570,18 @@ router.post("/user/update/profile",(req,res)=>{
 })
 
 
+
+router.post("/user/order/cancel",auth,(req,res)=>{
+    let orderId = req.body.order;
+    let productId = req.body.product;
+    let userId = req.session.user.uid;
+    userDB.cancelOrder(userId,orderId, productId).then((result)=>{
+       res.json({status:true})
+    }).catch((err)=>{
+      console.log(err)
+    })
+})
+ 
 
 //..............................profile end 
 router.get("/logout",(req,res)=>{

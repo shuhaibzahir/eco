@@ -1,0 +1,172 @@
+<div class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+
+            <div class="container ">
+                <div class="container text-center">
+                    <h1>{{userDetails.name}}</h1>
+
+                    <p>Email: <span>{{userDetails.email}}</span></p>
+                    <p>Phone: <span>{{userDetails.phone}}</span></p>
+                    <p>Status: <span>{{userDetails.status}}</span></p>
+                    <p>Sign Up Date: <span>{{userDetails.date}}</span></p>
+
+                </div>
+                <div class="row justify-content-center">
+                    <div class="">
+                        <div class="card">
+                            <div class="card-header card-header-tabs card-header-rose">
+                                <div class="nav-tabs-navigation">
+                                    <div class="nav-tabs-wrapper">
+                                        <span class="nav-tabs-title">Orders:</span>
+                                        <ul class="nav nav-tabs" data-tabs="tabs">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" href="#PLACED" data-toggle="tab">
+                                                    <i class="fas fa-shopping-cart"></i> PLACED
+                                                    <div class="ripple-container"></div>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#DELIVERED" data-toggle="tab">
+                                                    <i class="fas fa-truck"></i> DELIVERED
+                                                    <div class="ripple-container"></div>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#CANCELED" data-toggle="tab">
+                                                    <i class="fas fa-ban"></i> CANCELED
+                                                    <div class="ripple-container"></div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="PLACED">
+                                        <table class="table">
+                                            <tbody>
+                                                <thead>
+                                                    <th>Product Name</th>
+                                                    <th>Type</th>
+                                                    <th>Status</th>
+                                                    <th>Placed Date</th>
+                                                    <th>Quantity</th>
+                                                    <th>Total</th>
+                                                    <th>Pay Method</th>
+                                                </thead>
+                                                {{!-- HERE NEW PLACED ORDER --}}
+                                                {{#each orderDetails}}
+                                                {{#each products}}
+                                                {{#ifEqual status 'PLACED'}}
+                                                <tr>
+                                                    <td>{{productname}}</td>
+                                                    <td>{{pType}}</td>
+                                                    <td>{{status}}</td>
+                                                    <td>{{../placedDated}}</td>
+                                                     <td class="text-center">{{qty}}</td>
+                                                    <td> ₹ {{total}}</td>
+                                                    <td>{{../payment}}</td>
+                                                </tr>
+                                                {{else}}
+                                                {{#ifEqual status 'SHIPPED'}}
+                                                <tr>
+                                                    <td>{{productname}}</td>
+                                                    <td>{{pType}}</td>
+                                                    <td>{{status}}</td>
+                                                    <td>{{../placedDated}}</td>
+                                                    <td class="text-center">{{qty}}</td>
+                                                    <td> ₹ {{total}}</td>
+                                                    <td>{{../payment}}</td>
+                                                </tr>
+                                                {{/ifEqual}}
+                                                {{/ifEqual}}
+                                                {{/each}}
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane" id="DELIVERED">
+                                        <table class="table">
+                                            <tbody>
+
+                                                <thead>
+                                                    <th>Product Name</th>
+                                                    <th>Type</th>
+                                                    <th>Status</th>
+                                                    <th>Placed Date</th>
+                                                     <th>Quantity</th>
+                                                    <th>Total</th>
+                                                    <th>Pay Method</th>
+                                                </thead>
+
+
+
+                                                {{#each orderDetails}}
+                                                {{#each products}}
+                                                {{#ifEqual status 'DELIVERED'}}
+                                                <tr>
+                                                    <td>{{productname}}</td>
+                                                    <td>{{pType}}</td>
+                                                    <td>{{status}}</td>
+                                                    <td>{{../placedDated}}</td>
+                                                     <td class="text-center">{{qty}}</td>
+                                                    <td> ₹ {{total}}</td>
+                                                    <td>{{../payment}}</td>
+                                                </tr>
+
+
+                                                {{/ifEqual}}
+                                                {{/each}}
+                                                {{/each}}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane" id="CANCELED">
+                                        <table class="table">
+                                            <tbody>
+
+                                                <thead>
+                                                    <th>Product Name</th>
+                                                    <th>Type</th>
+                                                    <th>Status</th>
+                                                    <th>Placed Date</th>
+                                                     <th>Quantity</th>
+                                                    <th>Total</th>
+                                                    <th>Pay Method</th>
+                                                </thead>
+
+
+
+                                                {{#each orderDetails}}
+                                                {{#each products}}
+                                                {{#ifEqual status 'CANCEL'}}
+                                                <tr>
+                                                    <td>{{productname}}</td>
+                                                    <td>{{pType}}</td>
+                                                    <td>{{status}}</td>
+                                                    <td>{{../placedDated}}</td>
+                                                     <td class="text-center">{{qty}}</td>
+                                                    <td> ₹ {{total}}</td>
+                                                    <td>{{../payment}}</td>
+                                                </tr>
+
+
+                                                {{/ifEqual}}
+                                                {{/each}}
+                                                {{/each}}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

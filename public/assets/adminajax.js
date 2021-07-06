@@ -11,7 +11,7 @@ $("#admin-login").submit(function(event){
         success:function(d){ 
             console.log(d)
             if(d.status){
-                document.getElementById('admin-login').reset();
+                
                 window.location.href="/admin/dashboard"
             }else{
                 $("#admin-login-alert").html(d.msg)
@@ -126,11 +126,13 @@ $("#subCategory").submit(function(event){
 function  changeOStatus(orderId, pId,val){
     // let statusValue = $("#val"+pId).val()
     console.log(orderId, pId,val)
+    
     $.ajax({
         url: "/admin/change/order/status",
         type: "POST",
         data: {oId:orderId, proId:pId,value:val},
         success: function (result) {
+        
              if(result.status){
                 window.location.href="/admin/order-manage"
              }else{
@@ -141,4 +143,28 @@ function  changeOStatus(orderId, pId,val){
             console.log(err)
         }
     })
+}
+
+
+function cancelProduct(userid,oid , pid){
+    let confrm  = confirm('Are you sure you want to proceed?' );
+     
+        if(confrm){
+         $.ajax({
+             url:"/admin/cancel/order/",
+             type:'POST',
+             data:{user:userid,order:oid,product:pid},
+             success:function(result){
+                if(result){
+             
+                    window.location.href="/admin/order-manage"
+                }else{
+                    alert("some error occured")
+                }
+             },
+             error:function(err){
+                console.log(err)
+             }
+         })
+     }
 }

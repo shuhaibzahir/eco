@@ -4,7 +4,12 @@
 
 
 <style>
-   
+    body{
+        font-size: 18px;
+    }
+    p{
+        font-size: 16px;
+    }
     #progressbar {
         margin-bottom: 30px;
         overflow: hidden;
@@ -82,12 +87,16 @@
 
     #progressbar li.active:before,
     #progressbar li.active:after {
-        background: #4bb8a9
+        background: #0fb600
+    }
+     #progressbar li.cactive:before,
+    #progressbar li.cactive:after {
+        background: #c20000
     }
 
     .card {
         background-color: #fff;
-        box-shadow: 0px 0px 0px 0px rgb(105, 105, 105);
+        box-shadow: 0px 0px 3px 0px rgb(105, 105, 105);
         z-index: 0
     }
 
@@ -118,7 +127,7 @@
     <div class="row gutters">
         <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
             <div class="card h-100 ">
-                <div class="card-body" style="padding:50px; display:flex; justify-content:center; align-items:center">
+                <div class="card-body" style="padding:50px; display:flex; justify-content:center; align-items:start">
                     <div class="account-settings" style="align-items: center;">
                         <div class="user-profile">
                             <div class="user-avatar">
@@ -199,8 +208,8 @@
                                 <div class="text-right">
                                     <a id="edit" class="btn btn-secondary" onclick="clickEdit()"
                                         style="text-decoration:none; color:#ffff;">Edit</a>
-                                    <a id="cancel" class="btn btn-secondary" onclick="clickCancel()"
-                                        style="display: none;text-decoration:none; color:#ffff;">Cancel</a>
+                                    <a id="cancel" class="btn btn-secondary  " onclick="clickCancel()"
+                                        style="display: none;text-decoration:none;  color:#ffff;">Cancel</a>
                                     <button id="update" type="submit" id="submit" class="btn btn-primary"
                                         style="display: none;">Update</button>
                                 </div>
@@ -225,10 +234,10 @@
                             <h1>Address </h1>
                         </div>
                         {{#each address}}
-                        <div class="card" style="width: 18rem;">
+                        <div class="card" style="width: 25rem;">
                             <div class="card-body">
-                                <h5 class="card-title">{{AddressName}}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{HouseNo}}</h6>
+                                <h2 class="card-title">{{AddressName}}</h2>
+                                <h3 class="card-subtitle mb-2 text-muted">{{HouseNo}}</h3>
                                 <p class="card-text">{{Address}}<br>{{Town}},{{State}}<br>
                                     {{Pincode}},{{Phone}}
                                 </p>
@@ -269,13 +278,29 @@
                                           
                                             {{#ne status 'SHIPPED'}}
                                             {{#ne status 'DELIVERED'}}
-                                            <button class="btn btn-danger">Cancel</button>
+                                            {{#ne status 'CANCEL'}}
+                                            <button class="btn btn-danger" onclick="cancelProduct('{{../_id}}' ,'{{pid}}')" style="padding: 8px 20px; font-size:16px">Cancel</button>
+                                            {{/ne}}
                                             {{/ne}}
                                             {{/ne}}
                                         </div><img class="align-self-center img-fluid"
                                             src="/pimages/{{pid}}-001.jpg"  width="80px ">
                                     </div>
                                 </div>
+                                 {{#ifEqual status 'CANCEL'}}   
+                                     <div class="row px-3">
+                                    <div class="col">
+                                        <ul id="progressbar">
+                                            <li class="step0 cactive " id="step1">ORDERD</li>
+                                            <li class="step0 cactive text-center" id="step2"><i class="fas fa-ban"></i></li>
+                                            <li class="step0 cactive text-muted text-right" id="step3">CANCELED</li>
+                                        </ul>
+                                        <div style="padding: 10px;">
+                                            <a href="/view-cart" class="btn btn-success" style="padding: 10px 20px">Reorder</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                    {{else}}
                                 {{#ifEqual status 'PLACED'}}
                                 <div class="row px-3">
                                     <div class="col">
@@ -295,6 +320,7 @@
                                             <li class="step0 active text-center" id="step2">SHIPPED</li>
                                             <li class="step0 text-muted text-right" id="step3">DELIVERED</li>
                                         </ul>
+                                         
                                     </div>
                                 </div>
                                 {{else}}
@@ -310,6 +336,7 @@
                                 </div>
                                {{/ifEqual}}
                                    {{/ifEqual}}
+                                 {{/ifEqual}}
                                  {{/ifEqual}}
                             </div>
                         </div>

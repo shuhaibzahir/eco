@@ -6,6 +6,30 @@
   #datatables>thead>tr>th[class*="sort"]::after {
     display: none
   }
+  .canceled > td{
+    background-color: #DA0037;
+    color: #ffff;
+ 
+  }
+  .canceled > td > a{
+    text-decoration-color: none;
+      color: #ffff;
+ 
+  }
+  .delivered > td{
+      background-color: #66DE93;
+  }
+  .delivered > td > a{ 
+      text-decoration-color: none;
+      color: rgb(27, 27, 27);
+  }
+   td > select > option{ 
+    margin: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  }
+
 </style>
 
 <div class="content">
@@ -123,9 +147,10 @@
 
                   {{#each orderData}}
                   {{#each products}}
-                  <tr>
+
+                  <tr id="table_row{{pid}}"  class=" {{#ifEqual status 'CANCEL'}}canceled  {{else}} {{#ifEqual status 'DELIVERED'}}delivered{{/ifEqual}} {{/ifEqual}}">
                     <td>{{../_id}}</td>
-                    <td><a href="">{{../userId}}</a></td>
+                    <td><a href="/admin/user/oderdetails/{{../userId}}">{{../userId}}</a></td>
                     <td>{{productname}}</td>
                     <td>{{pType}}</td>
                     <td>{{qty}}</td>
@@ -137,8 +162,9 @@
                     <td>
                       
                         <select class="custom-select" data-size="7"
-                          data-style="btn btn-dark"  onchange="changeOStatus('{{../_id}}','{{pid}}',this.value)" name="status"  {{#ifEqual status 'DELIVERED'}} disabled {{/ifEqual}}  >
+                          data-style="btn btn-dark" id="statusoption{{pid}}"  onchange="changeOStatus( '{{../_id}}','{{pid}}',this.value)" name="status"  {{#ifEqual status 'DELIVERED' }}disabled {{else}} {{#ifEqual status 'CANCEL' }}disabled {{/ifEqual}} {{/ifEqual}}  >
                          <option value="{{status}}"  selected disabled>{{status}} </option>
+                         <option value="PLACED" >PLACED</option>
                          <option value="SHIPPED" >SHIPPED</option>
                          <option value="DELIVERED" >DELIVERED </option>
 
@@ -146,7 +172,7 @@
                       
                     </td>
 
-                    <td><p class=" btn {{#ne status 'DELIVERED'}} btn-danger{{else}}btn-dark{{/ne}}" style="cursor: pointer;  " {{#ne status 'DELIVERED'}}onclick="return confirm('Are you sure you want to proceed?' ); cancelProduct('{{../_id}}','{{pid}}')"{{/ne}} >Cancel</p>
+                    <td><p class=" btn {{#ifEqual status 'DELIVERED' }} btn-dark{{else}} {{#ifEqual status 'CANCEL' }} btn-dark {{else}}btn-danger{{/ifEqual}}{{/ifEqual}}" style="cursor: pointer;  " {{#ifEqual status 'DELIVERED'}}onclick="" {{else}} {{#ifEqual status 'CANCEL' }} onclick="" {{else}}onclick=" cancelProduct('{{../userId}}','{{../_id}}','{{pid}}')"{{/ifEqual}} {{/ifEqual}} >Cancel</p>
                        </td>
                   </tr>
                   {{/each}}

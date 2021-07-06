@@ -302,7 +302,17 @@ module.exports = {
             })
         })
     },
-
+    updteQuantity:(productid,qty)=>{
+        return new Promise((resolve,reject)=>{
+            Product.updateOne({_id:ObjectId(productid)},{$inc:{Quantity:qty}},(err,updateQty)=>{
+                if(err){
+                    console.log(err)
+                }else{
+                    resolve(updateQty)
+                }
+            })
+        })
+    },
     // ...............Edit product end........
 
     // ...............Delete Product............  

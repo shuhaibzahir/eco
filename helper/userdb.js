@@ -144,7 +144,7 @@ module.exports = {
                 } else {
                     console.log(err)
                 }
-            })
+            }).lean()
         })
     },
     getAllUsers: () => {
@@ -227,9 +227,10 @@ module.exports = {
                 orginalQty = orginal.Quantity
             })
             console.log("this is orgianl quantity", orginalQty)
-
-
+            
+            console.log(userCart)
             if (userCart) {
+                console.log("is enter here")
                 let flag = false
                 // checking quantity
                 userCart.cart.forEach((item) => {
@@ -276,14 +277,16 @@ module.exports = {
                         }
                     })
                 } else {
+                    console.log("no quantity left")
                     reject("No Quanity Left")
                 }
             } else {
+                console.log("hah its ordering ")
                 let cartItem = {
                     pid: ObjectId(productID),
                     qty: 1
                 }
-                User.findOneAndUpdate({
+                User.updateOne({
                     _id: id
                 }, {
                     $push: {
@@ -291,6 +294,7 @@ module.exports = {
                     }
                 }, function (err, result) {
                     if (err) {
+                        console.log(err)
                         reject(err)
                     } else {
                         User.findOne({
@@ -618,8 +622,6 @@ module.exports = {
     changeOrderStatus: (oid, productID, st) => {
         return new Promise((resolve, reject) => {
 
-            console.log(oid, productID)
-            console.log(st)
             Order.updateOne({
                 _id: ObjectId(oid),
                 products: {
@@ -636,6 +638,7 @@ module.exports = {
             })
         })
     },
+
     getUserOrder: (uid) => {
         return new Promise((resolve, reject) => {
             Order.find({
@@ -724,6 +727,85 @@ module.exports = {
                    resolve(true)
                })
            }
+        })
+    },
+    cancelOrder:(userId,orderId, productId)=>{
+        return new Promise(async(resolve,reject)=>{
+            console.log(orderId, productId)
+            let orderData = await Order.findOne({_id:ObjectId(orderId),products:{$elemMatch:{pid:ObjectId(productId)}}})
+            console.log(orderData)
+            let cartItem = {
+                pid: ObjectId(orderData.products[0].pid),
+                qty: orderData.products[0].qty
+            }
+
+            let userCart = await User.findOne({
+                $and: [{
+                    _id: ObjectId(userId)
+                }, {
+                    cart: {
+                        $elemMatch: {
+                            pid:ObjectId(orderData.products[0].pid)
+                        }
+                    }
+                }]
+            })
+
+            if(userCart){
+                let updateQuery = {
+                    $inc: {
+                        "cart.$.qty": cartItem.qty
+                    }
+                }
+                User.updateOne({
+                    _id: ObjectId(userId),
+                    cart: {
+                        $elemMatch: {
+                            pid: ObjectId(productId)
+                        }
+                    }
+                }, updateQuery, (err, updated) => {
+                    if(err){
+                        console.log(err)
+                    }else{
+                        console.log(updated)
+                    }
+                })
+            }else{
+                User.updateOne({_id: ObjectId(userId)},{$push:{cart:cartItem}},(err,added)=>{
+                    if(err){
+                        console.log(err)
+                    }else{
+                        console.log(added)
+                    }
+                })
+            }
+            
+
+
+            // update quantity in product inventory 
+             productDB.updteQuantity(productId,cartItem.qty).then((updqty)=>{
+                console.log(updqty)
+             })
+            // change status of order 
+           
+            let st= 'CANCEL'
+             Order.updateOne({
+                    _id: ObjectId(orderId),
+                    products: {
+                        $elemMatch: {
+                            pid: ObjectId(productId)
+                        }
+                    }
+                }, {
+                    $set: {
+                        'products.$.status': st
+                    }
+                }, (err, updateOrderst) => {
+                    resolve(true)
+                })
+            
+               
         })
     }
 }

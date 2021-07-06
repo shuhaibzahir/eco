@@ -217,7 +217,7 @@ function changeQty(qty,id,max){
                      }else{
                         let gdTotal = newSubTotal +120 ;
                         $("#grandTotal").html(gdTotal)
-                        $('#shipping').html('<i class="fas fa-shipping-fast"></i>  Shipping Charge ₹ 50').css("color","red")
+                        $('#shipping').html('<i class="fas fa-shipping-fast"></i>  Shipping Charge ₹ 120').css("color","red")
                      }
 
                  }else{
@@ -321,3 +321,28 @@ $("#userProfile").submit(function (event) {
         }
     })
 })
+
+// order cancel
+
+function cancelProduct(oid , pid){
+    let confrm  = confirm('Are you sure you want to proceed?' );
+     
+        if(confrm){
+         $.ajax({
+             url:"/user/order/cancel",
+             type:'POST',
+             data:{order:oid,product:pid},
+             success:function(result){
+                if(result){
+             
+                    window.location.href="/myaccount"
+                }else{
+                    alert("some error occured")
+                }
+             },
+             error:function(err){
+                console.log(err)
+             }
+         })
+     }
+}
