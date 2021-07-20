@@ -24,7 +24,7 @@
                                 Keep the details correct !
                             </p>
                         </div>
-          
+
                         <div class="card-body">
                             <div class="col-12">
                                 <div class="card ">
@@ -39,18 +39,22 @@
                                                 <div class="form-group col-md-6"> <label
                                                         class="bmd-label-floating">Product Name</label>
                                                     <div class="form-group"> <input type="text" class="form-control"
-                                                            placeholder="Enter Product Name" name="name" value="{{pDetails.Name}}" required>
+                                                            placeholder="Enter Product Name" name="name"
+                                                            value="{{pDetails.Name}}" required>
                                                     </div>
                                                 </div>
-                                                <input type="text" name="productID" id="" value="{{pDetails._id}}" hidden>
+                                                <input type="text" name="productID" id="" value="{{pDetails._id}}"
+                                                    hidden>
                                                 <div class="form-group col-md-6"> <label
                                                         class="bmd-label-floating">Select Product Type </label>
                                                     <div class="form-group "> <select class="selectpicker" data-size="7"
                                                             data-style="btn btn-success btn-round" title="Select Type"
                                                             name="product_type" required>
-                                                            <option value="{{pDetails.Type}}" selected> > {{pDetails.Type}}</option>
-                                                             {{#each types as |typeofProduct|}}
-                                                              <option value="{{typeofProduct}}" >{{typeofProduct}}  </option>
+                                                            <option value="{{pDetails.Type}}" selected> >
+                                                                {{pDetails.Type}}</option>
+                                                            {{#each types as |typeofProduct|}}
+                                                            <option value="{{typeofProduct}}">{{typeofProduct}}
+                                                            </option>
                                                             {{/each}}
                                                         </select>
                                                     </div>
@@ -62,12 +66,14 @@
                                                 <div class="col-md-4">
                                                     <label class="bmd-label-floating">Brand Name</label>
                                                     <div class="form-group">
-                                                        <select class="selectpicker" data-size="7"
+                                                        <select class="selectpicker col-12" data-size="7"
                                                             data-style="btn btn-success btn-round" title="Single Select"
                                                             name="brand" required>
-                                                             <option value="{{pDetails.Brand}}" selected> > {{pDetails.Brand}}</option>
+                                                            <option value="{{pDetails.Brand}}" selected> >
+                                                                {{pDetails.Brand}}</option>
                                                             {{#each brands as |brandOfProduct|}}
-                                                            <option value="{{brandOfProduct}}">{{brandOfProduct}}</option>
+                                                            <option value="{{brandOfProduct}}">{{brandOfProduct}}
+                                                            </option>
                                                             {{/each }}
 
                                                         </select>
@@ -77,17 +83,19 @@
                                                     <label class="bmd-label-floating">Prize</label>
                                                     <div class="form-group">
                                                         <input type="number" step="0.01" class="form-control"
-                                                            placeholder="Enter Product Prize" name="prize" value="{{pDetails.Prize}}" required>
+                                                            placeholder="Enter Product Prize" name="prize"
+                                                            value="{{pDetails.Prize}}" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-4" style="padding-left:0px; ">
                                                     <label class="bmd-label-floating">Department</label>
-                                                    <div class="form-group">
-                                                        <select class="selectpicker" data-size="7"
+                                                    <div class="form-group ">
+                                                        <select class="selectpicker col-12" data-size="7"
                                                             data-style="btn btn-success btn-round" title="Single Select"
                                                             name="department" required>
-                                                          
-                                                             <option  selected value="{{pDetails.Department}}"> > {{pDetails.Department}}</option>
+
+                                                            <option selected value="{{pDetails.Department}}"> >
+                                                                {{pDetails.Department}}</option>
                                                             <option value="Women">Women's</option>
                                                             <option value="Men">Men's</option>
                                                             <option value="Kid">Kid's</option>
@@ -101,10 +109,10 @@
                                                 <div class="col-md-4">
                                                     <label class="bmd-label-floating">Category</label>
                                                     <div class="form-group">
-                                                        <select class="selectpicker" data-size="7"
+                                                        <select class="selectpicker col-12" data-size="7"
                                                             data-style="btn btn-success btn-round" title="Single Select"
                                                             name="category" required>
-                                                             <option value="{{pDetails.Category}}" selected> > {{pDetails.Category}}</option>
+                                                            <option value="{{pDetails.Category}}" selected> > {{pDetails.Category}}</option>
                                                             {{#each categories as |catOfProduct|}}
                                                             <option value="{{catOfProduct}}">{{catOfProduct}}
                                                             </option>
@@ -116,16 +124,18 @@
                                                     <label class="bmd-label-floating">Color</label>
                                                     <div class="form-group">
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter Product Color" name="color" value="{{pDetails.Color}}" required>
+                                                            placeholder="Enter Product Color" name="color"
+                                                            value="{{pDetails.Color}}" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label class="bmd-label-floating">Select Size</label>
                                                     <div class="form-group">
-                                                        <select class="selectpicker" data-size="7"
-                                                            data-style="btn btn-success btn-round" name="size" title="Single Select"
-                                                             required>
-                                                          <option value="{{pDetails.Size}}" selected> > {{pDetails.Size}}</option>
+                                                        <select class="selectpicker col-12" data-size="7"
+                                                            data-style="btn btn-success btn-round" name="size"
+                                                            title="Single Select" required>
+                                                            <option value="{{pDetails.Size}}" selected> >
+                                                                {{pDetails.Size}}</option>
                                                             <option value="S">Small</option>
                                                             <option value="M">Medium</option>
                                                             <option value="L">Large</option>
@@ -142,7 +152,8 @@
                                                     <label class="bmd-label-floating">Quantity</label>
                                                     <div class="form-group">
                                                         <input type="number" min="0" class="form-control"
-                                                            placeholder="Product Quantity" name="quantity" value="{{pDetails.Quantity}}" required>
+                                                            placeholder="Product Quantity" name="quantity"
+                                                            value="{{pDetails.Quantity}}" required>
                                                     </div>
                                                 </div>
 
@@ -151,7 +162,7 @@
                                                     <div class="form-group">
                                                         <input type="number" step="0.01" class="form-control"
                                                             placeholder="Discount in Percentage" name="discount"
-                                                           value="{{pDetails.Discount}}" required>
+                                                            value="{{pDetails.Discount}}" required>
                                                     </div>
                                                 </div>
 
@@ -159,17 +170,19 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <h4 class="title">Tags</h4>
-                                                 
-                                                    <input type="text"  value= " {{#each pDetails.Tags as |tagsSet|}} {{tagsSet}},  {{/each}}" class="form-control tagsinput"
-                                                        data-role="tagsinput" data-color="info" name="tags" required>
-                                                   
+
+                                                    <input type="text"
+                                                        value=" {{#each pDetails.Tags as |tagsSet|}} {{tagsSet}},  {{/each}}"
+                                                        class="form-control tagsinput" data-role="tagsinput"
+                                                        data-color="info" name="tags" required>
+
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label class="bmd-label-floating">Selecte Mood</label>
                                                     <div class="form-group">
                                                         <select class="selectpicker" data-size="7"
-                                                            data-style="btn btn-success btn-round" title="Single Select"
-                                                            >
+                                                            data-style="btn btn-success btn-round" name="mood" title="Single Select"
+                                                            required >
                                                             <option value="{{pDetails.Mood}}" selected> > {{pDetails.Mood}}</option>
                                                             <option value="indoor">Indoor </option>
                                                             <option value="outdoor">Outdoor</option>
@@ -189,105 +202,101 @@
                                                 </div>
                                             </div>
                                             <div class="row justify-content-between" style="width:90%">
-                                                   {{!-- item 1 start --}}
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title"> Image 1</h4>
-                                                            <div class="fileinput fileinput-new text-center">
-                                                                <div class="fileinput-new thumbnail">
-                                                                    <img src="/pimages/{{pDetails._id}}-001.jpg"
-                                                                        id="chekPreview1" alt="...">
+                                                {{!-- item 1 start --}}
+                                                <div class="col-md-2 col-sm-2">
+                                                    <h4 class="title"> Image 1</h4>
+                                                    <div class="fileinput fileinput-new text-center">
+                                                        <div class="fileinput-new thumbnail">
+                                                            <img src="/pimages/{{pDetails._id}}-001.jpg"
+                                                                id="chekPreview1" alt="...">
 
-                                                                </div>
-                                                                <div>
-                                                                    <span class="btn btn-rose btn-round btn-file">
-                                                                        <span class="fileinput-new">Select image</span>
-                                                                        <input type="file" id="image1"
-                                                                            accept="image/gif, image/jpeg, image/png"
-                                                                             />
-                                                                        <textarea name="image1_b64" id="imageValue1"
-                                                                            cols="30" rows="10" hidden></textarea>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
                                                         </div>
-
-                                                        {{!-- item 1 end--}}
-
-
-
-                                                        {{!-- item 2 start --}}
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title"> Image 2</h4>
-                                                            <div class="fileinput fileinput-new text-center">
-                                                                <div class="fileinput-new thumbnail">
-                                                                    <img src="/pimages/{{pDetails._id}}-002.jpg"
-                                                                        id="chekPreview2" alt="...">
-
-                                                                </div>
-                                                                <div>
-                                                                    <span class="btn btn-rose btn-round btn-file">
-                                                                        <span class="fileinput-new">Select image</span>
-                                                                        <input type="file" id="image2"
-                                                                            accept="image/gif, image/jpeg, image/png"
-                                                                             />
-                                                                        <textarea name="image2_b64" id="imageValue2"
-                                                                            cols="30" rows="10" hidden></textarea>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
+                                                        <div>
+                                                            <span class="btn btn-rose btn-round btn-file">
+                                                                <span class="fileinput-new">Select image</span>
+                                                                <input type="file" id="image1"
+                                                                    accept="image/gif, image/jpeg, image/png" />
+                                                                <textarea name="image1_b64" id="imageValue1" cols="30"
+                                                                    rows="10" hidden></textarea>
+                                                            </span>
                                                         </div>
+                                                    </div>
+                                                </div>
 
-                                                        {{!-- item 2 end--}}
+                                                {{!-- item 1 end--}}
 
 
-                                                        {{!-- item 3 start --}}
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title"> Image 3</h4>
-                                                            <div class="fileinput fileinput-new text-center">
-                                                                <div class="fileinput-new thumbnail">
-                                                                    <img src="/pimages/{{pDetails._id}}-003.jpg"
-                                                                        id="chekPreview3" alt="...">
 
-                                                                </div>
-                                                                <div>
-                                                                    <span class="btn btn-rose btn-round btn-file">
-                                                                        <span class="fileinput-new">Select image</span>
-                                                                        <input type="file" id="image3"
-                                                                            accept="image/gif, image/jpeg, image/png"
-                                                                             />
-                                                                        <textarea name="image3_b64" id="imageValue3"
-                                                                            cols="30" rows="10" hidden></textarea>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
+                                                {{!-- item 2 start --}}
+                                                <div class="col-md-2 col-sm-2">
+                                                    <h4 class="title"> Image 2</h4>
+                                                    <div class="fileinput fileinput-new text-center">
+                                                        <div class="fileinput-new thumbnail">
+                                                            <img src="/pimages/{{pDetails._id}}-002.jpg"
+                                                                id="chekPreview2" alt="...">
+
                                                         </div>
-
-                                                        {{!-- item 3 end--}}
-
-
-                                                        {{!-- item 4 start --}}
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <h4 class="title"> Image 4</h4>
-                                                            <div class="fileinput fileinput-new text-center">
-                                                                <div class="fileinput-new thumbnail">
-                                                                    <img src="/pimages/{{pDetails._id}}-004.jpg"
-                                                                        id="chekPreview4" alt="...">
-
-                                                                </div>
-                                                                <div>
-                                                                    <span class="btn btn-rose btn-round btn-file">
-                                                                        <span class="fileinput-new">Select image</span>
-                                                                        <input type="file" id="image4"
-                                                                            accept="image/gif, image/jpeg, image/png"
-                                                                             />
-                                                                        <textarea name="image4_b64" id="imageValue4"
-                                                                            cols="30" rows="10" hidden></textarea>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
+                                                        <div>
+                                                            <span class="btn btn-rose btn-round btn-file">
+                                                                <span class="fileinput-new">Select image</span>
+                                                                <input type="file" id="image2"
+                                                                    accept="image/gif, image/jpeg, image/png" />
+                                                                <textarea name="image2_b64" id="imageValue2" cols="30"
+                                                                    rows="10" hidden></textarea>
+                                                            </span>
                                                         </div>
+                                                    </div>
+                                                </div>
 
-                                                        {{!-- item 4 end--}}
+                                                {{!-- item 2 end--}}
+
+
+                                                {{!-- item 3 start --}}
+                                                <div class="col-md-2 col-sm-2">
+                                                    <h4 class="title"> Image 3</h4>
+                                                    <div class="fileinput fileinput-new text-center">
+                                                        <div class="fileinput-new thumbnail">
+                                                            <img src="/pimages/{{pDetails._id}}-003.jpg"
+                                                                id="chekPreview3" alt="...">
+
+                                                        </div>
+                                                        <div>
+                                                            <span class="btn btn-rose btn-round btn-file">
+                                                                <span class="fileinput-new">Select image</span>
+                                                                <input type="file" id="image3"
+                                                                    accept="image/gif, image/jpeg, image/png" />
+                                                                <textarea name="image3_b64" id="imageValue3" cols="30"
+                                                                    rows="10" hidden></textarea>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {{!-- item 3 end--}}
+
+
+                                                {{!-- item 4 start --}}
+                                                <div class="col-md-2 col-sm-2">
+                                                    <h4 class="title"> Image 4</h4>
+                                                    <div class="fileinput fileinput-new text-center">
+                                                        <div class="fileinput-new thumbnail">
+                                                            <img src="/pimages/{{pDetails._id}}-004.jpg"
+                                                                id="chekPreview4" alt="...">
+
+                                                        </div>
+                                                        <div>
+                                                            <span class="btn btn-rose btn-round btn-file">
+                                                                <span class="fileinput-new">Select image</span>
+                                                                <input type="file" id="image4"
+                                                                    accept="image/gif, image/jpeg, image/png" />
+                                                                <textarea name="image4_b64" id="imageValue4" cols="30"
+                                                                    rows="10" hidden></textarea>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {{!-- item 4 end--}}
 
                                             </div>
                                     </div>
@@ -305,6 +314,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Modal 1-->
 <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -443,26 +453,43 @@
 
 
 <script>
-     $('document').ready(function () {
+    $('document').ready(function () {
         //modal1 and image 1
         var image1 = document.getElementById('sampleImage1');
         var modal1 = $('#modal1');
         var cropper1;
 
         $('#image1').change(function (event) {
-            var files = event.target.files;
 
-            var done = function (url) {
-                image1.src = url;
-                modal1.modal('show');
-            };
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
 
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function (event) {
-                    done(reader.result);
+                var files = event.target.files;
+
+                var done = function (url) {
+                    image1.src = url;
+                    modal1.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            } else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: "Invalid Image File",
+                    showConfirmButton: true,
+
+                }).then(()=>{
+                  
+                    this.value = null
+                })
             }
         });
 
@@ -503,19 +530,37 @@
         var cropper2;
 
         $('#image2').change(function (event) {
-            var files = event.target.files;
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
 
-            var done = function (url) {
-                image2.src = url;
-                modal2.modal('show');
-            };
 
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function (event) {
-                    done(reader.result);
+                var files = event.target.files;
+
+                var done = function (url) {
+                    image2.src = url;
+                    modal2.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+
+            } else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: "Invalid Image File",
+                    showConfirmButton: false,
+
+                }).then(()=>{
+                  
+                    this.value = null
+                })
             }
         });
 
@@ -557,19 +602,37 @@
         var cropper3;
 
         $('#image3').change(function (event) {
-            var files = event.target.files;
 
-            var done = function (url) {
-                image3.src = url;
-                modal3.modal('show');
-            };
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
 
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function (event) {
-                    done(reader.result);
+
+                var files = event.target.files;
+
+                var done = function (url) {
+                    image3.src = url;
+                    modal3.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            } else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: "Invalid Image File",
+                    showConfirmButton: false,
+
+                }).then(()=>{
+                  
+                    this.value = null
+                })
             }
         });
 
@@ -610,19 +673,35 @@
         var cropper4;
 
         $('#image4').change(function (event) {
-            var files = event.target.files;
 
-            var done = function (url) {
-                image4.src = url;
-                modal4.modal('show');
-            };
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
+                var files = event.target.files;
 
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function (event) {
-                    done(reader.result);
+                var done = function (url) {
+                    image4.src = url;
+                    modal4.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            } else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: "please Select Image",
+                    showConfirmButton: true,
+
+                }).then(()=>{
+                  
+                    this.value = null
+                })
             }
         });
 
@@ -656,5 +735,5 @@
             });
         });
 
-     });
+    });
 </script>

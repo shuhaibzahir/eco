@@ -1,3 +1,12 @@
+<style>
+    .discount{
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: red;
+    }
+</style>
+
 <div class="banner">
     <div class="banner-content">
         <img src="/images/mainbrands/catBanner.jpg" alt="">
@@ -6,50 +15,31 @@
 <div class="main-container left-slidebar">
     <div class="container">
         <div class="row">
-            <div class="main-content col-sm-8 col-md-9">
-                <div class="shop-top">
-                    <div class="shop-top-left">
-                        <div class="breadcrumbs">
-                            <a href="#">Home</a>
-                            <span>Categories Leftsidebar</span>
-                        </div>
-                    </div>
-                    <div class="shop-top-right">
-                        <span class="woocommerce-result-count">Showing 1-10 of 53 results</span>
-                        <div class="orderby-wapper">
-                            <select class="orderby">
-                                <option value="">SORT BY NEWNESS</option>
-                                <option value="">Short by price</option>
-                            </select>
-                        </div>
-                        <div class="show-grid-list">
-                            <span class="label-filter">VIEW:</span>
-                            <a class="show-grid active" href="#"><i class="fa fa-th"></i></a>
-                            <a class="show-list" href="#"><i class="fa fa-list"></i></a>
-                        </div>
-                    </div>
-                </div>
+            <div class="main-content col-sm-8 col-md-9" style="margin-top: 20px;">
+                 
                 <ul class="product-list-grid desktop-columns-3 tablet-columns-2 mobile-columns-1 row">
                     {{#each allProduct}}
 
                     <li class="product-item col-sm-6 col-md-4">
                         <div class="product-inner">
+                             
                             <div class="product-thumb has-back-image">
                                 <a href="/product/view/{{_id}}"><img src="/pimages/{{_id}}-001.jpg" alt=""></a>
                                 <a class="back-image" href="/product/view/{{_id}}"><img src="/pimages/{{_id}}-002.jpg"
-                                        alt=""></a>
-                                <div class="gorup-button">
-                                    <a href="#" class="wishlist"><i class="fa fa-heart"></i></a>
+                                 alt=""></a>
                                  
-                                    
-                                </div>
                             </div>
                             <div class="product-info">
                                 <h3 class="product-name"><a href="/product/view/{{_id}}">{{Name}}</a></h3>
                                 <span class="price">
 
-                                    <ins>₹ {{ OfferPrize}}</ins>
-                                    <del>₹ {{Prize}}</del>
+                                    <div style="padding-bottom: 5px;">
+                                        <span style=" font-weight:bold;">₹ {{OfferPrize}}</span>
+                                    </div>
+                                    <del style="color: red;">₹{{Prize}}</del>
+   
+                                    <span style="background: green; color:#ffff; padding:3px 5px;   font-weight:bold">{{Discount}}%</span>
+                                     
                                 </span>
                                    
 
@@ -69,11 +59,13 @@
                 </ul>
                 <div class="navigation">
                     <ul>
-                        <li><a href="#"><i class="fa fa-long-arrow-left"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="fa fa-long-arrow-right"></i></a></li>
+                        {{#if prevBtn}}
+                        <li><a  href="{{prevUrl}}"><i class="fa fa-long-arrow-left"></i></a></li>
+                       {{/if}}
+                      
+                        {{#if chekckButton}}
+                        <li><a   href="{{nexturl}}"><i class="fa fa-long-arrow-right"></i></a></li>
+                        {{/if}}
                     </ul>
                 </div>
             </div>
@@ -83,71 +75,48 @@
                 <div class="widget widget_product_categories">
                     <h2 class="widget-title">Categories</h2>
                     <ul class="product-categories">
-                        <li><a href="#">Sunglasses <span class="count">(100)</span></a></li>
-                        <li><a href="#">Watches<span class="count">(20)</span></a></li>
-                        <li class="current-cat"><a href="#">Jewelry<span class="count">(20)</span></a></li>
-                        <li><a href="#">Hats, Scraves & Gloves<span class="count">(20)</span></a></li>
-                        <li><a href="#">Underwear & Socks<span class="count">(20)</span></a></li>
-                        <li><a href="#">Grooming<span class="count">(20)</span></a></li>
-                        <li><a href="#">Belts<span class="count">(20)</span></a></li>
-                    </ul>
+                        <li><a href="/products/Category?filter=Casual">Casual </a></li>
+                        <li><a href="/products/Category?filter=Formal">Formal</a></li>
+                        <li class=""><a href="/products/Category?filter=Party wear">Partywear</a></li>
+                      </ul>
                 </div>
+                {{!-- current-cat class for active --}}
                 <!-- ./Product category -->
-                <!-- By color -->
+                <!-- By department -->
                 <div class="widget widget_layered_nav">
-                    <h2 class="widget-title">COLOUR</h2>
+                    <h2 class="widget-title">Department</h2>
                     <ul class="product-categories">
-                        <li><a href="#">White<span class="count">(20)</span></a></li>
-                        <li><a href="#">Black<span class="count">(20)</span></a></li>
-                        <li><a href="#">Blue<span class="count">(20)</span></a></li>
-                        <li><a href="#">Yellow<span class="count">(20)</span></a></li>
-                        <li><a href="#">Brown<span class="count">(20)</span></a></li>
-                        <li><a href="#">Red<span class="count">(20)</span></a></li>
-                        <li><a href="#">Teal<span class="count">(20)</span></a></li>
-
-                    </ul>
+                        <li><a href="/products/Department?filter=men">Men's</a></li>
+                         <li><a href="/products/Department?filter=women">Women's</a></li>
+                          <li><a href="/products/Department?filter=kid">Kid's</a></li>
+                 </ul>
                 </div>
-                <!-- ./By color -->
+                <!-- ./By department -->
                 <!-- Filter price -->
                 <div class="widget widget_price_filter">
                     <h2 class="widget-title">PRICES</h2>
                     <div class="price_slider_wrapper">
-                        <div class="amount-range-price">Price: $50 - $350</div>
-                        <div data-label-reasult="price:" data-min="0" data-max="500" data-unit="$"
-                            class="slider-range-price " data-value-min="50" data-value-max="350"></div>
-                        <button class="button">Filter</button>
+                        <div class="amount-range-price" >Price: ₹1000- ₹5000</div>
+                        <div id="price"  data-label-reasult="price:" data-min="50" data-max="10000" data-unit="₹"
+                            class="slider-range-price " data-value-min="" data-value-max="" ></div>
+                        <form action="/allproduct/price">
+                        <input type="number" name="start" id="start_price_input" hidden>
+                         <input type="number" name="end" id="end_price_input" hidden>
+                        <button class="button" onclick="gettingValues()">Filter</button>
+                        </form>
                     </div>
                 </div>
                 <!-- ./Filter price -->
                 <!-- By color -->
                 <div class="widget widget_layered_nav">
-                    <h2 class="widget-title">SIZE Option</h2>
+                    <h2 class="widget-title">SIZE mood</h2>
                     <ul class="product-categories">
-                        <li><a href="#">Very Small<span class="count">(20)</span></a></li>
-                        <li><a href="#">Small<span class="count">(20)</span></a></li>
-                        <li><a href="#">Medium<span class="count">(20)</span></a></li>
-                        <li><a href="#">Large<span class="count">(20)</span></a></li>
-                        <li><a href="#">Very Large<span class="count">(20)</span></a></li>
-
-                    </ul>
+                        <li><a href="/products/Mood?filter=indoor">Indoor </li>
+                        <li><a href="/products/Mood?filter=outdoor">Outdoor </li>
+                        </ul>
                 </div>
                 <!-- ./By color -->
-                <!-- Product tags -->
-                <div class="widget widget_product_tag_cloud">
-                    <h2 class="widget-title">POPULAR TAGS</h2>
-                    <div class="tagcloud">
-                        <a href="#">Cotton</a>
-                        <a href="#">Leggings</a>
-                        <a href="#">Men</a>
-                        <a href="#">Shirt</a>
-                        <a href="#">T-shirt</a>
-                        <a href="#">COSMETIC</a>
-                        <a href="#">SOFT WEAR</a>
-                        <a href="#">ACCESSORIES</a>
-                        <a href="#">LIFE STYLE</a>
-                    </div>
-                </div>
-                <!-- ./Product tags -->
+             
             </div>
         </div>
     </div>
@@ -182,3 +151,28 @@
         </div>
     </div>
 </div>
+
+ <script>
+     function gettingValues(){
+         var price = document.querySelector(".amount-range-price").innerHTML
+         price = price.split("₹")
+         console.log(price[1])
+         var startPrice = price[1]
+         startPrice = parseInt(startPrice)
+         var endPrice =price[2]
+         endPrice = parseInt(endPrice)
+        
+        $("#start_price_input").val(startPrice)
+        $("#end_price_input").val(endPrice)
+     }
+ </script>
+ <script>
+     var params = new URLSearchParams(window.location.search)
+     let start =params.get('start')||1000
+     let end = params.get('end')||5000
+      var price = $("#price")
+      $(".amount-range-price").html(`Price: ₹${start}- ₹${end}`)
+      price.attr("data-value-min",start)
+      price.attr("data-value-max",end)
+  </script>
+  

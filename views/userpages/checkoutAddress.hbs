@@ -1,120 +1,168 @@
+<style>
+   input[type="submit"]:hover{
+        background-color: green;
+    }
+</style>
+
 <div class="container p-5">
-    <div class="main-container">
+    <div class="main-container ">
         <div class="container  ">
             <div class="main-content">
                 <div class="page-title">
                     <h3>CHECKOUT</h3>
                 </div>
-                <form action="/checkout" method="POST">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-checkout">
-                            <h5 class="form-title">BILLING AND SHIPPING ADDRESS</h5>
-                            <div class="row">
+                <form action="/checkout" id="check_out" method="POST">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-checkout">
+                                <h5 class="form-title">BILLING AND SHIPPING ADDRESS</h5>
+                                <div class="row">
 
-                                <div class="col-sm-6">
-                                     <label class="form-check-label" for="inlineCheckbox1"> SELECT ADDRESS</label>
-                                    <select class="custom-select" name="addressName" id="addSelect" onchange="checkAddress('{{uid}}')">
-                                        <option  selected disabled>Select Address</option>
-                                        {{#each address }}
-                                            
+                                    <div class="col-sm-6">
+                                        <label class="form-check-label" for="inlineCheckbox1"> SELECT ADDRESS</label>
+                                        <select class="custom-select" name="addressName" id="addSelect"
+                                            onchange="checkAddress('{{uid}}')">
+                                            <option selected disabled>Select Address</option>
+                                            {{#each address }}
+
                                             <option value="{{AddressName}}">{{AddressName}}</option>
-                                        {{/each}}
-                                        <option  value="false">No Select</option>
-                                    </select>
+                                            {{/each}}
+                                            <option value="false">No Select</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p><input type="text" value="" id="addname" name="Adname"
+                                                placeholder="New Address name" required></p>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <p><input type="text"  value="" id="addname" name="Adname" placeholder="New Address name" required></p>
-                                </div>
-                            </div>
-                            <div class="row">
+                                <div class="row">
 
-                                <div class="col-sm-6">
-                                    <p><input type="text" name="Fname" id="first" placeholder="First Name" required></p>
+                                    <div class="col-sm-6">
+                                        <p><input type="text" name="Fname" id="first" placeholder="First Name" required>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p><input type="text" name="Lname" id="last" placeholder="Last Name" required>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <p><input type="text" name="Lname" id="last" placeholder="Last Name" required></p>
+                                <p><input type="text" name="Houseno" id="houseno" placeholder="House No" required></p>
+                                <p><input type="text" name="Address" id="addressfull" placeholder="Address" required>
+                                </p>
+                                <p><input type="text" name="Town" id="town" placeholder="Town / City"></p>
+                                <p><input type="text" name="State" id="state" placeholder="State / Country" required>
+                                </p>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p><input type="text" id="zipcode" name="Post" placeholder="Post Code" required>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p><input type="tel" id="phone" name="Phone" placeholder="Phone" required></p>
+                                    </div>
+                                </div>
+                                <div class="form-check form-check-inline" id="saveAdd">
+                                    <input class="form-check-input" name="saveaddress" type="checkbox"
+                                        id="inlineCheckbox1" value="true">
+                                    <label class="form-check-label" for="inlineCheckbox1"> SAVE ADDRESS</label>
                                 </div>
                             </div>
-                            <p><input type="text"  name="Houseno"  id="houseno"  placeholder="House No" required></p>
-                            <p><input type="text" name="Address" id="addressfull" placeholder="Address" required></p>
-                            <p><input type="text" name="Town"  id="town" placeholder="Town / City"></p>
-                            <p><input type="text"  name="State" id="state"  placeholder="State / Country" required></p>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <p><input type="text" id="zipcode"  name="Post" placeholder="Post Code" required></p>
-                                </div>
-                                <div class="col-sm-6">
-                                    <p><input type="tel" id="phone"  name="Phone" placeholder="Phone" required></p>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="box-coupon" style="padding: 20px;margin-bottom:50px">
+                                <div class="coupon">
+                                    <h3 class="coupon-box-title">Coupon</h3>
+                                    <div class="inner-box">
+                                        <input type="text" name="coupon_code" class="input-text" id="coupon_code"
+                                            value="" placeholder="Coupon code">
+                                        <input type="submit" class="button" onclick="submitCoupon()" name="apply_coupon"
+                                            value="Apply Coupon">
+                                        <p id="couponalert" style="color: red;"></p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-check form-check-inline" id="saveAdd">
-                                <input class="form-check-input"   name="saveaddress" type="checkbox" id="inlineCheckbox1" value="true">
-                                <label class="form-check-label" for="inlineCheckbox1"> SAVE ADDRESS</label>
+                            <div class="form-checkout order">
+                                <h5 class="form-title">YOUR ORDER</h5>
+                                <table class="shop-table order">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-name">PRODUCT</th>
+                                            <th class="total">TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="product-name">Cart Items</td>
+                                            <td class="total"><span class="price">{{itemCount}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="product-name">Subtotal</td>
+                                            <td class="total"><span class="price">₹ {{subtotal}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="subtotal">Shipping Charge</td>
+                                            {{#ifEqual shipCharge 0}}
+                                            <td class="total"><span class="price" style="color: green;">FREE</span></td>
+                                            {{else}}
+                                            <td class="total"><span class="price" style="color: red;"> ₹
+                                                    {{shipCharge}}</span></td>
+                                            {{/ifEqual}}
+                                        </tr>
+                                        <tr id="coupenrow" style="display: none;">
+                                            <td class="product-name">Coupon Applied</td>
+                                            <td class="total"><span class="price" id="coupen_discount"
+                                                    style="color: green;"></span></td>
+                                        </tr>
+                                        {{#ne referal 0}}
+                                        <tr>
+                                            <td class="subtotal">Referal Bonus</td>
+                                            <td class="total"><span class="price" style="color: green;">₹
+                                                    {{referal}}</span></td>
+                                        </tr>
+                                        {{/ne}}
+                                        {{#ne pocketMoney 0}}
+                                        <tr>
+                                            <td class="subtotal">Pocket Balance</td>
+                                            <td class="total"><span class="price" style="color: green;">₹
+                                                    {{pocketMoney}}</span></td>
+                                        </tr>
+                                        {{/ne}}
+                                        <tr class="order-total">
+                                            <td class="subtotal">ORDER TOTAL</td>
+                                            <td class="total">₹ <span class="price" id="grandtotal">
+                                                    {{grandTotal}}</span></td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="form-checkout checkout-payment" style="background: rgb(247, 247, 247); padding:30px; text-align:center">
+                                    <h5 class="form-title">YOUR PAYMENT</h5>
+                                    <div class="payment_methods">
+                                       
+                                        <div class="payment_method" style="display:flex; justify-content:center  ">
+                                            <label style="margin-right:20px;  display:flex; justify-content:center; max-width:33.33%"><input name="payment_method" style="width: 20px; height:20px" value="cashonDelivery" type="radio"
+                                                    required>Cash On Delivery</label>
+                                            <label style="margin-right:20px;   display:flex; justify-content:center; max-width:33.33%"><input name="payment_method" style="width: 20px; height:20px" value="Razorpay" type="radio"
+                                                    required>Razorpay</label>
+                                            <label style=" display:flex; justify-content:center; max-width:33.33%"><input name="payment_method" style="width: 20px; height:20px" value="Paypal" type="radio"
+                                                    required>PayPal</label>
+                                        </div>
+                            
+                                    </div>
+                                     <input type="submit" class="button btn-primary medium" value="PROCEED TO CHECKOUT">
+                                </div>
+                               
                             </div>
+
                         </div>
 
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-checkout order">
-                            <h5 class="form-title">YOUR ORDER</h5>
-                            <table class="shop-table order">
-                                <thead>
-                                    <tr>
-                                        <th class="product-name">PRODUCT</th>
-                                        <th class="total">TOTAL</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="product-name">Cart Items</td>
-                                        <td class="total"><span class="price">{{itemCount}}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-name">Subtotal</td>
-                                        <td class="total"><span class="price">₹ {{subtotal}}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="subtotal">Shipping Charge</td>
-                                        {{#ifEqual shipCharge 0}}
-                                        <td class="total"><span class="price" style="color: green;">FREE</span></td>
-                                        {{else}}
-                                         <td class="total"><span class="price" style="color: red;"> ₹ {{shipCharge}}</span></td>
-                                        {{/ifEqual}}
-                                    </tr>
-                                    
-                                    <tr class="order-total">
-                                        <td class="subtotal">ORDER TOTAL</td>
-                                        <td class="total"><span class="price">₹ {{grandTotal}}</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                              <div class="form-checkout checkout-payment">
-                            <h5 class="form-title">YOUR PAYMENT</h5>
-                            <div class="payment_methods">
-                                {{!-- <div class="payment_method">
-                                    <label><input name="payment_method" value="card" type="radio">Credit Or Debit Card</label>
-                                     
-                                </div> --}}
-                                <div class="payment_method">
-                                    <label><input name="payment_method" value="cashonDelivery" type="radio" required>Cash On Delivery</label>
-                                    
-                                </div>
-                                {{!-- <div class="payment_method">
-                                    <label><input name="payment_method" value="paypal" type="radio">PayPal</label>
-                                    
-                                </div> --}}
-                            </div>
-                        </div>
-                            <button  type="submit" class="button btn-primary medium">PROCEED TO CHECKOUT</button>
-                        </div>
-                         
-                    </div>
-
-                </div>
                 </form>
             </div>
+
         </div>
+
         <div class="margin-top-10">
             <div class="container">
                 <div class="row">
@@ -147,3 +195,4 @@
         </div>
     </div>
 </div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>

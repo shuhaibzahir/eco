@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product Review</title>
+
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+        integrity="sha512-ISS7cAi1PEhQ8jnbJpJZMd29NlhNj4AWYyLOSp2CE/CsHxTCu+r+t0D2yoJudVrd0/8fTVPUVDzY5Tvli75u/g=="
+        crossorigin="anonymous" />
+    <link href=" /css/star-rating.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"
+        integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ=="
+        crossorigin="anonymous" />
+</head>
+
+<body>
+    <style>
+        .chosen-container-single .chosen-single {
+            border: none;
+        }
+    </style>
+    <div class="container">
+        <div class="row "style="min-height:80vh; display:flex; align-items:center" >
+            <div class="col-md-5">
+                <form action="/rating/product/{{details._id}}" method="POST">
+                    <div>
+                        <label for="glsr-ltr" style="pointer-events: none;">Product Star Rating</label>
+                        <div class="form-field">
+                            <select id="glsr-ltr" name="star" title="Select a rating" class="star-rating">
+                                <option value="5">Fantastic</option>
+                                <option value="4">Great</option>
+                                <option value="3">Good</option>
+                                <option value="2">Poor</option>
+                                <option value="1">Terrible</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group " style="margin-top: 30px;">
+                         <textarea name="review" class="form-control" id="" cols="20" rows="5">{{reviewData.review}}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+             </form>
+            </div>
+            <div class="col-md-8">
+                <div class="col-sm-6">
+          <div class="product-detail-image style2">
+            <div class="main-image-wapper">
+              <img class="main-image imageView" src="/pimages/{{details._id}}-001.jpg"
+                data-large="/pimages/{{details._id}}-001.jpg" alt="">
+            </div>
+            <div class="thumbnails owl-carousel nav-center-center nav-style3"
+              data-responsive='{"0":{"items":3},"481":{"items":4},"600":{"items":3},"1000":{"items":4}}'
+              data-autoplay="true" data-loop="true" data-items="4" data-dots="false" data-nav="true" data-margin="20">
+              <a data-url="/pimages/{{details._id}}-001.jpg" class="active" href="#"><img
+                  src="/pimages/{{details._id}}-001.jpg" alt=""></a>
+              <a data-url="/pimages/{{details._id}}-002.jpg" href="#"><img src="/pimages/{{details._id}}-002.jpg"
+                  alt=""></a>
+              <a data-url="/pimages/{{details._id}}-003.jpg" href="#"><img src="/pimages/{{details._id}}-003.jpg"
+                  alt=""></a>
+              <a data-url="/pimages/{{details._id}}-003.jpg" href="#"><img src="/pimages/{{details._id}}-003.jpg"
+                  alt=""></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="product-details-right style2">
+            <h3 class="product-name">{{details.Name}}</h3>
+           
+            <div class="short-descript">
+              {{details.Description}}
+            </div>
+             
+             
+              <a class="wishlist button" href="#" 
+                style=" display: flex;
+                justify-content: center;
+                align-items: center;">
+              <i class="fa fa-heart-o" style="font-size: 18px;"></i></a>
+
+           
+
+          </div>
+        </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"
+        integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.min.js"
+        integrity="sha512-zc7WDnCM3aom2EziyDIRAtQg1mVXLdILE09Bo+aE1xk0AM2c2cVLfSW9NrxE5tKTX44WBY0Z2HClZ05ur9vB6A=="
+        crossorigin="anonymous"></script>
+    <script src="/js/star-rating.js?ver=4.1.4"></script>
+
+    <script>
+        var destroyed = false;
+        var starratingPrebuilt = new StarRating('.star-rating-prebuilt', {
+            prebuilt: true,
+            maxStars: 5,
+        });
+        var starrating = new StarRating('.star-rating', {
+            stars: function (el, item, index) {
+                el.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect class="gl-star-full" width="19" height="19" x="2.5" y="2.5"/><polygon fill="#FFF" points="12 5.375 13.646 10.417 19 10.417 14.665 13.556 16.313 18.625 11.995 15.476 7.688 18.583 9.333 13.542 5 10.417 10.354 10.417"/></svg>';
+            },
+        });
+        var starratingOld = new StarRating('.star-rating-old');
+        document.querySelector('.toggle-star-rating').addEventListener('click', function () {
+            if (!destroyed) {
+                starrating.destroy();
+                starratingOld.destroy();
+                starratingPrebuilt.destroy()
+                destroyed = true;
+            } else {
+                starrating.rebuild();
+                starratingOld.rebuild();
+                starratingPrebuilt.rebuild()
+                destroyed = false;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

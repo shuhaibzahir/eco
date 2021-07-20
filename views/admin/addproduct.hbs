@@ -59,8 +59,7 @@
                                                 <h4 class="card-title">ADD PRODUCTS</h4>
                                             </div>
                                             <div class="card-body ">
-                                                <form method="POST" action="/admin/add-product/"
-                                                    >
+                                                <form method="POST" action="/admin/add-product/">
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
                                                             <label class="bmd-label-floating">Product Name</label>
@@ -80,7 +79,7 @@
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="product_type" required>
-                                                                    <option disabled selected>Select Type</option>
+                                                                    
                                                                     {{#each watches.ptype as |item|}}
                                                                     <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
@@ -94,10 +93,10 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Brand Name</label>
                                                             <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
+                                                                <select class="selectpicker col-12" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="brand" required>
-                                                                    <option disabled selected>Select Brand</option>
+                                                                  
                                                                     {{#each watches.brand as |item|}}
                                                                     <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
@@ -108,18 +107,20 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Prize</label>
                                                             <div class="form-group">
-                                                                <input type="number" step="0.01" class="form-control prizeField"
-                                                                    placeholder="Enter Product Prize" onkeyUp="test_fn(this.value,'prizeField')"  name="prize"
-                                                                    required>
+                                                                <input type="number" step="0.01"
+                                                                    class="form-control prizeField"
+                                                                    placeholder="Enter Product Prize"
+                                                                    onkeyUp="test_fn(this.value,'prizeField')"
+                                                                    name="prize" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Department</label>
                                                             <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
+                                                                <select class="selectpicker col-12" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="department" required>
-                                                                    <option disabled selected>Single Option</option>
+                                                            
                                                                     <option value="Women">Women's</option>
                                                                     <option value="Men">Men's</option>
                                                                     <option value="Kid">Kid's</option>
@@ -133,10 +134,10 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Category</label>
                                                             <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
+                                                                <select class="selectpicker col-12" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="category" required>
-                                                                    <option disabled selected>Select Category</option>
+                                                                    
                                                                     {{#each watches.category as |item|}}
                                                                     <option value="{{item}}">{{item}}
                                                                     </option>
@@ -155,10 +156,10 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Select Size</label>
                                                             <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
+                                                                <select class="selectpicker col-12" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" disabled required>
-                                                                    <option disabled selected>Single Option</option>
+                                                               
                                                                     <option value="S">Small</option>
                                                                     <option value="M">Medium</option>
                                                                     <option value="L">Large</option>
@@ -190,7 +191,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <h4 class="title">Tags</h4>
-                                                            <input type="text" value="men's,"
+                                                            <input type="text" value="product   ,"
                                                                 class="form-control tagsinput" data-role="tagsinput"
                                                                 data-color="info" name="tags">
                                                         </div>
@@ -199,8 +200,8 @@
                                                             <div class="form-group">
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
-                                                                    title="Single Select" disabled>
-                                                                    <option disabled selected>Single Option</option>
+                                                                    title="Single Select" disabled required>
+                                                               
                                                                     <option value="indoor">Indoor </option>
                                                                     <option value="outdoor">Outdoor</option>
 
@@ -351,8 +352,7 @@
                                             </div>
                                             {{!-- add product --}}
                                             <div class="card-body ">
-                                                <form method="POST" action="/admin/add-product"
-                                                     >
+                                                <form method="POST" action="/admin/add-product">
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
                                                             <label class="bmd-label-floating">Product Name</label>
@@ -374,7 +374,7 @@
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="product_type" required>
-                                                                    <option disabled selected>Product Type</option>
+                                                                 
                                                                     {{#each footwear.ptype as |item|}}
                                                                     <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
@@ -388,10 +388,10 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Brand Name</label>
                                                             <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
+                                                                <select class="selectpicker col-12" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="brand" required>
-                                                                    <option disabled selected>Select Brand</option>
+                                                              
                                                                     {{#each footwear.brand as |brnd|}}
                                                                     <option value="{{brnd}}">{{brnd}}</option>
                                                                     {{/each }}
@@ -401,18 +401,20 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Prize</label>
                                                             <div class="form-group">
-                                                                <input type="number" step="0.01" class="form-control prizeField2"
-                                                                    placeholder="Enter Product Prize" onkeyUp="test_fn(this.value,'prizeField2')"  name="prize"
-                                                                    required>
+                                                                <input type="number" step="0.01"
+                                                                    class="form-control prizeField2"
+                                                                    placeholder="Enter Product Prize"
+                                                                    onkeyUp="test_fn(this.value,'prizeField2')"
+                                                                    name="prize" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Department</label>
                                                             <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
+                                                                <select class="selectpicker col-12" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="department" required>
-                                                                    <option disabled selected>Single Option</option>
+                                                                   
                                                                     <option value="Women">Women's</option>
                                                                     <option value="Men">Men's</option>
                                                                     <option value="Kid">Kid's</option>
@@ -426,10 +428,10 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Category</label>
                                                             <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
+                                                                <select class="selectpicker col-12" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="category" required>
-                                                                    <option disabled selected>Select Category</option>
+                                                                  
                                                                     {{#each footwear.category as |item|}}
                                                                     <option value="{{item}}">{{item}}
                                                                     </option>
@@ -448,10 +450,10 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Select Size</label>
                                                             <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
+                                                                <select class="selectpicker col-12" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="size" required>
-                                                                    <option disabled selected>Single Option</option>
+                                                                 
                                                                     <option value="6">6</option>
                                                                     <option value="7">7</option>
                                                                     <option value="8">8</option>
@@ -494,7 +496,7 @@
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="mood" required>
-                                                                    <option disabled selected>Single Option</option>
+                                                                   
                                                                     <option value="indoor">Indoor </option>
                                                                     <option value="outdoor">Outdoor</option>
 
@@ -644,8 +646,7 @@
                                                 <h4 class="card-title">ADD PRODUCTS</h4>
                                             </div>
                                             <div class="card-body ">
-                                                <form method="POST" action="/admin/add-product"
-                                                    >
+                                                <form method="POST" action="/admin/add-product">
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
                                                             <label class="bmd-label-floating">Product Name</label>
@@ -666,7 +667,7 @@
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="product_type" required>
-                                                                    <option disabled selected>Product Type</option>
+                                                                    
                                                                     {{#each clothes.ptype as |item|}}
                                                                     <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
@@ -682,10 +683,10 @@
 
                                                             <label class="bmd-label-floating">Brand Name</label>
                                                             <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
+                                                                <select class="selectpicker col-12" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="brand" required>
-                                                                    <option disabled selected>Select Brand</option>
+                                                                  
                                                                     {{#each clothes.brand as |item|}}
                                                                     <option value="{{item}}">{{item}}</option>
                                                                     {{/each }}
@@ -695,18 +696,20 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Prize</label>
                                                             <div class="form-group">
-                                                                <input type="number" step="0.01" class="form-control prizeField3"
-                                                                    placeholder="Enter Product Prize"  onkeyUp="test_fn(this.value,'prizeField3')"  name="prize"
-                                                                    required>
+                                                                <input type="number" step="0.01"
+                                                                    class="form-control prizeField3"
+                                                                    placeholder="Enter Product Prize"
+                                                                    onkeyUp="test_fn(this.value,'prizeField3')"
+                                                                    name="prize" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Department</label>
                                                             <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
+                                                                <select class="selectpicker col-12" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="department" required>
-                                                                    <option disabled selected>Single Option</option>
+                                                                  
                                                                     <option value="Women">Women's</option>
                                                                     <option value="Men">Men's</option>
                                                                     <option value="Kid">Kid's</option>
@@ -720,10 +723,10 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Category</label>
                                                             <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
+                                                                <select class="selectpicker col-12" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="category" required>
-                                                                    <option disabled selected>Select Category</option>
+                                                                   
                                                                     {{#each clothes.category as |item|}}
                                                                     <option value="{{item}}">{{item}}
                                                                     </option>
@@ -743,10 +746,10 @@
                                                         <div class="col-md-4">
                                                             <label class="bmd-label-floating">Select Size</label>
                                                             <div class="form-group">
-                                                                <select class="selectpicker" data-size="7"
+                                                                <select class="selectpicker col-12" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="size" required>
-                                                                    <option disabled selected>Single Option</option>
+                                                                  
                                                                     <option value="S">S</option>
                                                                     <option value="M">M</option>
                                                                     <option value="L">L</option>
@@ -789,7 +792,7 @@
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
                                                                     title="Single Select" name="mood" required>
-                                                                    <option disabled selected>Single Option</option>
+                                                               
                                                                     <option value="indoor">Indoor </option>
                                                                     <option value="outdoor">Outdoor</option>
 
@@ -808,89 +811,105 @@
                                                         </div>
                                                     </div>
                                                     <div class="row justify-content-between" style="width:90%">
-                                                            {{!-- item 1 start --}}
-        <div class="col-md-2 col-sm-2">
-            <h4 class="title"> Image 1</h4>
-            <div class="fileinput fileinput-new text-center">
-                <div class="fileinput-new thumbnail">
-                    <img src="../../assets/img/image_placeholder.jpg" id="chekPreview9" alt="...">
+                                                        {{!-- item 1 start --}}
+                                                        <div class="col-md-2 col-sm-2">
+                                                            <h4 class="title"> Image 1</h4>
+                                                            <div class="fileinput fileinput-new text-center">
+                                                                <div class="fileinput-new thumbnail">
+                                                                    <img src="../../assets/img/image_placeholder.jpg"
+                                                                        id="chekPreview9" alt="...">
 
-                </div>
-                <div>
-                    <span class="btn btn-rose btn-round btn-file">
-                        <span class="fileinput-new">Select image</span>
-                        <input type="file" id="image9" accept="image/gif, image/jpeg, image/png" required />
-                        <textarea name="image9_b64" id="imageValue9" cols="30" rows="10" hidden></textarea>
-                    </span>
-                </div>
-            </div>
-        </div>
+                                                                </div>
+                                                                <div>
+                                                                    <span class="btn btn-rose btn-round btn-file">
+                                                                        <span class="fileinput-new">Select image</span>
+                                                                        <input type="file" id="image9"
+                                                                            accept="image/gif, image/jpeg, image/png"
+                                                                            required />
+                                                                        <textarea name="image9_b64" id="imageValue9"
+                                                                            cols="30" rows="10" hidden></textarea>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-     {{!-- item 1 end--}}
-
-
-
-      {{!-- item 2 start --}}
-        <div class="col-md-2 col-sm-2">
-            <h4 class="title"> Image 2</h4>
-            <div class="fileinput fileinput-new text-center">
-                <div class="fileinput-new thumbnail">
-                    <img src="../../assets/img/image_placeholder.jpg" id="chekPreview10" alt="...">
-
-                </div>
-                <div>
-                    <span class="btn btn-rose btn-round btn-file">
-                        <span class="fileinput-new">Select image</span>
-                        <input type="file" id="image10" accept="image/gif, image/jpeg, image/png" required />
-                        <textarea name="image10_b64" id="imageValue10" cols="30" rows="10" hidden></textarea>
-                    </span>
-                </div>
-            </div>
-        </div>
-
-     {{!-- item 2 end--}}
+                                                        {{!-- item 1 end--}}
 
 
-    {{!-- item 3 start --}}
-        <div class="col-md-2 col-sm-2">
-            <h4 class="title"> Image 3</h4>
-            <div class="fileinput fileinput-new text-center">
-                <div class="fileinput-new thumbnail">
-                    <img src="../../assets/img/image_placeholder.jpg" id="chekPreview11" alt="...">
 
-                </div>
-                <div>
-                    <span class="btn btn-rose btn-round btn-file">
-                        <span class="fileinput-new">Select image</span>
-                        <input type="file" id="image11" accept="image/gif, image/jpeg, image/png" required />
-                        <textarea name="image11_b64" id="imageValue11" cols="30" rows="10" hidden></textarea>
-                    </span>
-                </div>
-            </div>
-        </div>
+                                                        {{!-- item 2 start --}}
+                                                        <div class="col-md-2 col-sm-2">
+                                                            <h4 class="title"> Image 2</h4>
+                                                            <div class="fileinput fileinput-new text-center">
+                                                                <div class="fileinput-new thumbnail">
+                                                                    <img src="../../assets/img/image_placeholder.jpg"
+                                                                        id="chekPreview10" alt="...">
 
-     {{!-- item 3 end--}}
+                                                                </div>
+                                                                <div>
+                                                                    <span class="btn btn-rose btn-round btn-file">
+                                                                        <span class="fileinput-new">Select image</span>
+                                                                        <input type="file" id="image10"
+                                                                            accept="image/gif, image/jpeg, image/png"
+                                                                            required />
+                                                                        <textarea name="image10_b64" id="imageValue10"
+                                                                            cols="30" rows="10" hidden></textarea>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {{!-- item 2 end--}}
 
 
-     {{!-- item 4 start --}}
-        <div class="col-md-2 col-sm-2">
-            <h4 class="title"> Image 4</h4>
-            <div class="fileinput fileinput-new text-center">
-                <div class="fileinput-new thumbnail">
-                    <img src="../../assets/img/image_placeholder.jpg" id="chekPreview12" alt="...">
+                                                        {{!-- item 3 start --}}
+                                                        <div class="col-md-2 col-sm-2">
+                                                            <h4 class="title"> Image 3</h4>
+                                                            <div class="fileinput fileinput-new text-center">
+                                                                <div class="fileinput-new thumbnail">
+                                                                    <img src="../../assets/img/image_placeholder.jpg"
+                                                                        id="chekPreview11" alt="...">
 
-                </div>
-                <div>
-                    <span class="btn btn-rose btn-round btn-file">
-                        <span class="fileinput-new">Select image</span>
-                        <input type="file" id="image12" accept="image/gif, image/jpeg, image/png" required />
-                        <textarea name="image12_b64" id="imageValue12" cols="30" rows="10" hidden></textarea>
-                    </span>
-                </div>
-            </div>
-        </div>
+                                                                </div>
+                                                                <div>
+                                                                    <span class="btn btn-rose btn-round btn-file">
+                                                                        <span class="fileinput-new">Select image</span>
+                                                                        <input type="file" id="image11"
+                                                                            accept="image/gif, image/jpeg, image/png"
+                                                                            required />
+                                                                        <textarea name="image11_b64" id="imageValue11"
+                                                                            cols="30" rows="10" hidden></textarea>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-     {{!-- item 4 end--}}
+                                                        {{!-- item 3 end--}}
+
+
+                                                        {{!-- item 4 start --}}
+                                                        <div class="col-md-2 col-sm-2">
+                                                            <h4 class="title"> Image 4</h4>
+                                                            <div class="fileinput fileinput-new text-center">
+                                                                <div class="fileinput-new thumbnail">
+                                                                    <img src="../../assets/img/image_placeholder.jpg"
+                                                                        id="chekPreview12" alt="...">
+
+                                                                </div>
+                                                                <div>
+                                                                    <span class="btn btn-rose btn-round btn-file">
+                                                                        <span class="fileinput-new">Select image</span>
+                                                                        <input type="file" id="image12"
+                                                                            accept="image/gif, image/jpeg, image/png"
+                                                                            required />
+                                                                        <textarea name="image12_b64" id="imageValue12"
+                                                                            cols="30" rows="10" hidden></textarea>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {{!-- item 4 end--}}
 
 
                                                     </div>
@@ -1186,8 +1205,7 @@
 
 
 <!-- Modal 9-->
-<div class="modal fade" id="modal9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="modal9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -1219,11 +1237,10 @@
 </div>
 <!-- Modal  9 end-->
 
- 
+
 
 <!-- Modal 10-->
-<div class="modal fade" id="modal10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="modal10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -1257,8 +1274,7 @@
 
 
 <!-- Modal 11-->
-<div class="modal fade" id="modal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="modal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -1291,8 +1307,7 @@
 <!-- Modal  11 end-->
 
 <!-- Modal 12 -->
-<div class="modal fade" id="modal12" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="modal12" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -1324,14 +1339,14 @@
 </div>
 <!-- Modal  12 end-->
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    function test_fn(xxx,clss) {
-  var xxx = xxx.replace(/[^0-9,.]+/g, "");
-  document.querySelector("."+clss).value = xxx;
-}
- 
+    function test_fn(xxx, clss) {
+        var xxx = xxx.replace(/[^0-9,.]+/g, "");
+        document.querySelector("." + clss).value = xxx;
+    }
+
 </script>
 
 <script>
@@ -1342,20 +1357,34 @@
         var cropper1;
 
         $('#image1').change(function (event) {
-            var files = event.target.files;
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
+                var files = event.target.files;
 
-            var done = function (url) {
-                image1.src = url;
-                modal1.modal('show');
-            };
-
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function (event) {
-                    done(reader.result);
+                var done = function (url) {
+                    image1.src = url;
+                    modal1.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
-            }
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            }   else{
+        
+                   Swal.fire({
+                    position: 'center',
+                    text: 'Please select image file',         
+                    title: "Invalid File",
+                    icon: 'warning',
+                 }) 
+                this.value=""
+            }  
+
         });
 
         modal1.on('shown.bs.modal', function () {
@@ -1395,20 +1424,34 @@
         var cropper2;
 
         $('#image2').change(function (event) {
-            var files = event.target.files;
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
 
-            var done = function (url) {
-                image2.src = url;
-                modal2.modal('show');
-            };
+                var files = event.target.files;
 
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function (event) {
-                    done(reader.result);
+                var done = function (url) {
+                    image2.src = url;
+                    modal2.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
-            }
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            }   else{
+            
+               Swal.fire({
+                    position: 'center',
+                    text: 'Please select image file',         
+                    title: "Invalid File",
+                    icon: 'warning',
+                 }) 
+                this.value=""
+            }  
         });
 
         modal2.on('shown.bs.modal', function () {
@@ -1449,20 +1492,36 @@
         var cropper3;
 
         $('#image3').change(function (event) {
-            var files = event.target.files;
 
-            var done = function (url) {
-                image3.src = url;
-                modal3.modal('show');
-            };
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
 
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function (event) {
-                    done(reader.result);
+                var files = event.target.files;
+
+                var done = function (url) {
+                    image3.src = url;
+                    modal3.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
-            }
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+
+            }    else{
+           
+                   Swal.fire({
+                    position: 'center',
+                    text: 'Please select image file',         
+                    title: "Invalid File",
+                    icon: 'warning',
+                 }) 
+                this.value=""
+            }  
         });
 
         modal3.on('shown.bs.modal', function () {
@@ -1502,20 +1561,36 @@
         var cropper4;
 
         $('#image4').change(function (event) {
-            var files = event.target.files;
 
-            var done = function (url) {
-                image4.src = url;
-                modal4.modal('show');
-            };
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
 
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function (event) {
-                    done(reader.result);
+                var files = event.target.files;
+
+                var done = function (url) {
+                    image4.src = url;
+                    modal4.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
             }
+               else{
+                   
+                      Swal.fire({
+                    position: 'center',
+                    text: 'Please select image file',         
+                    title: "Invalid File",
+                    icon: 'warning',
+                 }) 
+                this.value=""
+            }  
         });
 
         modal4.on('shown.bs.modal', function () {
@@ -1559,20 +1634,33 @@
         var cropper5;
 
         $('#image5').change(function (event) {
-            var files = event.target.files;
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
 
-            var done = function (url) {
-                image5.src = url;
-                modal5.modal('show');
-            };
+                var files = event.target.files;
 
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function (event) {
-                    done(reader.result);
+                var done = function (url) {
+                    image5.src = url;
+                    modal5.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
-            }
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            }    else{
+                   Swal.fire({
+                    position: 'center',
+                    text: 'Please select image file',         
+                    title: "Invalid File",
+                    icon: 'warning',
+                 }) 
+                this.value=""
+            }  
         });
 
         modal5.on('shown.bs.modal', function () {
@@ -1612,20 +1700,33 @@
         var cropper6;
 
         $('#image6').change(function (event) {
-            var files = event.target.files;
 
-            var done = function (url) {
-                image6.src = url;
-                modal6.modal('show');
-            };
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
+                var files = event.target.files;
 
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function (event) {
-                    done(reader.result);
+                var done = function (url) {
+                    image6.src = url;
+                    modal6.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
-            }
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            }    else{
+                Swal.fire({
+                    position: 'center',
+                    text: 'Please select image file',         
+                    title: "Invalid File",
+                    icon: 'warning',
+                 }) 
+                this.value=""
+            }  
         });
 
         modal6.on('shown.bs.modal', function () {
@@ -1666,20 +1767,35 @@
         var cropper3;
 
         $('#image7').change(function (event) {
-            var files = event.target.files;
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
 
-            var done = function (url) {
-                image7.src = url;
-                modal7.modal('show');
-            };
+                var files = event.target.files;
 
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function (event) {
-                    done(reader.result);
+                var done = function (url) {
+                    image7.src = url;
+                    modal7.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
             }
+              else{
+                
+                   Swal.fire({
+                    position: 'center',
+                    text: 'Please select image file',         
+                    title: "Invalid File",
+                    icon: 'warning',
+                 }) 
+                this.value=""
+            }  
         });
 
         modal7.on('shown.bs.modal', function () {
@@ -1719,20 +1835,36 @@
         var cropper8;
 
         $('#image8').change(function (event) {
-            var files = event.target.files;
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
 
-            var done = function (url) {
-                image8.src = url;
-                modal8.modal('show');
-            };
+                var files = event.target.files;
 
-            if (files && files.length > 0) {
-                reader = new FileReader();
-                reader.onload = function (event) {
-                    done(reader.result);
+                var done = function (url) {
+                    image8.src = url;
+                    modal8.modal('show');
                 };
-                reader.readAsDataURL(files[0]);
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
             }
+              else{
+            
+                     Swal.fire({
+                    position: 'center',
+                    text: 'Please select image file',         
+                    title: "Invalid File",
+                    icon: 'warning',
+                 }) 
+                this.value=""
+
+            }  
         });
 
         modal8.on('shown.bs.modal', function () {
@@ -1766,217 +1898,272 @@
         });
         //image 4 and modal 4 end
 
-    //clothe section
-          var image9 = document.getElementById('sampleImage9');
-    var modal9 = $('#modal9');
-    var cropper9;
+        //clothe section
+        var image9 = document.getElementById('sampleImage9');
+        var modal9 = $('#modal9');
+        var cropper9;
 
-    $('#image9').change(function (event) {
-        var files = event.target.files;
+        $('#image9').change(function (event) {
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
+                var files = event.target.files;
 
-        var done = function (url) {
-            image9.src = url;
-            modal9.modal('show');
-        };
+                var done = function (url) {
+                    image9.src = url;
+                    modal9.modal('show');
+                };
 
-        if (files && files.length > 0) {
-            reader = new FileReader();
-            reader.onload = function (event) {
-                done(reader.result);
-            };
-            reader.readAsDataURL(files[0]);
-        }
-    });
-
-    modal9.on('shown.bs.modal', function () {
-        cropper9 = new Cropper(image9, {
-            aspectRatio: 1,
-            viewMode: 3,
-            preview: '#preview9'
-        });
-    }).on('hidden.bs.modal', function () {
-        cropper9.destroy();
-        cropper9 = null;
-    });
-
-    $('#crop9').click(function () {
-        canvas = cropper9.getCroppedCanvas({
-            width: 400,
-            height: 400
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            }
+              else{
+                
+                   Swal.fire({
+                    position: 'center',
+                    text: 'Please select image file',         
+                    title: "Invalid File",
+                    icon: 'warning',
+                 }) 
+                this.value=""
+            }  
         });
 
-        canvas.toBlob(function (blob) {
-            url = URL.createObjectURL(blob);
-            var reader = new FileReader();
-            reader.readAsDataURL(blob);
-            reader.onloadend = function () {
-                var base64data = reader.result;
-                modal9.modal('hide');
-                $("#imageValue9").val(base64data)
-                $('#chekPreview9').attr('src', base64data);
-            };
-        });
-    });
-//modal1 and image 1 end
-
-//modal2 and image 2
-    var image10 = document.getElementById('sampleImage10');
-    var modal10 = $('#modal10');
-    var cropper10;
-
-    $('#image10').change(function (event) {
-        var files = event.target.files;
-
-        var done = function (url) {
-            image10.src = url;
-            modal10.modal('show');
-        };
-
-        if (files && files.length > 0) {
-            reader = new FileReader();
-            reader.onload = function (event) {
-                done(reader.result);
-            };
-            reader.readAsDataURL(files[0]);
-        }
-    });
-
-    modal10.on('shown.bs.modal', function () {
-        cropper10 = new Cropper(image10, {
-            aspectRatio: 1,
-            viewMode: 3,
-            preview: '#preview10'
-        });
-    }).on('hidden.bs.modal', function () {
-        cropper10.destroy();
-        cropper10 = null;
-    });
-
-    $('#crop10').click(function () {
-        canvas = cropper10.getCroppedCanvas({
-            width: 400,
-            height: 400
+        modal9.on('shown.bs.modal', function () {
+            cropper9 = new Cropper(image9, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview9'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper9.destroy();
+            cropper9 = null;
         });
 
-        canvas.toBlob(function (blob) {
-            url = URL.createObjectURL(blob);
-            var reader = new FileReader();
-            reader.readAsDataURL(blob);
-            reader.onloadend = function () {
-                var base64data = reader.result;
-                modal10.modal('hide');
-                $("#imageValue10").val(base64data)
-                $('#chekPreview10').attr('src', base64data);
-            };
+        $('#crop9').click(function () {
+            canvas = cropper9.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal9.modal('hide');
+                    $("#imageValue9").val(base64data)
+                    $('#chekPreview9').attr('src', base64data);
+                };
+            });
         });
-    });
-//image 2 and modal 2 end
+        //modal1 and image 1 end
 
+        //modal2 and image 2
+        var image10 = document.getElementById('sampleImage10');
+        var modal10 = $('#modal10');
+        var cropper10;
 
-//modal3 and image 3 start
-    var image11 = document.getElementById('sampleImage11');
-    var modal11 = $('#modal11');
-    var cropper11;
+        $('#image10').change(function (event) {
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
+                var files = event.target.files;
 
-    $('#image11').change(function (event) {
-        var files = event.target.files;
+                var done = function (url) {
+                    image10.src = url;
+                    modal10.modal('show');
+                };
 
-        var done = function (url) {
-            image11.src = url;
-            modal11.modal('show');
-        };
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            }
 
-        if (files && files.length > 0) {
-            reader = new FileReader();
-            reader.onload = function (event) {
-                done(reader.result);
-            };
-            reader.readAsDataURL(files[0]);
-        }
-    });
-
-    modal11.on('shown.bs.modal', function () {
-        cropper11 = new Cropper(image11, {
-            aspectRatio: 1,
-            viewMode: 3,
-            preview: '#preview11'
-        });
-    }).on('hidden.bs.modal', function () {
-        cropper11.destroy();
-        cropper11 = null;
-    });
-
-    $('#crop11').click(function () {
-        canvas = cropper11.getCroppedCanvas({
-            width: 400,
-            height: 400
-        });
-
-        canvas.toBlob(function (blob) {
-            url = URL.createObjectURL(blob);
-            var reader = new FileReader();
-            reader.readAsDataURL(blob);
-            reader.onloadend = function () {
-                var base64data = reader.result;
-                modal11.modal('hide');
-                $("#imageValue11").val(base64data)
-                $('#chekPreview11').attr('src', base64data);
-            };
-        });
-    });
-//image 3 and modal 3 end
-
-//modal4 and image 4 start
-    var image12 = document.getElementById('sampleImage12');
-    var modal12 = $('#modal12');
-    var cropper12;
-
-    $('#image12').change(function (event) {
-        var files = event.target.files;
-
-        var done = function (url) {
-            image12.src = url;
-            modal12.modal('show');
-        };
-
-        if (files && files.length > 0) {
-            reader = new FileReader();
-            reader.onload = function (event) {
-                done(reader.result);
-            };
-            reader.readAsDataURL(files[0]);
-        }
-    });
-
-    modal12.on('shown.bs.modal', function () {
-        cropper12 = new Cropper(image12, {
-            aspectRatio: 1,
-            viewMode: 3,
-            preview: '#preview12'
-        });
-    }).on('hidden.bs.modal', function () {
-        cropper12.destroy();
-        cropper12 = null;
-    });
-
-    $('#crop12').click(function () {
-        canvas = cropper12.getCroppedCanvas({
-            width: 400,
-            height: 400
+             else{
+                       Swal.fire({
+                    position: 'center',
+                    text: 'Please select image file',         
+                    title: "Invalid File",
+                    icon: 'warning',
+                 }) 
+                this.value=""
+            }  
         });
 
-        canvas.toBlob(function (blob) {
-            url = URL.createObjectURL(blob);
-            var reader = new FileReader();
-            reader.readAsDataURL(blob);
-            reader.onloadend = function () {
-                var base64data = reader.result;
-                modal12.modal('hide');
-                $("#imageValue12").val(base64data)
-                $('#chekPreview12').attr('src', base64data);
-            };
+        modal10.on('shown.bs.modal', function () {
+            cropper10 = new Cropper(image10, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview10'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper10.destroy();
+            cropper10 = null;
         });
-    });
+
+        $('#crop10').click(function () {
+            canvas = cropper10.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal10.modal('hide');
+                    $("#imageValue10").val(base64data)
+                    $('#chekPreview10').attr('src', base64data);
+                };
+            });
+        });
+        //image 2 and modal 2 end
+
+
+        //modal3 and image 3 start
+        var image11 = document.getElementById('sampleImage11');
+        var modal11 = $('#modal11');
+        var cropper11;
+
+        $('#image11').change(function (event) {
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
+                var files = event.target.files;
+
+                var done = function (url) {
+                    image11.src = url;
+                    modal11.modal('show');
+                };
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            }
+
+            else{
+                      Swal.fire({
+                    position: 'center',
+                    text: 'Please select image file',         
+                    title: "Invalid File",
+                    icon: 'warning',
+                 }) 
+                this.value=""
+            }    
+        });
+
+        modal11.on('shown.bs.modal', function () {
+            cropper11 = new Cropper(image11, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview11'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper11.destroy();
+            cropper11 = null;
+        });
+
+        $('#crop11').click(function () {
+            canvas = cropper11.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal11.modal('hide');
+                    $("#imageValue11").val(base64data)
+                    $('#chekPreview11').attr('src', base64data);
+                };
+            });
+        });
+        //image 3 and modal 3 end
+
+        //modal4 and image 4 start
+        var image12 = document.getElementById('sampleImage12');
+        var modal12 = $('#modal12');
+        var cropper12;
+
+        $('#image12').change(function (event) {
+            var file = this.files[0];
+            var fileType = file["type"];
+            if (fileType.search('image') >= 0) {
+                var files = event.target.files;
+
+                var done = function (url) {
+                    image12.src = url;
+                    modal12.modal('show');
+                };
+
+                if (files && files.length > 0) {
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            }
+                else{
+                    Swal.fire({
+                    position: 'center',
+                    text: 'Please select image file',         
+                    title: "Invalid File",
+                    icon: 'warning',
+                 }) 
+                this.value=""
+            }
+        });
+
+        modal12.on('shown.bs.modal', function () {
+            cropper12 = new Cropper(image12, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '#preview12'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper12.destroy();
+            cropper12 = null;
+        });
+
+        $('#crop12').click(function () {
+            canvas = cropper12.getCroppedCanvas({
+                width: 400,
+                height: 400
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    modal12.modal('hide');
+                    $("#imageValue12").val(base64data)
+                    $('#chekPreview12').attr('src', base64data);
+                };
+            });
+        });
 
 
     });

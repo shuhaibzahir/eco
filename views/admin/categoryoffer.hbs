@@ -1,0 +1,137 @@
+<style>
+    .cursour{
+        cursor: pointer;
+        color: rgb(168, 48, 48);
+    }
+
+</style>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row p-5">
+            <div class="card-body">
+                <div class="col-12">
+                    <div class="card ">
+                        <div class="card-header card-header-rose card-header-icon">
+                            <div class="card-icon">
+                                <i class="far fa-clock" style="font-size:34px"></i>
+                            </div>
+                            <h4 class="card-title">ADD SUB</h4>
+                        </div>
+                        <div class="card-body ">
+                            <form method="POST" action="/admin/category/add/offer">
+                                <div class="row ">
+                                    <div class="col-4">
+                                        <label class="bmd-label-floating">Select Product
+                                            Type</label>
+                                        <div class="form-group ">
+
+                                            <select class="selectpicker" data-size="7"
+                                                data-style="btn btn-success btn-round" title="Single Select"
+                                                name="category" required>
+
+                                                {{#each categoryData}}
+                                                <option value="{{_id}}">{{_id}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group ">
+                                            <label class="bmd-label-floating">Enter Your Expire Date </label>
+                                            <div class="form-group">
+                                                <input type="date" class="form-control date" name="categoryExp" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group ">
+                                        <label class="bmd-label-floating">Enter your Discount </label>
+                                        <div class="form-group">
+                                            <input type="number" class="form-control offerinput"
+                                                placeholder="Enter New Offer" name="discount" ng-pattern="/^[0-9]+$/"
+                                                max="80" min="0" required>
+                                        </div>
+
+                                    </div>
+
+                                 <div class="card-footer ">
+                                        <button type="submit " class="btn btn-fill btn-rose">Submit</button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="row px-5">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon">
+                            <i class="fas fa-store-alt"></i>
+                        </div>
+                        <h4 class="card-title">All Orders</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div class="material-datatables">
+                            <table id="datatablesales" class="table table-striped nowrap table-no-bordered table-hover"
+                                cellspacing="0" width="100%" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+
+                                        <th>Discount</th>
+                                        <th>Expire Date</th>
+                                        <th>Action</th>
+                                  </tr>
+                                </thead>
+                             
+                                <tbody>
+                                    {{#each expireData}}
+                                    <tr>
+                                         <td>{{_id.producttype}}</td>
+                                         <td>{{_id.discount}}</td>
+                                         <td class="expdateChange">{{_id.expDate}}</td>
+                                         <td><i class="fas fa-trash cursour" onclick="deleteCategoryOffer('{{_id.producttype}}')"></i></td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+
+    let dateInput = document.querySelector(".date")
+    let testDate = new Date().toLocaleDateString().split("/").reverse().join("-")
+    dateInput.setAttribute('min', testDate)
+
+    document.querySelectorAll('.expdateChange').forEach((item)=>{
+        let date = item.innerHTML 
+        let today = new Date().toLocaleString().slice(0,10)
+        date = new Date(date).toLocaleString().slice(0,10)
+        item.innerHTML =date
+        if(today==date){
+            item.style.background= "rgb(168, 48, 48)";
+            item.style.color="#ffff"
+          
+        }
+    })
+
+
+</script>

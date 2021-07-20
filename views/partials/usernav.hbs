@@ -22,10 +22,10 @@
 					</div>
 					<div class="col-sm-12 col-md-9 menu-wapper">
 						<div class="box-control justify-content-center">
-							<form class="box-search show-icon">
+							<form class="box-search show-icon" action="/product/search" method="get">
 								<span class="icon"><span class="pe-7s-search"></span></span>
 								<div class="inner">
-									<input type="text" class="search" placeholder="Search here...">
+									<input type="text" class="search" name="keyword" placeholder="Search here...">
 									<button class="button-search" type="submit"><span
 											class="pe-7s-search"></span></button>
 								</div>
@@ -47,8 +47,7 @@
 									  
 										<div class="setting-option">
 											<ul>
-												<li><a href="#"><i
-															class="icon-heart icons"></i><span>Wishlist</span></a></li>
+											 
 												<li><a href="/myaccount"><i class="icon-user icons"></i><span>
 															My Account</span></a></li>
 												<li><a href="/view-cart"><i class="icon-note icons"></i><span>My Cart</span></a>
@@ -66,7 +65,7 @@
 						</div>
 						<ul class="boutique-nav main-menu clone-main-menu">
 						
-							{{!-- <li class="menu-item-has-children item-megamenu">
+							<li class="menu-item-has-children item-megamenu">
 								<a href="#">categories</a>
 								<div style="width:820px; background-image:url('images/bg-megamenu.png'); "
 									class="sub-menu megamenu megamenu-bg">
@@ -75,11 +74,11 @@
 											<div class="mega-custom-menu">
 												<h2 class="title">Men's</h2>
 												<ul>
-													<li><a href="category-left-sidebar.html">Indoor Collections</a></li>
-													<li><a href="category-right-sidebar.html">Outdoor Collections</a>
+													<li><a href="/product/cat/search?mood=indoor&dep=men">Indoor Collections</a></li>
+													<li><a href="/product/cat/search?mood=outdoor&dep=men">Outdoor Collections</a>
 													</li>
-													<li><a href="category-list.html">Footwear</a></li>
-													<li><a href="category-2columns.html">Watches</a></li>
+													<li><a href="/product/footwear/search?dep=men">Footwear</a></li>
+													<li><a href="/product/watches/search?dep=men">Watches</a></li>
 
 												</ul>
 											</div>
@@ -88,11 +87,11 @@
 											<div class="mega-custom-menu">
 												<h2 class="title">Women's</h2>
 												<ul>
-													<li><a href="category-left-sidebar.html">Indoor Collections</a></li>
-													<li><a href="category-right-sidebar.html">Outdoor Collections</a>
+													<li><a href="/product/cat/search?mood=indoo&dep=women">Indoor Collections</a></li>
+													<li><a href="/product/cat/search?mood=outdoor&dep=women">Outdoor Collections</a>
 													</li>
-													<li><a href="category-list.html">Footwear</a></li>
-													<li><a href="category-2columns.html">Watches</a></li>
+													<li><a href="/product/footwear/search?dep=women">Footwear</a></li>
+													<li><a href="/product/watches/search?dep=women">Watches</a></li>
 												</ul>
 											</div>
 										</div>
@@ -100,36 +99,18 @@
 											<div class="mega-custom-menu">
 												<h2 class="title">Kid's</h2>
 												<ul>
-													<li><a href="category-left-sidebar.html">Indoor Collections</a></li>
-													<li><a href="category-right-sidebar.html">Outdoor Collections</a>
+													<li><a href="/product/cat/search?mood=indoo&dep=kid">Indoor Collections</a></li>
+													<li><a href="/product/cat/search?mood=outdoor&dep=kid">Outdoor Collections</a>
 													</li>
-													<li><a href="category-list.html">Footwear</a></li>
-													<li><a href="category-2columns.html">Watches</a></li>
+													<li><a href="/product/footwear/search?dep=kid">Footwear</a></li>
+													<li><a href="/product/watches/search?dep=kid">Watches</a></li>
 												</ul>
 											</div>
 										</div>
 									</div>
 								</div>
 							</li>
-							<li class="menu-item-has-children item-megamenu">
-								<a href="#">categories</a>
-								<div style="width: 400px;; background:#fff; "
-									class="sub-menu megamenu megamenu-bg">
-									<div class="row">
-
-										<div class="mega-custom-menu">
-											<h2 class="title">Brands</h2>
-											<ul>
-												<li><a href="category-left-sidebar.html">Indoor Collections</a></li>
-												<li><a href="category-right-sidebar.html">Outdoor Collections</a></li>
-												<li><a href="category-list.html">Footwear</a></li>
-												<li><a href="category-2columns.html">Watches</a></li>
-
-											</ul>
-										</div>
-										</div>
-								</div>
-							</li> --}}
+							 
 							<li class="item-megamenu"><a href="/allproduct">All Products</a></li>
 						</ul>
 						<span class="mobile-navigation"><i class="fa fa-bars"></i></span>

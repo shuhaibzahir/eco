@@ -11,11 +11,11 @@
         font-size: 16px;
     }
     #progressbar {
-        margin-bottom: 30px;
+        margin-bottom: 10px;
         overflow: hidden;
         color: #455A64;
         padding-left: 0px;
-        margin-top: 30px
+        margin-top: 10px;
     }
 
     #progressbar li {
@@ -96,8 +96,10 @@
 
     .card {
         background-color: #fff;
-        box-shadow: 0px 0px 3px 0px rgb(105, 105, 105);
-        z-index: 0
+
+        
+        z-index: 0;
+         
     }
 
     small {
@@ -182,21 +184,21 @@
                                 <div class="form-group">
                                     <label for="fullName">Full Name</label>
                                     <input type="text" class="form-control" id="fullName" value="{{usernav.name}}"
-                                        placeholder="Enter full name" name="userFullname" disabled>
+                                        placeholder="Enter full name" name="userFullname" disabled required>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="eMail">Email</label>
                                     <input type="email" class="form-control" name="email" id="eMail"
-                                        value="{{usernav.email}}" placeholder="Enter email ID" disabled>
+                                        value="{{usernav.email}}" placeholder="Enter email ID" disabled required>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="phone">Phone</label>
                                     <input type="text" class="form-control" name="phone" id="phone"
-                                        value="{{usernav.phone}}" placeholder="Enter phone number" disabled>
+                                        value="{{usernav.phone}}" placeholder="Enter phone number" disabled required>
                                 </div>
                             </div>
 
@@ -225,16 +227,43 @@
                         <button type="button" id="address_manage" class="btn btn-primary">
                             Address manage
                         </button>
-                        <button type="button" id="OrderHistory" class="btn btn-primary">
+                        <button type="button" id="order_div" class="btn btn-primary">
                             Order History
                         </button>
+                         <button type="button" id="referal" class="btn btn-primary">
+                            Referal
+                        </button>
                     </div>
-                    <div class="row" style="display: none;" id="address_div">
+
+                    <div class="row" style="display: none;" id="referalDiv">
+
+                        <div class="container ">
+                            <h1>Referal Details</h1>
+
+
+                             <div class="contianer " style=" display:flex; justify-content:start; padding-top:30px">
+                            <div>
+                              <h3>Referal Code</h3>
+                             <input type="text"  class="form-control"  onclick="copyFuction()" value="{{userReferal}}"  style="font-size: 18px; width:50%; border:2px solid rgb(5, 128, 5);"  id="referalCode">
+                             </div>
+                             <div>
+                              <h3>Pocket Balance</h3>
+                                <h1>₹ {{referalEarnings}}  /-</h1>
+                             </div>
+                            </div>
+                            
+                               
+                          </div>      
+                     </div>
+
+
+                    <div class="row"  style="display: none;"  id="address_div">
                         <div class="container">
                             <h1>Address </h1>
                         </div>
                         {{#each address}}
-                        <div class="card" style="width: 25rem;">
+                            
+                             <div class="card " style="width: 25rem;">
                             <div class="card-body">
                                 <h2 class="card-title">{{AddressName}}</h2>
                                 <h3 class="card-subtitle mb-2 text-muted">{{HouseNo}}</h3>
@@ -245,30 +274,20 @@
                                 <a href="/delete/address/{{AddressName}}" class="btn btn-danger" onclick="return confirm('are your sure?')">Delete</a>
 
                             </div>
-                            {{/each}}
-                        </div>
-                    </div>
-                    <div class="container" id="ordersDetails" style="display: none;">
-                        {{#each orders}}
-                          
-                            {{#each products}}
-                          
-                        <div class="row">
-                            <div class="card px-2">
-                                <div class="card-header bg-white">
-                                    <div class="row justify-content-between">
-                                        <div class="col">
-                                            <p class="text-muted"> Order ID <span
-                                                    class="font-weight-bold text-dark">{{../_id}}</span></p>
-                                            <p class="text-muted"> Place On <span
-                                                    class="font-weight-bold text-dark">{{../placedDated}}</span>
-                                            </p>
-
-                                        </div>
-
-                                    </div>
                                 </div>
-                                <div class="card-body">
+                            {{/each}}
+                        
+                    </div>
+                     
+                      <div class="row"  style="display: none;"  id="order-history"> 
+                         
+                     
+                            {{#each orders}}
+                           {{#each products}}
+                           <div class="col-md-6 p-3">
+                             <div class="card" >
+                                
+                                <div class="card-body" >
                                     <div class="media flex-column flex-sm-row">
                                         <div class="media-body ">
                                             <h5 class="bold">{{productname}}</h5>
@@ -279,7 +298,7 @@
                                             {{#ne status 'SHIPPED'}}
                                             {{#ne status 'DELIVERED'}}
                                             {{#ne status 'CANCEL'}}
-                                            <button class="btn btn-danger" onclick="cancelProduct('{{../_id}}' ,'{{pid}}')" style="padding: 8px 20px; font-size:16px">Cancel</button>
+                                            <button class="btn btn-danger"  onclick="cancelProduct('{{../_id}}' ,'{{pid}}')" style="padding: 8px 18px; font-size:8px">Cancel</button>
                                             {{/ne}}
                                             {{/ne}}
                                             {{/ne}}
@@ -325,7 +344,7 @@
                                 </div>
                                 {{else}}
                                   {{#ifEqual status 'DELIVERED'}}
-                                          <div class="row px-3">
+                                    <div class="row px-3">
                                     <div class="col">
                                         <ul id="progressbar">
                                             <li class="step0 active " id="step1">PLACED</li>
@@ -333,17 +352,23 @@
                                             <li class="step0  active text-muted text-right" id="step3">DELIVERED</li>
                                         </ul>
                                     </div>
+
                                 </div>
+                                <a class="btn btn-success" href="/rating/product/{{pid}}">Review</a>
                                {{/ifEqual}}
                                    {{/ifEqual}}
                                  {{/ifEqual}}
                                  {{/ifEqual}}
                             </div>
-                        </div>
+                             </div>
+                        
                             {{/each}}
                         {{/each }} 
-                    </div>
-                </div>
+                         
+                  </div>
+                    
+               </div>
+                 
             </div>
         </div>
     </div>
@@ -361,23 +386,24 @@
 
             </div>
             <div class="modal-body">
-                <form action="/user-pass/change" style="padding: 20px;">
+                <form  id="changePassword" style="padding: 20px;">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Old Password</label>
-                        <input type="password" class="form-control">
+                        <input type="password" name="oldpass" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">New Password</label>
-                        <input type="text" class="form-control">
+                        <input type="text" id="newpass" name="newpass" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control">
-                    </div>
+                        <input type="password" id="cpass"  name="cpass" class="form-control">
 
+                    </div>
+                        <p id="erroralert" style="color: red;"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" id="change-pass-cancle" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary"> change</button>
             </div>
             </form>
@@ -430,19 +456,33 @@
         var cropper1;
 
         $('#image1').change(function (event) {
-            var files = event.target.files;
+            var file = this.files[0];
+            var fileType = file["type"];
+             if (fileType.search('image') >= 0) {
+   
+             var files = event.target.files;
             var done = function (url) {
                 image1.src = url;
                 modal1.modal('show');
             };
-
-            if (files && files.length > 0) {
+             if (files && files.length > 0) {
                 reader = new FileReader();
                 reader.onload = function (event) {
                     done(reader.result);
                 };
                 reader.readAsDataURL(files[0]);
             }
+            }else{
+                    Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: "please Select Image",
+                    showConfirmButton: true,
+                   
+                })
+                this.value=""
+            }
+           
         });
 
         modal1.on('shown.bs.modal', function () {
@@ -480,6 +520,19 @@
 
     })
 
+</script>
+<script>
+    function copyFuction(){
+   
+  var copyText = document.getElementById("referalCode");
+ 
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+ 
+  document.execCommand("copy");
+ 
+  alert("Copied the text: " + copyText.value);
+}
 </script>
 <script>
     function canel() {
@@ -520,16 +573,33 @@
 
 <script>
     $(document).ready(function () {
+
+      
+      
+
+          $("#order_div").click(function () {
+              
+            $("#order-history").toggle();
+            $("#referalDiv").hide();
+            $("#address_div").hide();
+        });
+
         $("#address_manage").click(function () {
-            $("#ordersDetails").hide();
+              
+            $("#order-history").hide();
+              $("#referalDiv").hide();
             $("#address_div").toggle();
         });
 
 
 
-        $("#OrderHistory").click(function () {
+       
+
+        $("#referal").click(function () {
+            $("#referalDiv").toggle();
             $("#address_div").hide();
-            $("#ordersDetails").toggle();
+            $("#order-history").hide();
+             
         });
 
     });

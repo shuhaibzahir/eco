@@ -1,0 +1,199 @@
+<style>
+    #datatables>thead>tr>th[class*="sort"]::before {
+        display: none
+    }
+
+    #datatables>thead>tr>th[class*="sort"]::after {
+        display: none
+    }
+
+    .canceled>td {
+        background-color: #ff7e9e;
+        color: rgb(22, 22, 22);
+
+    }
+
+    .canceled>td>a {
+        text-decoration-color: none;
+        color: #ffff;
+
+    }
+
+    .delivered>td {
+        background-color: #affdcd;
+    }
+
+    .delivered>td>a {
+        text-decoration-color: none;
+        color: rgb(27, 27, 27);
+    }
+
+    td>select>option {
+        margin: 40px;
+        background: rgba(0, 0, 0, 0.3);
+        color: #fff;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    .dt-button:hover {
+        background-color: rgb(230, 0, 96) !important;
+        border: none;
+    }
+</style>
+
+<div class="content">
+    <div class="container-fluid">
+        <form action="/admin/sales-report/filter" method="GET">
+            <div class="row justify-content-center" style="align-items: center">
+
+
+
+
+                {{!-- from date --}}
+                <div class="col-md-3">
+                    <div class="card ">
+                        <div class="card-header card-header-rose card-header-text">
+                            <div class="card-icon">
+                                <i class="material-icons">library_books</i>
+                            </div>
+                            <h4 class="card-title">From Date</h4>
+                        </div>
+                        <div class="card-body ">
+                            <div class="form-group">
+                                <input  type="date" id="startdate" class="selectdate form-control" onchange="selectdate()"  name="fromdate" required>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{!-- to date --}}
+                <div class="col-md-3">
+                    <div class="card ">
+                        <div class="card-header card-header-rose card-header-text">
+                            <div class="card-icon">
+                                <i class="material-icons">library_books</i>
+                            </div>
+                            <h4 class="card-title">To Date</h4>
+                        </div>
+                        <div class="card-body ">
+                            <div class="form-group">
+                                <input style="margin-left: 1rem;" type="date" id="EndDate"   class="selectdate form-control"  name="todate" required>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-fill btn-rose">Submit</button>
+
+
+            </div>
+        </form>
+        <div class="row" style="padding-left: 35px;">
+            <a href="/admin/sales-report/today" class="btn btn-fill btn-success">Today</a>
+            <a href="/admin/sales-report/weekly" class="btn btn-fill btn-success">Weekly</a>
+            <a href="/admin/sales-report/monthly" class="btn btn-fill btn-light">Monthly</a>
+            <a href="/admin/sales-report/yearly" class="btn btn-fill btn-primary">Yearly</a>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon">
+                            <i class="fas fa-store-alt"></i>
+                        </div>
+                        <h4 class="card-title">All Orders</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div class="material-datatables">
+                            <table id="datatablesales" class="table table-striped nowrap table-no-bordered table-hover"
+                                cellspacing="0" width="100%" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Order Id</th>
+
+                                        <th>Address</th>
+                                        <th>Product</th>
+                                        <th>Pay-method</th>
+                                        <th>Ship-charge</th>
+                                        <th>Total</th>
+
+                                        {{!-- //class="disabled-sorting text-right"// --}}
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th> </th>
+                                        <th> </th>
+                                        <th>Total Order </th>
+                                        <th> </th>
+
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+
+                                    {{#each orderData}}
+                                    {{#each products}}
+
+
+                                    <tr>
+                                        <td>{{../_id}}</td>
+                                        <td>
+                                            <p>{{../address.HouseNo}}<br>{{../address.Address}}<br>{{../address.Town}},{{../address.Pincode}}
+                                            </p>
+                                        </td>
+                                        <td>{{productname}}</td>
+                                        <td>{{../payment}}</td>
+                                        <td>{{../shippingCharg}}</td>
+                                        <td> {{total}} </td>
+
+
+
+
+                                    </tr>
+                                    {{/each}}
+                                    {{/each}}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+							
+							
+<script>
+    
+        $(function(){
+		var dttoday = new Date();
+        var month = dttoday.getMonth()+1;
+        var day = dttoday.getDate();
+        var year = dttoday.getFullYear();
+        if(month<10)
+        month = '0' + month.toString();
+        if(day<10)
+        day = '0' + day.toString();
+        var maxdate = year + '-' + month + '-' + day;
+        $('.selectdate').attr('max',maxdate);
+         })
+</script>
+
+
+<script>
+    function selectdate(){
+	var StartDate= document.getElementById('startdate').value;
+    document.getElementById('EndDate').setAttribute('min',StartDate)
+      }
+   
+</script>
+
+ 
+ 

@@ -11,7 +11,7 @@
 	data-loop="true" data-autoplay="true" style="padding-bottom:50px">
 	{{#each banner}}
 
-	<a href=""><img src="/banners/{{_id}}-001.jpg" alt=""></a>
+	<a href="/special/off/?section={{sectionName}}&dep={{department}}&discount={{disStart}}&disend={{disEnd}}"><img src="/banners/{{_id}}-001.jpg" alt=""></a>
 
 
 	{{/each}}
@@ -23,7 +23,7 @@
 		<div class="col-sm-5">
 			<div class="banner-text">
 				<div class="image">
-					<a class="banner-opacity" href="#"><img src="/spbanner/{{spbanner._id}}-001.jpg" alt=""></a>
+					<a class="banner-opacity" href="/brand-off?brand={{spbanner.Brand}}&type={{spbanner.Type}}&des={{spbanner.disStart}}&desend={{spbanner.disEnd}}"><img src="/spbanner/{{spbanner._id}}-001.jpg" alt=""></a>
 				</div>
 				<div class="content-text">
 
@@ -31,14 +31,14 @@
 					<h3 class="title">{{spbanner.Title}} <span>{{spbanner.disEnd}}% OFF</span></h3>
 
 					<span class="sub-title">Checkout Our HotSale Products This Week !</span>
-					<a href="#" class="button">SHOP PRODUCTS</a>
+					<a href="/brand-off?brand={{spbanner.Brand}}&type={{spbanner.Type}}&des={{spbanner.disStart}}&desend={{spbanner.disEnd}}" class="button">SHOP PRODUCTS</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-4">
 			<div class="banner-text style2">
 				<div class="image">
-					<a class="banner-opacity "   href="#"><img   src="/images/mainbrands/men's.jpg" alt=""></a>
+					<a class="banner-opacity " href="/products/Department?filter=men"><img src="/images/mainbrands/men's.jpg" alt=""></a>
 				</div>
 				<div class="content-text">
 					<h3 class="title">MENSWEAR</h3>
@@ -48,7 +48,7 @@
 		<div class="col-sm-3">
 			<div class="banner-text style2">
 				<div class="image">
-					<a class="banner-opacity" href="#"><img src="/images/mainbrands/kid's.jpg" alt="" style=""></a>
+					<a class="banner-opacity" href="/products/Department?filter=kid"><img src="/images/mainbrands/kid's.jpg" alt="" style=""></a>
 				</div>
 				<div class="content-text">
 					<h3 class="title">KID'S ZONE</h3>
@@ -56,7 +56,7 @@
 			</div>
 			<div class="banner-text style2">
 				<div class="image ">
-					<a class="banner-opacity" href="#"><img src="/images/mainbrands/watch.jpg" alt=""></a>
+					<a class="banner-opacity" href="/allproduct/watches"><img src="/images/mainbrands/watch.jpg" alt=""></a>
 				</div>
 				<div class="content-text">
 					<h3 class="title">WATCHES</h3>
@@ -76,42 +76,42 @@
 		data-responsive='{"0":{"items":1},"600":{"items":2},"1000":{"items":4}}'>
 		<div class="banner-text style4">
 			<div class="image ">
-				<a href="#"><img src="/images/mainbrands/adidas.jpg" class="brandImagview" alt=""></a>
+				<a href="/top-brands?brand=adidas"><img src="/images/mainbrands/adidas.jpg" class="brandImagview" alt=""></a>
 			</div>
 			<div class="content-text">
 				<h4 class="subtitle">Adidas</h4>
 				<h3 class="title">Men fashion</h3>
-				<a class="shop-now" href="#">shop now!</a>
+				<a class="shop-now" href="/top-brands?brand=adidas">shop now!</a>
 			</div>
 		</div>
 		<div class="banner-text style4">
 			<div class="image">
-				<a href="#"><img src="/images/mainbrands/nikes.jpg" class="brandImagview" alt=""> </a>
+				<a href="/top-brands?brand=nike"><img src="/images/mainbrands/nikes.jpg" class="brandImagview" alt=""> </a>
 			</div>
 			<div class="content-text">
 				<h4 class="subtitle">Nike</h4>
 				<h3 class="title">Nike Trending</h3>
-				<a class="shop-now" href="#">shop now!</a>
+				<a class="shop-now" href="/top-brands?brand=nike">shop now!</a>
 			</div>
 		</div>
 		<div class="banner-text style4">
 			<div class="image">
-				<a href="#"><img src="/images/mainbrands/Levis.jpg" class="brandImagview" alt=""></a>
+				<a ><img src="/images/mainbrands/Levis.jpg" class="brandImagview" alt=""></a>
 			</div>
 			<div class="content-text">
 				<h4 class="subtitle">Levi's </h4>
 				<h3 class="title">Trend With Levi's</h3>
-				<a class="shop-now" href="#">shop now!</a>
+				<a class="shop-now" href="/top-brands?brand=levies">shop now!</a>
 			</div>
 		</div>
 		<div class="banner-text style4">
 			<div class="image">
-				<a href="#"><img src="/images/mainbrands/allen.jpg"  class="brandImagview"alt=""></a>
+				<a href="#"><img src="/images/mainbrands/allen.jpg" class="brandImagview" alt=""></a>
 			</div>
 			<div class="content-text">
 				<h4 class="subtitle">Allen Solly</h4>
 				<h3 class="title">Allen Solly Trend</h3>
-				<a class="shop-now" href="#">shop now!</a>
+				<a class="shop-now" href="/top-brands?brand=ALLEN SOLLY">shop now!</a>
 			</div>
 		</div>
 	</div>
@@ -120,11 +120,11 @@
 	<div class="section-brand-slide">
 		<div class="brands-slide owl-carousel nav-center-center nav-style7" data-nav="true" data-dots="false"
 			data-loop="true" data-margin="60" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":5}}'>
-			<a href="#"><img src="images/brands/brand1.png" alt=""></a>
-			<a href="#"><img src="images/brands/brand2.png" alt=""></a>
-			<a href="#"><img src="images/brands/brand3.png" alt=""></a>
-			<a href="#"><img src="images/brands/brand4.png" alt=""></a>
-			<a href="#"><img src="images/brands/brand5.png" alt=""></a>
+			<a href="/top-brands?brand=adidas"><img src="/images/brands/adidas.png" alt=""></a>
+			<a href="/top-brands?brand=LEVIES"><img src="/images/brands/levis.png" alt=""></a>
+			<a href="/top-brands?brand=nike"><img src="/images/brands/nike.png" alt=""></a>
+			<a href="/top-brands?brand=rado"><img src="/images/brands/rado.png" alt=""></a>
+			<a href="/top-brands?brand=fastrack"><img src="/images/brands/fastrack.png" alt=""></a>
 		</div>
 	</div>
 
@@ -135,43 +135,24 @@
 			<h3>Special for Men's</h3>
 			<span class="driver"></span>
 		</div>
-		 
-	
-		<div class="col-sm-6 margin-top-30"  >
+
+
+		<div class="col-sm-6 margin-top-30">
 			<div class="banner-text style2">
 				<div class="image">
-					<a class="banner-opacity "    href="#"><img src="/images/mainbrands/menIndoor.jpg" alt=""></a>
+					<a class="banner-opacity " href="/product/cat/search?mood=indoo&dep=men"><img
+							src="/images/mainbrands/menIndoor.jpg" alt=""></a>
 				</div>
 				<div class="content-text">
 					<h3 class="title">Men's Indoor</h3>
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-6 margin-top-30"  >
+		<div class="col-sm-6 margin-top-30">
 			<div class="banner-text style2">
 				<div class="image">
-					<a class="banner-opacity "    href="#"><img src="/images/mainbrands/men'soutdoor.jpg"  alt=""></a>
-				</div>
-				<div class="content-text">
-					<h3 class="title">Women's Indoor</h3>
-				</div>
-			</div>
-		</div>
-		 
-	</div>
-	{{!-- girls section --}}
-	 <div class="row margin-top-60">
-		<div class="section-title style2 text-center">
-			<span class="sub-title">Check out our Featured today!</span>
-			<h3>Special for Women's</h3>
-			<span class="driver"></span>
-		</div>
-		 
-	
-		<div class="col-sm-6 margin-top-30"  >
-			<div class="banner-text style2">
-				<div class="image">
-					<a class="banner-opacity "    href="#"><img src="/images/mainbrands/womenindoor.jpg" alt=""></a>
+					<a class="banner-opacity " href="/product/cat/search?mood=outdoor&dep=men"><img
+							src="/images/mainbrands/men'soutdoor.jpg" alt=""></a>
 				</div>
 				<div class="content-text">
 					<h3 class="title">Women's Indoor</h3>
@@ -179,10 +160,32 @@
 			</div>
 		</div>
 
-		 		<div class="col-sm-6 margin-top-30"  >
+	</div>
+	{{!-- girls section --}}
+	<div class="row margin-top-60">
+		<div class="section-title style2 text-center">
+			<span class="sub-title">Check out our Featured today!</span>
+			<h3>Special for Women's</h3>
+			<span class="driver"></span>
+		</div>
+
+
+		<div class="col-sm-6 margin-top-30">
 			<div class="banner-text style2">
 				<div class="image">
-					<a class="banner-opacity "    href="#"><img src="/images/mainbrands/womenoutdoor.jpg" class="brandImagview" alt=""></a>
+					<a class="banner-opacity " href="/product/cat/search?mood=indoo&dep=women"><img src="/images/mainbrands/womenindoor.jpg" alt=""></a>
+				</div>
+				<div class="content-text">
+					<h3 class="title">Women's Indoor</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-6 margin-top-30">
+			<div class="banner-text style2">
+				<div class="image">
+					<a class="banner-opacity " href="/product/cat/search?mood=outdoor&dep=women"><img src="/images/mainbrands/womenoutdoor.jpg"
+							class="brandImagview" alt=""></a>
 				</div>
 				<div class="content-text">
 					<h3 class="title">Women's Outdoor</h3>
@@ -191,7 +194,7 @@
 		</div>
 	</div>
 	{{!-- watch section --}}
-	<div class="margin-top-60 section-lasttest-blog">
+	{{!-- <div class="margin-top-60 section-lasttest-blog">
 		<div class="section-title text-center">
 			<h3>Watches</h3>
 		</div>
@@ -216,7 +219,7 @@
 
 			</div>
 		</div>
-	</div>
+	</div> --}}
 
 	<div class="margin-top-60 margin-bottom-30">
 		<div class="row">
@@ -257,14 +260,14 @@
 						<span class="text-primary PlayfairDisplay">Talk to Us Now !</span>
 						<h3 class="widget-title">Contact Us</h3>
 						<div class="content">
-							<p class="address">5701 Outlets at Bangalore, Madiwala 560064 INDIA	.</p>
+							<p class="address">5701 Outlets at Bangalore, Madiwala 560064 INDIA .</p>
 							<p class="phone"><i class="fa fa-phone"></i> (+91) 90482 68028</p>
 						</div>
 					</div>
 				</div>
-				 
+
 			</div>
 		</div>
 	</div>
-	 
+
 </footer>

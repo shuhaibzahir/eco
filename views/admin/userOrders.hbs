@@ -13,7 +13,7 @@
 
                 </div>
                 <div class="row justify-content-center">
-                    <div class="">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-header card-header-tabs card-header-rose">
                                 <div class="nav-tabs-navigation">
@@ -22,7 +22,7 @@
                                         <ul class="nav nav-tabs" data-tabs="tabs">
                                             <li class="nav-item">
                                                 <a class="nav-link active" href="#PLACED" data-toggle="tab">
-                                                    <i class="fas fa-shopping-cart"></i> PLACED
+                                                    <i class="fas fa-shopping-cart"></i> PLACED/SHIPPED
                                                     <div class="ripple-container"></div>
                                                 </a>
                                             </li>
@@ -51,7 +51,7 @@
                                                     <th>Product Name</th>
                                                     <th>Type</th>
                                                     <th>Status</th>
-                                                    <th>Placed Date</th>
+                                                    <th>Place/Ship Date</th>
                                                     <th>Quantity</th>
                                                     <th>Total</th>
                                                     <th>Pay Method</th>
@@ -64,7 +64,7 @@
                                                     <td>{{productname}}</td>
                                                     <td>{{pType}}</td>
                                                     <td>{{status}}</td>
-                                                    <td>{{../placedDated}}</td>
+                                                    <td class="dates">{{../placedDated}}</td>
                                                      <td class="text-center">{{qty}}</td>
                                                     <td> ₹ {{total}}</td>
                                                     <td>{{../payment}}</td>
@@ -95,7 +95,7 @@
                                                     <th>Product Name</th>
                                                     <th>Type</th>
                                                     <th>Status</th>
-                                                    <th>Placed Date</th>
+                                                    <th>Delivered</th>
                                                      <th>Quantity</th>
                                                     <th>Total</th>
                                                     <th>Pay Method</th>
@@ -110,7 +110,7 @@
                                                     <td>{{productname}}</td>
                                                     <td>{{pType}}</td>
                                                     <td>{{status}}</td>
-                                                    <td>{{../placedDated}}</td>
+                                                    <td class="dates">{{DeliveredDate}}</td>
                                                      <td class="text-center">{{qty}}</td>
                                                     <td> ₹ {{total}}</td>
                                                     <td>{{../payment}}</td>
@@ -132,7 +132,7 @@
                                                     <th>Product Name</th>
                                                     <th>Type</th>
                                                     <th>Status</th>
-                                                    <th>Placed Date</th>
+                                                  
                                                      <th>Quantity</th>
                                                     <th>Total</th>
                                                     <th>Pay Method</th>
@@ -147,7 +147,7 @@
                                                     <td>{{productname}}</td>
                                                     <td>{{pType}}</td>
                                                     <td>{{status}}</td>
-                                                    <td>{{../placedDated}}</td>
+                                                    
                                                      <td class="text-center">{{qty}}</td>
                                                     <td> ₹ {{total}}</td>
                                                     <td>{{../payment}}</td>
@@ -170,3 +170,25 @@
         </div>
     </div>
 </div>
+
+  <script>
+    function changeDate(){
+      let orderdates=  document.querySelectorAll(".dates")
+      orderdates.forEach((item)=>{
+         var options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+
+         let date = item.innerHTML
+         let newDate = new Date(date).toLocaleString("en-US", options)
+         item.innerHTML= newDate
+
+      })
+    }
+  </script>
+  <script>
+    changeDate()
+  </script>

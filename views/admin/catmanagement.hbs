@@ -46,7 +46,7 @@
                                             <div class="card-body ">
                                                 <form method="POST" id="subCategory" action="/admin/add-subcat"
                                                     enctype="multipart/form-data">
-                                                    <div class="row ">
+                                                    <div class="row  d-flex" style="justify-content:space-evenly;">
                                                           <div class="col-4" >
                                                             <label class="bmd-label-floating">Select Product
                                                                 Type</label>
@@ -54,8 +54,8 @@
 
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
-                                                                    title="Single Select" name="section" required>
-                                                                    <option disabled selected>Product Type</option>
+                                                                    title="Select Section" name="section" required>
+                                                                  
                                                                     {{#each types}}
                                                                     <option value="{{section}}">{{section}}</option>
                                                                     {{/each}}
@@ -69,8 +69,8 @@
 
                                                                 <select class="selectpicker" data-size="7"
                                                                     data-style="btn btn-success btn-round"
-                                                                    title="Single Select" name="option" required>
-                                                                    <option disabled selected>Select Option</option>
+                                                                    title="Select Option" name="option" required>
+                                                                   
 
                                                                     <option value="brand ">Brand</option>
                                                                     <option value="category ">Category</option>

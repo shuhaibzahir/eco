@@ -100,6 +100,14 @@
                                     </td>
                                     {{/ifEqual}}
                                 </tr>
+                                   
+                                    {{#ne referal 0}}
+                                    <td>Referal Bonus</td>
+                                    <td>
+                                        <label style="color: green;" >₹<span id="referal">{{referal}}</span></label>
+                                    </td>
+                                    {{/ne}}
+                                </tr>
                                 <tr class="order-total">
                                     <td>Toal</td>
                                     <td> <span class="price" id="grandTotal">{{grandTotal}}</span>  <span class="price">₹</span></td>

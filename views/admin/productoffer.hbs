@@ -1,0 +1,204 @@
+<head>
+    <meta http-equiv="refresh" content="30">
+</head>
+
+<style>
+    .arrowbtn {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        background: rgb(71, 180, 71);
+        border: none;
+        font-size: 20px;
+         
+        text-align: center;
+        color: #ffff;
+        transition: 0.3s ease-in;
+        padding: 0px 15px;
+        border-radius: 15px;
+
+    }
+
+    .arrowbtn:hover {
+        color: #ffff;
+    }
+
+    .arrowbtn i {
+        cursor: pointer;
+    }
+
+    input[type="date"] {
+        border: none;
+
+    }
+
+    .exp {
+        background: rgb(197, 60, 60);
+        color: #ffff;
+    }
+</style>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon"  style="background: rgb(43, 138, 64);">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Product Offer</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div class="material-datatables">
+                            <table id="datatables" class="table table-striped table-no-bordered table-hover"
+                                cellspacing="0" width="100%" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="disabled-sorting">Product Name</th>
+                                        <th class="disabled-sorting">Real Prize</th>
+                                        <th class="disabled-sorting">Offer Prize</th>
+                                      
+                                        <th class="disabled-sorting">Product Discount</th>
+                                        <th class="disabled-sorting">Offer expire Date</th>
+                                        <th class="disabled-sorting  ">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Real Prize</th>
+                                        <th>Offer Prize</th>
+                                        
+                                        <th>Discount</th>
+                                        <th>Offer Expire Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    {{#each allproduct}}
+                                    <tr>
+                                        <td>{{Name}}</td>
+                                        <td>₹ <span>{{Prize}}</span> </td>
+                                        <td>₹ <span id="prize{{_id}}">{{OfferPrize}}</span> </td>
+                                       
+                                        <td><span id="discount{{_id}}">{{Discount}}</span> %</td>
+                                              <span class="expdate" hidden>{{ExpOffer}}</span>  
+                                        <td><input type="date" class="date" id="uptodate{{_id}}" data="{{ExpOffer}}" ></td>
+                                        <td class="">
+                                            <div style="position:relative; ">
+
+                                                <input type="number" class="form-control offerinput"
+                                                    placeholder="Enter New Offer" ng-pattern="/^[0-9]+$/" max="100"
+                                                    onchange="chekNumber()" id="{{_id}}" required>
+                                                <button class="arrowbtn btn" onclick="changeProductOffer('{{_id}}')"><i
+                                                        class="fas fa-arrow-right"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+        </div>
+        <!-- end row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon" style="background: rgb(190, 52, 52);">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h4 class="card-title">Product Offer Expire </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div class="material-datatables">
+                            <table id="datatables" class="table table-striped table-no-bordered table-hover"
+                                cellspacing="0" width="100%" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="disabled-sorting">Product Name</th>
+                                        <th class="disabled-sorting">Real Prize</th>
+                                        <th class="disabled-sorting">Offer Prize</th>
+
+                                        <th class="disabled-sorting">Discount</th>
+
+                                        <th class="disabled-sorting  ">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Real Prize</th>
+                                        <th>Offer Prize</th>
+
+                                        <th>Discount</th>
+
+                                        <th>Actions</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    {{#each expProducts}}
+                                    <tr>
+                                        <td class="exp">{{Name}}</td>
+                                        <td class="exp">₹ <span>{{Prize}}</span> </td>
+                                        <td class="exp">₹ <span>{{OfferPrize}}</td>
+                                        <td class="exp"><span>{{Discount}}</span> %</td>
+                                        <td style="color: rgb(194, 51, 51); cursor:pointer" onclick="deleteProductOffer('{{_id}}')"><i class="fas fa-trash"></i></td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+        </div>
+    </div>
+</div>
+<script>
+
+    let allDate = document.querySelectorAll(".date")
+    let testDate = new Date().toLocaleDateString().split("/").reverse().join("-")
+     
+     allDate.forEach(function (single) {
+        let expDate = single.getAttribute("data")
+        expDate =  new Date(expDate).toLocaleDateString().split("/").reverse().join("-")
+        single.value = expDate
+        
+        single.setAttribute('min', testDate)
+    })
+
+</script>
+<script>
+
+    $().ready(function () {
+
+        $('#datatables').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            responsive: true,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search records",
+            }
+        });
+    })
+</script>
