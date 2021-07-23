@@ -5,11 +5,20 @@
         left: 0;
         background: red;
     }
+    .navarrow > i{
+        color: #2e2e2e;
+        font-size:3rem;
+        transition: 0.3s ease-in;
+    }
+    .navarrow:hover> i{
+        color: #ca9d09;
+        transform: scale(1.2)
+    }
 </style>
 
 <div class="banner">
     <div class="banner-content">
-        <img src="/images/mainbrands/catBanner.jpg" alt="">
+        <img src="/images/mainbrands/catBanner.png" alt="">
     </div>
 </div>
 <div class="main-container left-slidebar">
@@ -58,13 +67,13 @@
                     {{/each}}
                 </ul>
                 <div class="navigation">
-                    <ul>
+                    <ul class="d-flex justify-content-center">
                         {{#if prevBtn}}
-                        <li><a  href="{{prevUrl}}"><i class="fa fa-long-arrow-left"></i></a></li>
+                        <li><a  href="{{prevUrl}}" class="navarrow" onclick="changePageNumber(-1)"><i class="fas fa-arrow-circle-left"></i></a></li>
                        {{/if}}
-                      
+                        <li><h3 style="font-weight: bold;" id="page-number">1</h3></li>
                         {{#if chekckButton}}
-                        <li><a   href="{{nexturl}}"><i class="fa fa-long-arrow-right"></i></a></li>
+                        <li><a   href="{{nexturl}}" class="navarrow" onclick="changePageNumber(1)"><i class="fas fa-arrow-circle-right"></i></a></li>
                         {{/if}}
                     </ul>
                 </div>
@@ -175,4 +184,4 @@
       price.attr("data-value-min",start)
       price.attr("data-value-max",end)
   </script>
-  
+ 

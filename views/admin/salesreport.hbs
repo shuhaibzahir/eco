@@ -107,6 +107,9 @@
                         <div class="toolbar">
                             <!--        Here you can write extra buttons/actions for the toolbar              -->
                         </div>
+                        {{#ifEqual orderData.length 0}}
+                        <h1>No data </h1>
+                        {{else}}
                         <div class="material-datatables">
                             <table id="datatablesales" class="table table-striped nowrap table-no-bordered table-hover"
                                 cellspacing="0" width="100%" style="width:100%">
@@ -161,6 +164,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{/ifEqual}}
                     </div>
                 </div>
             </div>

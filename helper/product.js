@@ -785,13 +785,13 @@ module.exports = {
             let skipp = wantskip || 0
             let keyword = sec.charAt(0).toUpperCase() + sec.slice(1)
             let count= await Product.countDocuments({[keyword]:{$regex:`^${data.filter}`,$options:"si"}})
-             
+             console.log(count)
            let datas =  await  Product.find({[keyword]:{$regex:`^${data.filter}`,$options:"si"}},(err)=>{
                 if(err){
                     console.log(err)
                 } 
-            }).limit(6)
-            .skip(Number(skipp)).lean() 
+            }).skip(Number(skipp)).limit(6)
+            .lean() 
 
             resolve({re:datas,c:count})
         })

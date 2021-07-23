@@ -1,26 +1,100 @@
 // sign up form
+var validated ={
+    name:false,
+    phone:false,
+    email:false,
+}
+
+function nameChek(){
+ 
+    var name = document.getElementById("namefield").value;
+    var expression = /^[a-zA-Z\s]*$/;
+   
+    if(name == ""){
+        validated.name= false;
+        $("#namefield").css('border', '2px solid red'); 
+        
+    }else if(name.match(expression)){
+        $("#namefield").css('border', '2px solid green'); 
+        validated.name= true;
+    }else{
+   
+        validated.name=false
+        $("#namefield").css('border', '2px solid red'); 
+    }
+
+    }
+
+function chekEmail(){
+    var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    var emailCheck = document.getElementById('emailfield').value;
+ 
+    if(emailCheck == ""){
+        validated.email= false;
+        $("#emailfield").css('border', '2px solid red'); 
+    }else if(emailCheck.match(pattern)){
+        $("#emailfield").css('border', '2px solid green'); 
+        validated.email= true;
+    }else{
+        $("#emailfield").css('border', '2px solid red'); 
+        validated.email=false
+    }
+}
+
+function numberCheck(){
+    var phnPattern = /^\d{10}$/;
+    var phoneNumber = document.getElementById('phonenumberfield').value;
+ 
+    if(phoneNumber.match(phnPattern)){
+        console.log(true)
+        $("#phonenumberfield").css('border', '2px solid green'); 
+        validated.phone= true;
+    }else if (!phoneNumber.match(phnPattern)){
+        console.log(false)
+        $("#phonenumberfield").css('border', '2px solid red'); 
+        validated.phone=false
+     } 
+}
+
+function checkAlltrue(){
+    if(validated.name&&validated.email&&validated.phone){
+        return true
+    }else{
+        return false
+    }
+}
+
+
+
 $('#signup').submit(function (event) {
     event.preventDefault();
     let form = $(this);
     // let action = $('#signup').attr('action');
     // event.preventDefault();
-    $.ajax({
-        url: '/signup',
-        type: 'POST',
-        data: form.serialize(),
-        success: function (data) {
-            if (data.status) {
-                document.getElementById('signup').reset();
-                window.location.href = data.url || "/"
 
-            } else {
-                $("#signup-alert").html(data.msg)
+    let allTrue = checkAlltrue()
+    if(allTrue){
+        $.ajax({
+            url: '/signup',
+            type: 'POST',
+            data: form.serialize(),
+            success: function (data) {
+                if (data.status) {
+                    document.getElementById('signup').reset();
+                    window.location.href = data.url || "/"
+    
+                } else {
+                    $("#signup-alert").html(data.msg)
+                }
+            },
+            error: function (err) {
+                console.log(err)
             }
-        },
-        error: function (err) {
-            console.log(err)
-        }
-    })
+        })
+    }else{
+        $("#signup-alert").html("Incorrect Form Detail")
+    }
+   
 
 })
 

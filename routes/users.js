@@ -671,15 +671,16 @@ router.get("/checkout", auth, (req, res) => {
             let uid = userAddData._id
             let address = data.address
             let pocketMoney = 0;
+            console.log(data.referalEarnings)
             if (data.referalEarnings > 20) {
-                pocketMoney = Math.round((data.referalEarnings / 100) * 50)
+                pocketMoney = Math.round((data.referalEarnings / 100) * 30)
             } else if (!data.referalEarnings) {
                 pocketMoney = 0
             } else {
                 pocketMoney = data.referalEarnings
             }
             let referalStaus = data.referalStatus
-
+           
 
             req.session.user.pocket = pocketMoney
 
@@ -1315,16 +1316,9 @@ router.get("/rating/product/:topic", auth, (req, res) => {
 router.get("/special/off/", (req, res) => {
     if (req.query) {
         let wantskip = req.query.next ||0
-        let orginal = req.originalUrl
-    
-        console.log(slicing)
-        let url =  orginal.split("&") 
-        const str = "next=";
-        if (url.some(v => str === v)) {
-            url.pop()
-        }
-        url = url.join("&")
-       
+         if(wantskip < 0){
+             wantskip =0
+         }
         productDB.getSpecialBannerProduct(req.query,wantskip).then((result) => {
             let skipping = parseInt(wantskip) + 6
             let chekckButton = true;
@@ -1341,9 +1335,9 @@ router.get("/special/off/", (req, res) => {
                 prevBtn = false
             }
 
-            let nexturl = `${url}&next=${skipping}`
+            let nexturl = `/special/off/?section=${req.query.section}&dep=${req.query.dep}&discount=${req.query.discount}&disend=${req.query.disend}&next=${skipping}`
             let prviouValue = parseInt(wantskip) - 6
-            let prevUrl = `${url}&next=${prviouValue}`
+            let prevUrl = `/special/off/?section=${req.query.section}&dep=${req.query.dep}&discount=${req.query.discount}&disend=${req.query.disend}&next=${prviouValue}`
 
 
             let allProduct = result.re 
@@ -1390,9 +1384,10 @@ router.get("/products/:topic", (req, res) => {
     if (req.query) {
         let wantskip = req.query.next || 0
         
-         productDB.getByDepartment(req.params.topic, req.query, wantskip).then((result) => {
+         productDB.getByDepartment(req.params.topic, req.query, wantskip).then((result) => {    
             let skipping = parseInt(wantskip) + 6
             let chekckButton = true;
+
             let prevBtn = true;
             if (skipping < result.c) {
                 skipping = parseInt(wantskip) + 6
@@ -1405,10 +1400,10 @@ router.get("/products/:topic", (req, res) => {
             if (wantskip < 6) {
                 prevBtn = false
             }
-
-            let nexturl = `/products/${req.params.topic}?filter${req.query.filter}&next=${skipping}`
+             
+            let nexturl = `/products/${req.params.topic}?filter=${req.query.filter}&next=${skipping}`
             let prviouValue = parseInt(wantskip) - 6
-            let prevUrl = `/products/${req.params.topic}?filter${req.query.filter}&next=${prviouValue}`
+            let prevUrl = `/products/${req.params.topic}?filter=${req.query.filter}&next=${prviouValue}`
 
 
             let allProduct = result.re

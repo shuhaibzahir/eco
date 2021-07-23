@@ -229,9 +229,9 @@ section .container.active .signinBx .imgBx {
 
           <form  id="signup">
             <h2>Create an account</h2>
-            <input type="text" name="name" placeholder="Username"required />
-            <input type="email" name="email" placeholder="Email Address" required/>
-            <input type="text" name="phone" placeholder="Enter Phone number" required />
+            <input type="text" name="name" id="namefield" onkeyup="nameChek()" placeholder="Username"required />
+            <input type="email" name="email" id="emailfield" onkeyup="chekEmail()" placeholder="Email Address" required/>
+            <input class="phonenumber" type="tel" id="phonenumberfield" name="phone" onkeyup="numberCheck()" placeholder="Enter Phone number" required />
             <input type="password" name="password" placeholder="Create Password" required/>
             <input type="password" name="cpassword" placeholder="Confirm Password" required/>
             <input type="text" name="referal" placeholder="Enter Your Referal code" />
@@ -329,7 +329,7 @@ section .container.active .signinBx .imgBx {
   </div>
 </div>
 
-
+ 
 
  <script>
       function toggleForm() {

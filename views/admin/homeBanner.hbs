@@ -146,7 +146,7 @@
                                         <th>{{disEnd}}</th>
                                         <td> <img src="/banners/{{_id}}-001.jpg" alt="" style="width: 150px;"></td>
                                         <td>
-                                            <a href="/admin/delete/banner/{{_id}}" class="btn btn-danger">Delet</a>
+                                            <a href="/admin/delete/banner/{{_id}}" onclick="return confirm('are you sure ?')" class="btn btn-danger">Delet</a>
                                         </td>
                                     </tr>
                                     {{/each}}

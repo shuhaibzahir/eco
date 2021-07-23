@@ -54,11 +54,10 @@
                                 </p>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <p><input type="text" id="zipcode" name="Post" placeholder="Post Code" required>
-                                        </p>
+                                     <p>  <input class="postnumber" type="tel"  id="zipcode" name="Post"   maxlength="6" minlength="5"  onkeyUp="test_fn(this.value,'postnumber')" placeholder="Post Code" required /></p>
                                     </div>
                                     <div class="col-sm-6">
-                                        <p><input type="tel" id="phone" name="Phone" placeholder="Phone" required></p>
+                                        <p> <input class="phonenumber" type="tel" name="Phone" id="phone"  maxlength="10" minlength="10" onkeyUp="test_fn(this.value,'phonenumber')" placeholder="Enter Phone number" required /></p>
                                     </div>
                                 </div>
                                 <div class="form-check form-check-inline" id="saveAdd">
@@ -76,7 +75,7 @@
                                     <div class="inner-box">
                                         <input type="text" name="coupon_code" class="input-text" id="coupon_code"
                                             value="" placeholder="Coupon code">
-                                        <input type="submit" class="button" onclick="submitCoupon()" name="apply_coupon"
+                                        <input type="submit" class="button" style="margin-top: 20px;" onclick="submitCoupon()" name="apply_coupon"
                                             value="Apply Coupon">
                                         <p id="couponalert" style="color: red;"></p>
                                     </div>
@@ -196,3 +195,11 @@
     </div>
 </div>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+<script>
+    function test_fn(xxx, clss) {
+        var xxx = xxx.replace(/[^0-9,.]+/g, "");
+        document.querySelector("." + clss).value = xxx;
+    }
+</script>
