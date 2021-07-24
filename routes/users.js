@@ -32,7 +32,7 @@ paypal.configure({
 passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_SECRET,
-        callbackURL: "http://localhost:3000/auth/google/success"
+        callbackURL: "https://shop.shuhaib.tech/auth/google/success"
     },
     (accessToken, refreshToken, profile, cb) => {
         userDB.googelLogin(profile).then((result) => {
@@ -45,7 +45,7 @@ passport.use(new GoogleStrategy({
 passport.use(new facebook.Strategy({
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: 'http://localhost:3000/facebook/callback'
+        callbackURL: 'https://shop.shuhaib.tech/facebook/callback'
     },
     (accessToken, refreshToken, profile, cb) => {
         console.log(profile)
