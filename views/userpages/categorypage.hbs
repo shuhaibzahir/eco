@@ -1,4 +1,12 @@
 <style>
+    .pagenation-div ul{
+        display: flex;
+        list-style: none;
+       
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 10px;
+    }
     .discount{
         position: absolute;
         top: 0;
@@ -66,14 +74,18 @@
                     </li>
                     {{/each}}
                 </ul>
-                <div class="navigation">
-                    <ul class="d-flex justify-content-center">
+                <div class="pagenation-div" >
+                    <ul class="" >
                         {{#if prevBtn}}
                         <li><a  href="{{prevUrl}}" class="navarrow" onclick="changePageNumber(-1)"><i class="fas fa-arrow-circle-left"></i></a></li>
-                       {{/if}}
-                        <li><h3 style="font-weight: bold;" id="page-number">1</h3></li>
+                        {{else}}
+                         <li ><a  class="navarrow" style="color: gray;"><i style="color: gray;" class="fas fa-arrow-circle-left"></i></a></li>
+                         {{/if}}
+                        <li><h3 style="font-weight:100;font-size:16px; color:rgba(168, 168, 168, 0.527)" >zeebracross</h3></li>
                         {{#if chekckButton}}
                         <li><a   href="{{nexturl}}" class="navarrow" onclick="changePageNumber(1)"><i class="fas fa-arrow-circle-right"></i></a></li>
+                        {{else}}
+                         <li><a  style="color: gray;"    class="navarrow" ><i  style="color: gray;" class="fas fa-arrow-circle-right"></i></a></li>
                         {{/if}}
                     </ul>
                 </div>
