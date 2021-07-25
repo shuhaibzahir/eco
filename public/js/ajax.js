@@ -74,6 +74,11 @@ $('#signup').submit(function (event) {
 
     let allTrue = checkAlltrue()
     if(allTrue){
+        let pass = $("#password1").val()
+        let pass2 = $("#password2").val()
+        if(pass == pass2){
+
+       
         $.ajax({
             url: '/signup',
             type: 'POST',
@@ -91,6 +96,10 @@ $('#signup').submit(function (event) {
                 console.log(err)
             }
         })
+    }
+    else{
+        $("#signup-alert").html("Password Not Macth!") 
+    }
     }else{
         $("#signup-alert").html("Incorrect Form Detail")
     }
