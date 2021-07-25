@@ -260,6 +260,18 @@ module.exports = {
             resolve({re:data,c:count})
         })
     },
+    getAllProductforAdmin: () => {
+        return new Promise((resolve, reject) => {
+            console.log("its working here")
+          Product.find({},(err, data) => {
+                if (err) {
+                   reject(err)
+                } else{
+                    resolve(data)
+                }
+            }).lean()
+        })
+    },
     // ..............get all product end...........
     // .................GET ONE PRODUCT.............
 

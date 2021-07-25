@@ -185,7 +185,8 @@ router.post("/add-product/", (req, res) => {
 
 // // .......... view all product..............................
 router.get("/view-allproduct", auth, (req, res) => {
-  productDB.getAllProduct().then((resul) => {
+  productDB.getAllProductforAdmin().then((resul) => {
+    console.log(resul)
     let allproduct = resul;
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.render("admin/allproduct", {
@@ -694,11 +695,11 @@ router.get("/test",(req,res)=>{
 /* this function for change product discount here I am taking the data to delete*/
 
 router.get("/product-offer",auth,(req,res)=>{
-  productDB.getAllProduct().then((result) => {
+  productDB.getAllProductforAdmin().then((result) => {
     let allproduct = result;
     let expProducts =[];
     let dateOftheDay = new Date()
-  
+     
     result.forEach((item)=>{
       if(item.ExpOffer !=null){
         let date = new Date(item.ExpOffer)
