@@ -186,7 +186,7 @@ router.post("/add-product/", (req, res) => {
 // // .......... view all product..............................
 router.get("/view-allproduct", auth, (req, res) => {
   productDB.getAllProductforAdmin().then((resul) => {
-    console.log(resul)
+     
     let allproduct = resul;
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.render("admin/allproduct", {
