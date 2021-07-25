@@ -262,7 +262,7 @@ module.exports = {
     },
     getAllProductforAdmin: () => {
         return new Promise((resolve, reject) => {
-            console.log("its working here")
+         
           Product.find({},(err, data) => {
                 if (err) {
                    reject(err)

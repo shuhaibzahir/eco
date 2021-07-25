@@ -185,6 +185,7 @@ router.post("/add-product/", (req, res) => {
 
 // // .......... view all product..............................
 router.get("/view-allproduct", auth, (req, res) => {
+  console.log("this is safsa")
   productDB.getAllProductforAdmin().then((resul) => {
      
     let allproduct = resul;

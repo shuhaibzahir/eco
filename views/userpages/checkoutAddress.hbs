@@ -2,6 +2,11 @@
    input[type="submit"]:hover{
         background-color: green;
     }
+  @media screen and (max-width: 600px) {
+      #coupon_code{
+          width: ;
+      }
+   }
 </style>
 
 <div class="container p-5">
@@ -139,7 +144,7 @@
                                     <h5 class="form-title">YOUR PAYMENT</h5>
                                     <div class="payment_methods">
                                        
-                                        <div class="payment_method" style="display:flex; justify-content:center  ">
+                                        <div class="payment_method payment-buttons" style="display:flex; justify-content:center  ">
                                             <label style="margin-right:20px;  display:flex; justify-content:center; max-width:33.33%"><input name="payment_method" style="width: 20px; height:20px" value="cashonDelivery" type="radio"
                                                     required>Cash On Delivery</label>
                                             <label style="margin-right:20px;   display:flex; justify-content:center; max-width:33.33%"><input name="payment_method" style="width: 20px; height:20px" value="Razorpay" type="radio"

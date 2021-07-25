@@ -76,10 +76,9 @@ $('#signup').submit(function (event) {
     if(allTrue){
         let pass = $("#password1").val()
         let pass2 = $("#password2").val()
+        console.log(pass , pass2)
         if(pass == pass2){
-
-       
-        $.ajax({
+          $.ajax({
             url: '/signup',
             type: 'POST',
             data: form.serialize(),
