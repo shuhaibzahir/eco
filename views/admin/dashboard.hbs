@@ -149,7 +149,7 @@
 
   <script>
     var payments = {{{chartData}}} 
-    console.log(payments)
+    
     var paypal , razorpay, cash;
     paypal= razorpay=cash=0;
     payments.pay.forEach((item)=>{
@@ -167,11 +167,11 @@
 
 //line chart
 var  dateData = {{{chartData}}} 
-console.log(dateData)
+ 
 var JAN, FEB, APR, MAR, MAY,JUN,JUL,AUG,SEP,OCT,NOV, DEC;
 JAN=FEB= APR= MAR=MAY=JUN=JUL=AUG=SEP=OCT=NOV=DEC=0;
 
-console.log(dateData.monthly)
+ 
 dateData.monthly.forEach((month)=>{
   if(month._id=="01"){
     JAN = month.amount
