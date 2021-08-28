@@ -6,6 +6,13 @@ var logger = require('morgan');
 var exphbs = require('express-handlebars');
 const fileUpload = require('express-fileupload')
 var session = require('express-session')
+const redis = require('redis')
+let RedisStore = require('connect-redis')(session)
+let redisClient = redis.createClient({
+  host: 'localhost',
+  port: 6379,
+  db:1
+})
 var app = express();
 
 var passport = require("passport")
@@ -64,14 +71,27 @@ app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* this is my session settings*/
+
+// connect redis
+redisClient.on('error', function (err) {
+  console.log('Could not establish a connection with redis. ' + err);
+});
+redisClient.on('connect', function (err) {
+  console.log('Connected to redis successfully');
+});
+
 app.use(session({
-  secret: 'keyboard cat',
+  store: new RedisStore({ client: redisClient }),
+  secret: 'secret$%^134',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
-    maxAge: 6000000
+      maxAge: 1000 * 60 * 10 // session max age in miliseconds
   }
 }))
+
+ 
+
 app.use(passport.initialize());
 app.use(passport.session());
 /* This is my routers initialze */
