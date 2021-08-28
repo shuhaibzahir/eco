@@ -812,7 +812,8 @@ router.post("/delete/coupon",auth,(req,res)=>{
 })
 // ...........admin logout................
 router.get("/account/logout", (req, res) => {
-  delete req.session.admin
+  
+  req.session.destroy()
   res.redirect("/admin")
 })
 

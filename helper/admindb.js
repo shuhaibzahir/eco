@@ -49,6 +49,7 @@ module.exports={
                            if(err){
                                console.log(err)
                            }else{
+                               console.log(check)
                             if(check){
                                 resolve(result)
                             }else{

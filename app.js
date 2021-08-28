@@ -86,6 +86,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
+      httpOnly: false,
       maxAge: 1000 * 60 * 10 // session max age in miliseconds
   }
 }))

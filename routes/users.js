@@ -1549,7 +1549,7 @@ router.post("/rating/product/:topic", (req, res) => {
 
 /* logout user */
 router.get("/logout", (req, res) => {
-    delete req.session.user;
+    req.session.destroy()
     res.redirect("/")
 })
 
