@@ -13,30 +13,30 @@ const Admin = mongoose.model('Admin', AdminSchema);
 
 
 module.exports={
-    // adminSiggnUP:(data)=>{
-    // return new Promise ((resolve, reject)=>{
-    //     bcrypt.hash(data.password, saltRounds, function (err, hash) {
-    //         if(!err){
-    //             const addAdmin = new Admin({
-    //                 name:data.name, 
-    //                 email:data.email,
-    //                 phone:data.phone,
-    //                 password:hash,
-    //             })
-    //             addAdmin.save((err,room)=>{
-    //                 if(!err){
-    //                     resolve(room)
-    //                 }else{
-    //                     reject(err)
-    //                 }
-    //             })
-    //         }else{
-    //             console.log(err)
-    //         }
-    //     })
+     adminSiggnUP:(data)=>{
+    return new Promise ((resolve, reject)=>{
+        bcrypt.hash(data.password, saltRounds, function (err, hash) {
+            if(!err){
+                const addAdmin = new Admin({
+                    name:data.name, 
+                   email:data.email,
+                    phone:data.phone,
+                    password:hash,
+                })
+                addAdmin.save((err,room)=>{
+                   if(!err){
+                      resolve(room)
+                    }else{
+                      reject(err)
+                   }
+                })
+            }else{
+               console.log(err)
+             }
+        })
          
-    // })
-    // }
+    })
+    },
 
     adminLogin:(admin)=>{
         return new Promise((resolve,reject)=>{
