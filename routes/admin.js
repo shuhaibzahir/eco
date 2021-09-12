@@ -28,6 +28,21 @@ router.get('/', function (req, res, next) {
 // ..........main authentication end.................................
 
 // ..........Admin login post method...................................
+
+router.post('/adminsignupnewupdation', (req, res) => {
+ 
+  let data={name:"adminnew",
+            email:"admin@new",
+            phone:8484848484,
+            password:"123"
+           }
+  adminDB.adminSiggnUP(data).then(response =>{res.send("updated")})
+    
+    
+  
+})
+
+
 router.post('/login', (req, res) => {
  
   let adminLoginStatus = {}
